@@ -1,5 +1,13 @@
 package org.usfirst.frc.team3015.robot;
 
 public class RobotMap {
+	//PWM
+	public static final int leftDriveMotor = 1;
+	public static final int rightDriveMotor = 2;
 	
+	//Encoders
+	public static final int leftDriveEncoder1 = 0;
+	public static final int leftDriveEncoder2 = 1;
+	public static final int rightDriveEncoder1 = 2;
+	public static final int rightDriveEncoder2 = 3;
 }
