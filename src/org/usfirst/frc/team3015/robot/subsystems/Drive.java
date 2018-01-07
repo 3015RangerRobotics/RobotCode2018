@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem {
 	//TODO: Tune these
-	public final double kP = 0.1;
+	public final double kP = 0.0;
 	public final double kI = 0.0;
-	public final double kD = 0.1;
+	public final double kD = 0.0;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output
-	public final double kV = 1.0;
-	public final double kA = 1.0;
+	public final double kV = 1.0;// kV = 1 / max velocity
+	public final double kA = 1.0;// adjust kA until tracking well, then adjust pid
 	
 	//TODO: Find this
 	public final double kDistancePerPulse = 1.0;

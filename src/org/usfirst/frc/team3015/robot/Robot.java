@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends TimedRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	public static volatile boolean isEnabled = false;
 
 	@Override
 	public void robotInit() {
@@ -22,7 +23,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-
+		isEnabled = false;
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		isEnabled = true;
 		autonomousCommand = chooser.getSelected();
 
 		if (autonomousCommand != null) {
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		isEnabled = true;
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}

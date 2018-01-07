@@ -1,14 +1,17 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 import org.usfirst.frc.team3015.robot.Constants;
+import org.usfirst.frc.team3015.robot.Robot;
+
+import edu.wpi.first.wpilibj.Timer;
 
 public class DriveMotionProfile extends CommandBase {
-	private boolean isFinished = false;
+	private volatile boolean isFinished = false;
 	private double[][] leftMotion;
 	private double[][] rightMotion;
-	private int i =  0;
-	private double prevErrorL = 0;
-	private double prevErrorR = 0;
+	private volatile int i =  0;
+	private volatile double prevErrorL = 0;
+	private volatile double prevErrorR = 0;
 
     public DriveMotionProfile(double[][] motionProfile) {
     	requires(drive);
@@ -33,9 +36,25 @@ public class DriveMotionProfile extends CommandBase {
     		this.cancel();
     		return;
     	}
+    	
+    	new Thread(() -> {
+    		double lastTime = 0;
+    		
+    		while(!isFinished && Robot.isEnabled) {
+    			if(Timer.getFPGATimestamp() >= lastTime + 0.01) {
+    				lastTime = Timer.getFPGATimestamp();
+    				threadedExecute();
+    			}
+    			try {
+    				Thread.sleep(2);
+    			}catch(InterruptedException e) {
+    				e.printStackTrace();
+    			}
+    		}
+    	}).start();
     }
-
-    protected void execute() {
+    
+    protected synchronized void threadedExecute() {
     	if(i < leftMotion.length) {
 			double goalPosL = leftMotion[i][0];
 			double goalVelL = leftMotion[i][1];
@@ -64,6 +83,10 @@ public class DriveMotionProfile extends CommandBase {
 		}
     }
 
+    protected void execute() {
+    	
+    }
+
     protected boolean isFinished() {
         return isFinished;
     }
@@ -73,6 +96,7 @@ public class DriveMotionProfile extends CommandBase {
     }
 
     protected void interrupted() {
+    	isFinished = true;
     	end();
     }
 }
