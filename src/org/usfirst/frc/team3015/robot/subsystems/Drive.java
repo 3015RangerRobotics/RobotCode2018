@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
-import org.usfirst.frc.team3015.robot.RobotMap;
+import org.usfirst.frc.team3015.robot.Constants;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -25,13 +25,13 @@ public class Drive extends Subsystem {
 	Encoder rightEncoder;
 	
 	public Drive() {
-		leftDrive = new VictorSP(RobotMap.leftDriveMotor);
-		leftEncoder = new Encoder(RobotMap.leftDriveEncoder1, RobotMap.leftDriveEncoder2);
+		leftDrive = new VictorSP(Constants.leftDriveMotor);
+		leftEncoder = new Encoder(Constants.leftDriveEncoder1, Constants.leftDriveEncoder2);
 		leftDrive.setInverted(true);
 		leftEncoder.setReverseDirection(true);
 		leftEncoder.setDistancePerPulse(kDistancePerPulse);
-		rightDrive = new VictorSP(RobotMap.rightDriveMotor);
-		rightEncoder = new Encoder(RobotMap.rightDriveEncoder1, RobotMap.rightDriveEncoder2);
+		rightDrive = new VictorSP(Constants.rightDriveMotor);
+		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 	}
 

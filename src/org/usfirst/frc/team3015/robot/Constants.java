@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3015.robot;
 
-public class RobotMap {
+public class Constants {
+	public static final double kPeriod = 0.01;
+	
 	//PWM
 	public static final int leftDriveMotor = 1;
 	public static final int rightDriveMotor = 2;

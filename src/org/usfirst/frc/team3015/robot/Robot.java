@@ -17,6 +17,7 @@ public class Robot extends TimedRobot {
 //		chooser.addDefault("Auto", new Auto());
 //		chooser.addObject("My Auto", new MyAutoCommand());
 //		SmartDashboard.putData("Auto mode", chooser);
+		this.setPeriod(Constants.kPeriod);
 	}
 
 	@Override
