@@ -26,6 +26,7 @@ public class DriveMotionProfile extends CommandBase {
     }
 
     protected void initialize() {
+    	drive.resetEncoders();
     	isFinished = false;
     	i = 0;
     	prevErrorL = 0;
@@ -73,10 +74,12 @@ public class DriveMotionProfile extends CommandBase {
 			double pwmL = (drive.kP * errorL) + (drive.kD * errorDerivL) + (drive.kV * goalVelL) + (drive.kA * goalAccL);
 			double pwmR = (drive.kP * errorR) + (drive.kD * errorDerivR) + (drive.kV * goalVelR) + (drive.kA * goalAccR);
 			
+			System.out.println(goalPosL + ", " + drive.getLeftDistance());
+			
 			prevErrorL = errorL;
 			prevErrorR = errorR;
 			
-			drive.tankDrive(pwmL, pwmR);
+			drive.tankDrive(pwmL, pwmL);
 			i++;
 		}else {
 			isFinished = true;

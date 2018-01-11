@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
+import org.usfirst.frc.team3015.robot.commands.DriveForTime;
 import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -46,6 +47,15 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.exampleProfile));
+		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
+//		driverB2.whenPressed(new DriveForTime(5));
+	}
+	
+	public double getLeftStick() {
+		return driver.getY(Hand.kLeft);
+	}
+	
+	public double getRightStick() {
+		return driver.getY(Hand.kRight);
 	}
 }
