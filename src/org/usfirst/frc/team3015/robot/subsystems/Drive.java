@@ -14,7 +14,7 @@ public class Drive extends Subsystem {
 	public final double kI = 0.0;
 	public final double kD = 0.0;
 	
-	//TODO: Tune these: conversion from real-world units to percentage output
+	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.091;// kV = 1 / max velocity 0.091
 	public final double kA = 0.0325;// adjust kA until tracking well, then adjust pid
 	
