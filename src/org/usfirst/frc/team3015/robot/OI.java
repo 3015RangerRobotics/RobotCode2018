@@ -47,7 +47,7 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
+//		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight)); //broke
 //		driverB2.whenPressed(new DriveForTime(5));
 	}
 	

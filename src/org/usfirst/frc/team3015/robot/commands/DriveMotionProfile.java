@@ -79,7 +79,7 @@ public class DriveMotionProfile extends CommandBase {
 			prevErrorL = errorL;
 			prevErrorR = errorR;
 			
-			drive.tankDrive(pwmL, pwmL);
+			drive.tankDrive(pwmL, pwmR);
 			i++;
 		}else {
 			isFinished = true;
