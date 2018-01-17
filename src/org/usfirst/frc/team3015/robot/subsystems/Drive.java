@@ -8,15 +8,14 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drive extends Subsystem {
-	//0.1029573493872
 	//TODO: Tune these
-	public final double kP = 0.275;
+	public final double kP = 1.0;
 	public final double kI = 0.0;
 	public final double kD = 0.01;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.091;// kV = 1 / max velocity 0.091
-	public final double kA = 0.033;// adjust kA until tracking well, then adjust pid
+	public final double kA = 0.022;// adjust kA until tracking well, then adjust pid
 	
 	//TODO: Find this
 	public final double kDistancePerPulse = 0.008;
@@ -30,10 +29,11 @@ public class Drive extends Subsystem {
 		leftDrive = new VictorSP(Constants.leftDriveMotor);
 		leftEncoder = new Encoder(Constants.leftDriveEncoder1, Constants.leftDriveEncoder2);
 		leftDrive.setInverted(true);
-		leftEncoder.setReverseDirection(true);
+		leftEncoder.setReverseDirection(false);
 		leftEncoder.setDistancePerPulse(kDistancePerPulse);
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
+		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 	}
 	

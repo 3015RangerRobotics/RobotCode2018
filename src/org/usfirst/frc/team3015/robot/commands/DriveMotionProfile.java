@@ -74,7 +74,7 @@ public class DriveMotionProfile extends CommandBase {
 			double pwmL = (drive.kP * errorL) + (drive.kD * errorDerivL) + (drive.kV * goalVelL) + (drive.kA * goalAccL);
 			double pwmR = (drive.kP * errorR) + (drive.kD * errorDerivR) + (drive.kV * goalVelR) + (drive.kA * goalAccR);
 			
-			System.out.println(goalPosL + ", " + drive.getLeftDistance());
+			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			
 			prevErrorL = errorL;
 			prevErrorR = errorR;
