@@ -47,16 +47,16 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight)); //broke
+		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
 //		driverB2.whenPressed(new DriveForTime(5));
 	}
 	
-	public double getLeftStick() {
-		return driver.getY(Hand.kLeft);
+	public double getLeftStickY() {
+		return -driver.getY(Hand.kLeft);
 	}
 	
-	public double getRightStick() {
-		return driver.getY(Hand.kRight);
+	public double getRightStickX() {
+		return driver.getX(Hand.kRight);
 	}
 }

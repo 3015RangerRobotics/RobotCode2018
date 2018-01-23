@@ -19,8 +19,8 @@ public class DriveWithGamepad extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.tankDrive(oi.getLeftStick(), oi.getRightStick());
-//    	System.out.println(drive.getRightDistance());
+    	drive.arcadeDrive(oi.getLeftStickY(), oi.getRightStickX()/1.5, true);
+//    	System.out.println(drive.getRightVelocity());
     }
 
     // Make this return true when this Command no longer needs to run execute()

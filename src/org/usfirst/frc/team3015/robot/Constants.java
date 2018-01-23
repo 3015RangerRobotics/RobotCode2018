@@ -8,8 +8,8 @@ public class Constants {
 	public static final int rightDriveMotor = 1;
 	
 	//Encoders
-	public static final int leftDriveEncoder1 = 2;
-	public static final int leftDriveEncoder2 = 3;
-	public static final int rightDriveEncoder1 = 0;
-	public static final int rightDriveEncoder2 = 1;
+	public static final int leftDriveEncoder1 = 0;
+	public static final int leftDriveEncoder2 = 1;
+	public static final int rightDriveEncoder1 = 2;
+	public static final int rightDriveEncoder2 = 3;
 }
