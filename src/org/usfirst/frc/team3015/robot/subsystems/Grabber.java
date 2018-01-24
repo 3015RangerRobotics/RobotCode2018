@@ -14,12 +14,10 @@ public class Grabber extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	DoubleSolenoid leftGrab;
-	DoubleSolenoid rightGrab;
+	DoubleSolenoid grabberSolenoid;
 	
 	public Grabber() {
-		leftGrab = new DoubleSolenoid(Constants.leftGrabSolenoid1, Constants.leftGrabSolenoid2);
-		rightGrab = new DoubleSolenoid(Constants.rightGrabSolenoid1,Constants.rightGrabSolenoid2);
+		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
 	}
 	
     public void initDefaultCommand() {
@@ -27,18 +25,15 @@ public class Grabber extends Subsystem {
     }
     
     public void closeGrabber() {
-    	leftGrab.set(DoubleSolenoid.Value.kReverse);
-    	rightGrab.set(DoubleSolenoid.Value.kReverse);
+    	grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void openGrabber() {
-    	leftGrab.set(DoubleSolenoid.Value.kForward);
-    	rightGrab.set(DoubleSolenoid.Value.kForward);
+    	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
     public void offGrabber() {
-    	leftGrab.set(DoubleSolenoid.Value.kOff);
-    	rightGrab.set(DoubleSolenoid.Value.kOff);
+    	grabberSolenoid.set(DoubleSolenoid.Value.kOff);
     }
     
 }
