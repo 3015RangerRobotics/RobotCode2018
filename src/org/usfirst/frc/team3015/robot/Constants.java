@@ -15,5 +15,8 @@ public class Constants {
 	
 	//Intake
 	public static final int intakeMotor = 17;
-		
+	
+	//Grabber
+	public static final int grabberSolenoid1 = 0;
+	public static final int grabberSolenoid2 = 1;
 }
