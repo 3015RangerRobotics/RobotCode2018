@@ -12,4 +12,11 @@ public class Constants {
 	public static final int leftDriveEncoder2 = 1;
 	public static final int rightDriveEncoder1 = 2;
 	public static final int rightDriveEncoder2 = 3;
+	
+	//Grabber
+	public static final int leftGrabSolenoid1 = 0;
+	public static final int leftGrabSolenoid2 = 1;
+	public static final int rightGrabSolenoid1 = 2;
+	public static final int rightGrabSolenoid2 = 3;
+	
 }
