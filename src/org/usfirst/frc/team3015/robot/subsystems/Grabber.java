@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
-import org.usfirst.frc.team3015.robot.commands.GrabberOpen;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,9 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Operates on 2 double solenoids
  */
 public class Grabber extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	DoubleSolenoid grabberSolenoid;
 	
 	public Grabber() {
@@ -21,7 +17,7 @@ public class Grabber extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new GrabberOpen());
+        
     }
     
     public void closeGrabber() {

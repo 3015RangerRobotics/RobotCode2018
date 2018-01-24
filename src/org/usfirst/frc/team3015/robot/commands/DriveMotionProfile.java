@@ -5,6 +5,9 @@ import org.usfirst.frc.team3015.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 
+/**
+ * Follows a motion profile
+ */
 public class DriveMotionProfile extends CommandBase {
 	private volatile boolean isFinished = false;
 	private double[][] leftMotion;

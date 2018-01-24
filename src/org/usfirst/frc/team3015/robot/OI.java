@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.DriveForTime;
 import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -49,7 +48,6 @@ public class OI {
 	public OI() {
 		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
-//		driverB2.whenPressed(new DriveForTime(5));
 	}
 	
 	public double getLeftStickY() {

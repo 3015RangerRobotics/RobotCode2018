@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * Drive Subsystem, used for driving
+ */
 public class Drive extends Subsystem implements TargetUpdateReceiver{
 	//TODO: Tune these
 	public final double kDriveP = 1.3;

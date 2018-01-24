@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
+import org.usfirst.frc.team3015.robot.Constants;
 import org.usfirst.frc.team3015.robot.commands.OurCompressorAuto;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -16,11 +17,10 @@ public class OurCompressor extends Subsystem {
 	
 	public OurCompressor() {
 		compressor = new Compressor();
-		pressureSensor = new AnalogPotentiometer(0, 250, -25);
+		pressureSensor = new AnalogPotentiometer(Constants.pressureSensor, 250, -25);
 	}
 	
 	public void initDefaultCommand() {
-    	// Set the default command for a subsystem here.
     	setDefaultCommand(new OurCompressorAuto());
     }
 	
@@ -45,5 +45,4 @@ public class OurCompressor extends Subsystem {
 	public double getPressure() {
 		return pressureSensor.get();
 	}
-
 }

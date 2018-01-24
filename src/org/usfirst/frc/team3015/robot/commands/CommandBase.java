@@ -28,6 +28,5 @@ public abstract class CommandBase extends Command {
 		
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
-
 	}
 }

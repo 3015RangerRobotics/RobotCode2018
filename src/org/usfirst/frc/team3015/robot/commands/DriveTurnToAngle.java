@@ -1,12 +1,9 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.robot.Robot;
-
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Turns to an angle using the imu
  */
 public class DriveTurnToAngle extends CommandBase {
 	private double angle;
