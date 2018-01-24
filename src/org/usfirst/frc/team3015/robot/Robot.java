@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
+import org.rangerrobotics.lib.android.AndroidServer;
 import org.usfirst.frc.team3015.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,6 +20,8 @@ public class Robot extends TimedRobot {
 //		chooser.addObject("My Auto", new MyAutoCommand());
 //		SmartDashboard.putData("Auto mode", chooser);
 		this.setPeriod(Constants.kPeriod);
+		AndroidServer server = AndroidServer.getInstance();
+		server.addTargetUpdateReceiver(CommandBase.drive);
 	}
 
 	@Override

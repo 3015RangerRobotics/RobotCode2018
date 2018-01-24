@@ -1,17 +1,31 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
+import org.rangerrobotics.lib.android.TargetInfo;
+import org.rangerrobotics.lib.android.TargetUpdate;
+import org.rangerrobotics.lib.android.messages.TargetUpdateReceiver;
 import org.usfirst.frc.team3015.robot.Constants;
 import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Drive extends Subsystem {
+public class Drive extends Subsystem implements TargetUpdateReceiver{
 	//TODO: Tune these
-	public final double kP = 1.3;
-	public final double kI = 0.0;
-	public final double kD = 0.01;
+	public final double kDriveP = 1.3;
+	public final double kDriveI = 0.0;
+	public final double kDriveD = 0.01;
+	
+	//TODO: Tune these
+	public final double kTurnP = 0;
+	public final double kTurnI = 0;
+	public final double kTurnD = 0;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091
@@ -24,6 +38,11 @@ public class Drive extends Subsystem {
 	VictorSP rightDrive;
 	Encoder leftEncoder;
 	Encoder rightEncoder;
+	AHRS imu = new AHRS(I2C.Port.kOnboard);
+	public IMUPidSource imuPidSource;
+	public TurnPidOutput turnPidOutput;
+	
+	public TargetInfo bestTarget = null;
 	
 	public Drive() {
 		leftDrive = new VictorSP(Constants.leftDriveMotor);
@@ -35,6 +54,8 @@ public class Drive extends Subsystem {
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
+		this.imuPidSource = new IMUPidSource();
+		this.turnPidOutput = new TurnPidOutput();
 	}
 	
 	public void resetEncoders() {
@@ -119,5 +140,48 @@ public class Drive extends Subsystem {
     public double getRightVelocity() {
     	return rightEncoder.getRate();
     }
+    
+    public double getAngle() {
+    	return imu.getYaw() + 180;
+    }
+
+	@Override
+	public void onUpdateReceived(TargetUpdate update) {
+		TargetInfo shortestDistance = null;
+		for(TargetInfo target:update.getTargets()) {
+			if(shortestDistance == null) {
+				shortestDistance = target;
+			}else if(target.getDistance() < shortestDistance.getDistance()){
+				shortestDistance = target;
+			}
+		}
+		bestTarget = shortestDistance;
+	}
+	
+	public class IMUPidSource implements PIDSource{
+
+		@Override
+		public void setPIDSourceType(PIDSourceType pidSource) {
+			
+		}
+
+		@Override
+		public PIDSourceType getPIDSourceType() {
+			return null;
+		}
+
+		@Override
+		public double pidGet() {
+			return getAngle();
+		}
+		
+	}
+	
+	public class TurnPidOutput implements PIDOutput{
+		@Override
+		public void pidWrite(double output) {
+			arcadeDrive(0, output, false);
+		}
+	}
 }
 
