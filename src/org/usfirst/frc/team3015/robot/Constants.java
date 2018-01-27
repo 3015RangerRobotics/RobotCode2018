@@ -21,4 +21,9 @@ public class Constants {
 	public static final int grabberLimitSwitch2 = 1;
 	//Compressor
 	public static final int pressureSensor = 0;
+	
+	//Manhattan Project
+	public static final int manhattenRollers = 4;
+	public static final double rollerSpeed = .5;
+	public static final int manhattenExtender = 3;
 }
