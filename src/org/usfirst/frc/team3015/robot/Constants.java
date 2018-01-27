@@ -17,7 +17,8 @@ public class Constants {
 	//Grabber
 	public static final int grabberSolenoid1 = 0;
 	public static final int grabberSolenoid2 = 1;
-	
+	public static final int grabberLimitSwitch1 = 0;
+	public static final int grabberLimitSwitch2 = 1;
 	//Compressor
 	public static final int pressureSensor = 0;
 }
