@@ -15,8 +15,9 @@ public class DriveToCube extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double[][] motionProfiles = MotionProfiles.generate1D(drive.bestTarget.getDistance(), drive.maxVelocity, drive.maxAcceleration, 0.01);
-    	Command command = new DriveMotionProfile
+    	double[][] motionProfile = MotionProfiles.generate1D(drive.bestTarget.getDistance(), drive.maxVelocity, drive.maxAcceleration, 0.01);
+    	Command command = new DriveMotionProfile(motionProfile);
+    	command.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
