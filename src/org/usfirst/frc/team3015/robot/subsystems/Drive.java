@@ -37,6 +37,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	//TODO: Find this
 	public final double kDistancePerPulse = 0.0090477405;
 	
+	public final double maxVelocity = 16.0;
+	public final double maxAcceleration = 5;
+	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
 	Encoder leftEncoder;

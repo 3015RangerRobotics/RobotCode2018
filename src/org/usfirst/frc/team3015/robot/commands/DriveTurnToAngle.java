@@ -18,7 +18,7 @@ public class DriveTurnToAngle extends CommandBase {
     protected void initialize() {
     	pidController.setAbsoluteTolerance(.5);
     	pidController.setOutputRange(-1, 1);
-    	pidController.setSetpoint(angle);
+    	pidController.setSetpoint(drive.getAngle() + angle);
     	pidController.enable();
     }
 
