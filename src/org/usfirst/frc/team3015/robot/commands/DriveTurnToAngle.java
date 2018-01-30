@@ -12,13 +12,14 @@ public class DriveTurnToAngle extends CommandBase {
     public DriveTurnToAngle(double angle) {
         requires(drive);   
         this.angle = angle;
-        this.pidController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.imuPidSource, drive.turnPidOutput);
+        this.pidController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.new IMUPidSource(), drive.new TurnPidOutput());
     }
 
     protected void initialize() {
+    	drive.resetGyro();
     	pidController.setAbsoluteTolerance(.5);
     	pidController.setOutputRange(-1, 1);
-    	pidController.setSetpoint(drive.getAngle() + angle);
+    	pidController.setSetpoint(angle);
     	pidController.enable();
     }
 

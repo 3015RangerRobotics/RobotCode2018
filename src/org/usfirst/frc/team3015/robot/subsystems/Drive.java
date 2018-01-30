@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
+import javax.swing.plaf.InputMapUIResource;
+
 import org.rangerrobotics.lib.android.TargetInfo;
 import org.rangerrobotics.lib.android.TargetUpdate;
 import org.rangerrobotics.lib.android.messages.TargetUpdateReceiver;
@@ -45,8 +47,6 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu = new AHRS(I2C.Port.kOnboard);
-	public IMUPidSource imuPidSource;
-	public TurnPidOutput turnPidOutput;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -60,8 +60,6 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
-		this.imuPidSource = new IMUPidSource();
-		this.turnPidOutput = new TurnPidOutput();
 	}
 	
 	public void resetEncoders() {
@@ -148,9 +146,13 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
     }
     
     public double getAngle() {
-    	return imu.getYaw() + 180;
+    	return imu.getYaw();
     }
-
+    
+    public void resetGyro() {
+    	imu.zeroYaw();
+    }
+    
 	@Override
 	public void onUpdateReceived(TargetUpdate update) {
 		TargetInfo shortestDistance = null;
@@ -185,8 +187,20 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	
 	public class TurnPidOutput implements PIDOutput{
 		@Override
-		public void pidWrite(double output) {
-			arcadeDrive(0, output, false);
+		public void pidWrite(double turnSpeed) {
+			arcadeDrive(0, turnSpeed, false);
+		}
+	}
+	
+	public class DriveToCubePidOutput implements PIDOutput{
+		double driveSpeed;
+		
+		public DriveToCubePidOutput(double driveSpeed) {
+			this.driveSpeed = driveSpeed;
+		}
+		@Override
+		public void pidWrite(double turnSpeed) {
+			arcadeDrive(driveSpeed, turnSpeed, false);
 		}
 	}
 }

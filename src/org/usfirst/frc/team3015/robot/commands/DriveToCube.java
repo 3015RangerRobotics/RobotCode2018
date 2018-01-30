@@ -1,40 +1,45 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.robot.MotionProfiles;
+import org.usfirst.frc.team3015.robot.subsystems.Drive.IMUPidSource;
+import org.usfirst.frc.team3015.robot.subsystems.Drive.TurnPidOutput;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.PIDController;
 
 /**
  *
  */
 public class DriveToCube extends CommandBase {
-
-    public DriveToCube() {
+	private PIDController pidController;
+	
+    public DriveToCube(double driveSpeed) {
         requires(drive);
+        this.pidController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.new IMUPidSource(), drive.new DriveToCubePidOutput(driveSpeed));
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	double[][] motionProfile = MotionProfiles.generate1D(drive.bestTarget.getDistance(), drive.maxVelocity, drive.maxAcceleration, 0.01);
-    	Command command = new DriveMotionProfile(motionProfile);
-    	command.start();
+    	drive.resetGyro();
+    	pidController.setAbsoluteTolerance(.5);
+    	pidController.setOutputRange(-1, 1);
+    	pidController.setSetpoint(drive.bestTarget.getXAngle());
+    	pidController.enable();
     }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() { 
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	if(drive.bestTarget.getDistance() < 2) {
+    		return true;
+    	} 
+    	return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
+    	drive.arcadeDrive(0, 0, false);
+    	pidController.disable();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
