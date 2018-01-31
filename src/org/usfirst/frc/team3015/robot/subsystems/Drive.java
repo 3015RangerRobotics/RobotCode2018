@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
-import javax.swing.plaf.InputMapUIResource;
-
 import org.rangerrobotics.lib.android.TargetInfo;
 import org.rangerrobotics.lib.android.TargetUpdate;
 import org.rangerrobotics.lib.android.messages.TargetUpdateReceiver;
@@ -46,7 +44,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	VictorSP rightDrive;
 	Encoder leftEncoder;
 	Encoder rightEncoder;
-	AHRS imu = new AHRS(I2C.Port.kOnboard);
+	AHRS imu;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -60,6 +58,12 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
+		imu = new AHRS(I2C.Port.kOnboard);
+	}
+	
+	@Override
+	public void periodic() {
+//		System.out.println(getAngle() + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
 	}
 	
 	public void resetEncoders() {

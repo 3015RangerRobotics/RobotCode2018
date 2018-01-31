@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

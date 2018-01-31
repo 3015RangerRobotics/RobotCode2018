@@ -1,20 +1,21 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 /**
- * Sets the grabber to off, might not need this, runs once
+ *
  */
-public class GrabberOff extends CommandBase {
+public class ManhattanRetract extends CommandBase {
 
-    public GrabberOff() {
-    	requires(grabber);
+    public ManhattanRetract() {
+    	requires(manhattan);
     }
-
+    
     protected void initialize() {
-    	
+    	manhattan.retract();
+    	manhattan.rollerStop();
     }
 
     protected void execute() {
-    	grabber.offGrabber();
+    	
     }
 
     protected boolean isFinished() {

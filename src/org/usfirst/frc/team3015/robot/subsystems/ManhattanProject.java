@@ -1,9 +1,9 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
-import org.usfirst.frc.team3015.robot.commands.ManhattanStop;
+import org.usfirst.frc.team3015.robot.commands.ManhattanRetract;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,24 +12,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ManhattanProject extends Subsystem {
 	VictorSP rollers;
-	Solenoid extension;
+	DoubleSolenoid extension;
 	private final double rollerSpeed = 0.5;
 	
 	public ManhattanProject() {
 		rollers = new VictorSP(Constants.manhattenRollers);
-		extension = new Solenoid(Constants.manhattenExtender);
+		extension = new DoubleSolenoid(Constants.manhattenExtender1, Constants.manhattenExtender2);
 	}
 	
 	public void initDefaultCommand() {
-        setDefaultCommand(new ManhattanStop());
+        setDefaultCommand(new ManhattanRetract());
     }
 	
 	public void extend() {
-		extension.set(true);
+		extension.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void retract() {
-		extension.set(false);
+		extension.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public void rollerUp() {
@@ -44,4 +44,3 @@ public class ManhattanProject extends Subsystem {
 		rollers.set(0);
 	}
 }
-

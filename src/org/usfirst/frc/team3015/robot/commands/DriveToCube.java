@@ -1,8 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.robot.subsystems.Drive.IMUPidSource;
-import org.usfirst.frc.team3015.robot.subsystems.Drive.TurnPidOutput;
-
 import edu.wpi.first.wpilibj.PIDController;
 
 /**

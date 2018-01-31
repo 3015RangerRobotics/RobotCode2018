@@ -10,11 +10,11 @@ public class GrabberOpen extends CommandBase {
     }
 
     protected void initialize() {
-    	
+    	grabber.openGrabber();
     }
 
     protected void execute() {
-    	grabber.openGrabber();
+    	
     }
 
     protected boolean isFinished() {

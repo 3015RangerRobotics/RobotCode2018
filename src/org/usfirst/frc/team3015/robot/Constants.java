@@ -19,10 +19,12 @@ public class Constants {
 	public static final int grabberSolenoid2 = 1;
 	public static final int grabberLimitSwitch1 = 5;
 	public static final int grabberLimitSwitch2 = 6;
+	
 	//Compressor
 	public static final int pressureSensor = 0;
 	
 	//Manhattan Project
 	public static final int manhattenRollers = 4;
-	public static final int manhattenExtender = 2;
+	public static final int manhattenExtender1 = 2;
+	public static final int manhattenExtender2 = 3;
 }
