@@ -26,9 +26,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveD = 0.01;
 	
 	//TODO: Tune these
-	public final double kTurnP = 0;
+	public final double kTurnP = 0.01;
 	public final double kTurnI = 0;
-	public final double kTurnD = 0;
+	public final double kTurnD = 0.0015;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091
@@ -61,19 +61,19 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		imu = new AHRS(I2C.Port.kOnboard);
 	}
 	
+	public void initDefaultCommand() {
+        setDefaultCommand(new DriveWithGamepad());
+    }
+	
 	@Override
 	public void periodic() {
-//		System.out.println(getAngle() + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
+		System.out.println(getAngle() + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
 	}
 	
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
-
-    public void initDefaultCommand() {
-        setDefaultCommand(new DriveWithGamepad());
-    }
     
     public void tankDrive(double left, double right) {
     	leftDrive.set(left);
@@ -179,7 +179,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 
 		@Override
 		public PIDSourceType getPIDSourceType() {
-			return null;
+			return PIDSourceType.kDisplacement;
 		}
 
 		@Override
@@ -193,6 +193,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		@Override
 		public void pidWrite(double turnSpeed) {
 			arcadeDrive(0, turnSpeed, false);
+			System.out.print(turnSpeed);
 		}
 	}
 	

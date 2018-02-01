@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
+import org.rangerrobotics.lib.android.AndroidServer;
 import org.usfirst.frc.team3015.robot.commands.CommandBase;
 
 import edu.wpi.cscore.MjpegServer;
@@ -23,8 +24,8 @@ public class Robot extends TimedRobot {
 //		SmartDashboard.putData("Auto mode", chooser);
 		this.setPeriod(Constants.kPeriod);
 		
-//		AndroidServer server = AndroidServer.getInstance();
-//		server.addTargetUpdateReceiver(CommandBase.drive);
+		AndroidServer server = AndroidServer.getInstance();
+		server.addTargetUpdateReceiver(CommandBase.drive);
 		
 //		UsbCamera camera = new UsbCamera("USB Camera 0", 0);
 //		MjpegServer server = new MjpegServer("server_USB Camera 0", 5800);

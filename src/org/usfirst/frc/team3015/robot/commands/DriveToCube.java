@@ -1,16 +1,23 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 
 /**
  *
  */
 public class DriveToCube extends CommandBase {
 	private PIDController pidController;
+	private double driveSpeed;
 	
     public DriveToCube(double driveSpeed) {
         requires(drive);
-        this.pidController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.new IMUPidSource(), drive.new DriveToCubePidOutput(driveSpeed));
+        this.driveSpeed = driveSpeed;
+        this.pidController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.new IMUPidSource(), new PIDOutput(){
+        	public void pidWrite(double output) {
+        		
+        	}
+        });
     }
 
     protected void initialize() {
@@ -22,6 +29,7 @@ public class DriveToCube extends CommandBase {
     }
 
     protected void execute() { 
+    	drive.arcadeDrive(driveSpeed, pidController.get(), false);
     }
 
     protected boolean isFinished() {

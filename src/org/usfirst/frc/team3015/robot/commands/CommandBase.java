@@ -19,10 +19,10 @@ public abstract class CommandBase extends Command {
 	
 	public static void init() {
 		drive = new Drive();
-		intake = new Intake();
-		grabber = new Grabber();
-		ourCompressor = new OurCompressor();
-		manhattan = new ManhattanProject();		
+//		intake = new Intake();
+//		grabber = new Grabber();
+//		ourCompressor = new OurCompressor();
+//		manhattan = new ManhattanProject();		
 		
 		
 		

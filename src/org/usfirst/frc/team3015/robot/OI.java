@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
+import org.usfirst.frc.team3015.robot.commands.DriveToCube;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
@@ -46,7 +46,8 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
+//		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
+		driverB2.whenPressed(new DriveToCube(-0.2));
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
 	}
 	
