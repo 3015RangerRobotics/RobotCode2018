@@ -3,14 +3,14 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  *
  */
-public class ClimberExtend extends CommandBase {
+public class BuddyExtend extends CommandBase {
 
-    public ClimberExtend() {
-        requires(climber);
+    public BuddyExtend() {
+        requires(buddyClimb);
     }
 
     protected void initialize() {
-    	climber.retractClimber();
+    	buddyClimb.buddyExtend();
     }
 
     protected void execute() {

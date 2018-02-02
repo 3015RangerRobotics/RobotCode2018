@@ -32,4 +32,7 @@ public class Constants {
 	public static final int climberSolenoid1 = 0;
 	public static final int climberSolenoid2 = 1;
 	
+	//Buddy Climb
+	public static final int buddySolenoid = 0;
+	
 }

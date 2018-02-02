@@ -1,21 +1,23 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */
-public class ClimberExtend extends CommandBase {
+public class BuddyRetract extends CommandBase {
 
-    public ClimberExtend() {
-        requires(climber);
+    public BuddyRetract() {
+        requires(buddyClimb);
     }
 
     protected void initialize() {
-    	climber.retractClimber();
+    	buddyClimb.buddyRetract();
     }
 
     protected void execute() {
     }
-
+    
     protected boolean isFinished() {
         return true;
     }
