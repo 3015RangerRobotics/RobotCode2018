@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 import org.usfirst.frc.team3015.robot.OI;
+import org.usfirst.frc.team3015.robot.subsystems.Climber;
 import org.usfirst.frc.team3015.robot.subsystems.Drive;
 import org.usfirst.frc.team3015.robot.subsystems.Grabber;
 import org.usfirst.frc.team3015.robot.subsystems.Intake;
@@ -16,6 +17,7 @@ public abstract class CommandBase extends Command {
 	public static Grabber grabber;
 	public static OurCompressor ourCompressor;
 	public static ManhattanProject manhattan;
+	public static Climber climber;
 	
 	public static void init() {
 		drive = new Drive();

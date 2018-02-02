@@ -33,10 +33,6 @@ public class Grabber extends Subsystem {
     	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void offGrabber() {
-    	grabberSolenoid.set(DoubleSolenoid.Value.kOff);
-    }
-    
     public boolean isSwitchTriggered() {
     	return (grabberSwitch1.get() && grabberSwitch2.get());
     }

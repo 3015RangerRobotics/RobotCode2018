@@ -27,4 +27,9 @@ public class Constants {
 	public static final int manhattenRollers = 4;
 	public static final int manhattenExtender1 = 2;
 	public static final int manhattenExtender2 = 3;
+	
+	//Climber
+	public static final int climberSolenoid1 = 0;
+	public static final int climberSolenoid2 = 1;
+	
 }
