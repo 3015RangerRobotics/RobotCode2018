@@ -4,8 +4,11 @@ import org.json.simple.JSONObject;
 
 public abstract class CommMessage {
     public abstract String getType();
+    
     public abstract String getMessage();
-    public String toJson(){
+    
+    @SuppressWarnings("unchecked")
+	public String toJson(){
         JSONObject jo = new JSONObject();
         jo.put("type", getType());
         jo.put("message", getMessage());

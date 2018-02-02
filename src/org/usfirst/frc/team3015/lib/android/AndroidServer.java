@@ -16,7 +16,6 @@ public class AndroidServer extends Threaded {
     private static AndroidServer instance = null;
     private ServerSocket serverSocket;
     private boolean isRunning = true;
-    private int port;
     private ArrayList<TargetUpdateReceiver> receivers = new ArrayList<>();
     private double lastMessageReceivedTime = 0;
     private ArrayList<ServerThread> serverThreads = new ArrayList<>();
@@ -31,7 +30,6 @@ public class AndroidServer extends Threaded {
 
     private AndroidServer(int port){
         try {
-            this.port = port;
             serverSocket = new ServerSocket(port);
         }catch (IOException e){
             e.printStackTrace();

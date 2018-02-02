@@ -33,7 +33,7 @@ public class Grabber extends Subsystem {
     	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
-    public boolean isSwitchTriggered() {
+    public boolean isCubePresent() {
     	return (grabberSwitch1.get() && grabberSwitch2.get());
     }
     
