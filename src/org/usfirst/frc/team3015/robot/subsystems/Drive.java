@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
-import org.rangerrobotics.lib.android.TargetInfo;
-import org.rangerrobotics.lib.android.TargetUpdate;
-import org.rangerrobotics.lib.android.messages.TargetUpdateReceiver;
+import org.usfirst.frc.team3015.lib.android.TargetInfo;
+import org.usfirst.frc.team3015.lib.android.TargetUpdate;
+import org.usfirst.frc.team3015.lib.android.messages.TargetUpdateReceiver;
 import org.usfirst.frc.team3015.robot.Constants;
 import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 
