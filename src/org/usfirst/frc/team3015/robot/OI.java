@@ -3,6 +3,7 @@ package org.usfirst.frc.team3015.robot;
 import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -63,5 +64,60 @@ public class OI {
 	
 	public double getLeftStickX() {
 		return driver.getX(Hand.kLeft);
+	}
+	
+	/**
+	 * Rumble driver's left side of the joypad
+	 * In the case of Xbox joypads, this is a stronger rumble
+	 * @param value Strength of rumble
+	 */
+	public void driverLeftRumble(double value) {
+		driver.setRumble(RumbleType.kLeftRumble, value);
+	}
+	
+	/**
+	 * Rumble codriver's right side of the joypad
+	 * In the case of Xbox joypads, this is a softer rumble
+	 * @param value Strength of rumble
+	 */
+	public void coDriverRightRumble(double value) {
+		coDriver.setRumble(RumbleType.kRightRumble, value);
+	}
+	
+	/**
+	 * Rumble codriver's left side of the joypad
+	 * In the case of Xbox joypads, this is a stronger rumble
+	 * @param value Strength of rumble
+	 */
+	public void coDriverLeftRumble(double value) {
+		coDriver.setRumble(RumbleType.kLeftRumble, value);
+	}
+	
+	/**
+	 * Stops rumble on right side of driver's joypad
+	 */
+	public void driverStopRightRumble(){
+		driver.setRumble(RumbleType.kRightRumble, 0);
+	}
+	
+	/**
+	 * Stops rumble on left side of driver's joypad
+	 */
+	public void driverStopLeftRumble(){
+		driver.setRumble(RumbleType.kLeftRumble, 0);
+	}
+	
+	/**
+	 * Stops rumble on right side of codriver's joypad
+	 */
+	public void coDriverStopRightRumble(){
+		coDriver.setRumble(RumbleType.kRightRumble, 0);
+	}
+	
+	/**
+	 * Stops rumble on left side of codriver's joypad
+	 */
+	public void coDriverStopLeftRumble(){
+		coDriver.setRumble(RumbleType.kLeftRumble, 0);
 	}
 }

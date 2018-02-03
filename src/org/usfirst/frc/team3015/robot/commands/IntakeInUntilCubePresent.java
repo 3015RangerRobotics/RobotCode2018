@@ -1,11 +1,13 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 /**
- * Starts the intake to bring cubes in
+ * Starts the intake to bring cubes in, stops when cube is present
  */
-public class IntakeIn extends CommandBase {
-
-	public IntakeIn() {
+public class IntakeInUntilCubePresent extends CommandBase {
+	
+	boolean isFinished = false;
+	
+	public IntakeInUntilCubePresent() {
     	requires(grabber);
     }
 
@@ -15,10 +17,16 @@ public class IntakeIn extends CommandBase {
 
     protected void execute() {
     	grabber.intake();
+    	
+    	if(grabber.isCubePresent()) {
+    		grabber.stopIntake();
+    		grabber.closeGrabber();
+    		isFinished = true;
+    	}
     }
 
     protected boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
     protected void end() {

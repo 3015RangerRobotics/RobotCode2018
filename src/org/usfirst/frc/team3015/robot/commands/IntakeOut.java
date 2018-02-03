@@ -6,7 +6,7 @@ package org.usfirst.frc.team3015.robot.commands;
 public class IntakeOut extends CommandBase {
 
     public IntakeOut() {
-    	requires(intake);
+    	requires(grabber);
     }
 
     protected void initialize() {
@@ -14,7 +14,7 @@ public class IntakeOut extends CommandBase {
     }
 
     protected void execute() {
-    	intake.reverseIntake();
+    	grabber.reverseIntake();
     }
 
     protected boolean isFinished() {
@@ -22,7 +22,7 @@ public class IntakeOut extends CommandBase {
     }
 
     protected void end() {
-    	intake.stopIntake();
+    	grabber.stopIntake();
     }
 
     protected void interrupted() {
