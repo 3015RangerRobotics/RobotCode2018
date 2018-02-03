@@ -2,7 +2,7 @@ package org.usfirst.frc.team3015.robot;
 
 import java.util.ArrayList;
 
-public class MotionProfiles {
+public class DriveMotionProfiles {
 	public static double[][] testLeft = new double[][] {
 		{0.0, 0.0, 0.0},
 		{2.749603801376534E-4, 0.027496038013699695, 2.749603801363405},

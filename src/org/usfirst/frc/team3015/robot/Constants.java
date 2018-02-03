@@ -35,4 +35,8 @@ public class Constants {
 	//Buddy Climb
 	public static final int buddySolenoid = 0;
 	
+	//Elevator
+	public static final int elevatorTalonSRX = 1;
+	public static final int elevatorPotentiometer = 6;
+	
 }

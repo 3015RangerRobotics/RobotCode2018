@@ -4,6 +4,7 @@ import org.usfirst.frc.team3015.robot.OI;
 import org.usfirst.frc.team3015.robot.subsystems.BuddyClimb;
 import org.usfirst.frc.team3015.robot.subsystems.Climber;
 import org.usfirst.frc.team3015.robot.subsystems.Drive;
+import org.usfirst.frc.team3015.robot.subsystems.Elevator;
 import org.usfirst.frc.team3015.robot.subsystems.Grabber;
 import org.usfirst.frc.team3015.robot.subsystems.Intake;
 import org.usfirst.frc.team3015.robot.subsystems.ManhattanProject;
@@ -20,6 +21,7 @@ public abstract class CommandBase extends Command {
 	public static ManhattanProject manhattan;
 	public static Climber climber;
 	public static BuddyClimb buddyClimb;
+	public static Elevator elevator;
 	
 	public static void init() {
 		drive = new Drive();
@@ -29,6 +31,7 @@ public abstract class CommandBase extends Command {
 //		manhattan = new ManhattanProject();		
 //		climber = new Climber();
 //		buddyClimb = new BuddyClimb();
+//		elevator = new Elevator();
 		
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
