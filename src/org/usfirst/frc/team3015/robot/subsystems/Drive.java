@@ -34,6 +34,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091
 	public final double kA = 0.013;// adjust kA until tracking well, then adjust pid
 	
+	public final double kTurnV = 0;
+	public final double kTurnA = 0;
+	
 	//TODO: Find this
 	public final double kDistancePerPulse = 0.0090477405;
 	
