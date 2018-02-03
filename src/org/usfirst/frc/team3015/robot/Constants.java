@@ -12,7 +12,7 @@ public class Constants {
 	public static final int rightDriveEncoder2 = 3;
 	
 	//Intake
-	public static final int intakeMotor = 10;
+	public static final int intakeMotor = 2;
 	
 	//Grabber
 	public static final int grabberSolenoid1 = 0;

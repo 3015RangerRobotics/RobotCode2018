@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.DriveToCube;
+import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
@@ -47,8 +47,10 @@ public class OI {
 	
 	public OI() {
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
-		driverB2.whenPressed(new DriveToCube(-0.2));
+//		driverB2.whenPressed(new DriveToCube(-0.2));
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
+		driverA1.whileHeld(new IntakeIn());
+		driverB2.whileHeld(new IntakeOut());
 	}
 	
 	public double getLeftStickY() {
@@ -57,5 +59,9 @@ public class OI {
 	
 	public double getRightStickX() {
 		return driver.getX(Hand.kRight);
+	}
+	
+	public double getLeftStickX() {
+		return driver.getX(Hand.kLeft);
 	}
 }

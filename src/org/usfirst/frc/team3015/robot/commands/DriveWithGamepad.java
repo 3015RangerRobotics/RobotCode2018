@@ -13,7 +13,7 @@ public class DriveWithGamepad extends CommandBase {
     }
 
     protected void execute() {
-    	drive.arcadeDrive(oi.getLeftStickY(), oi.getRightStickX()/1.5, true);
+    	drive.arcadeDrive(oi.getLeftStickY(), oi.getLeftStickX()/1.5, true);
     }
 
     protected boolean isFinished() {
