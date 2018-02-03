@@ -6,7 +6,7 @@ package org.usfirst.frc.team3015.robot.commands;
 public class IntakeStop extends CommandBase {
 
     public IntakeStop() {
-    	requires(intake);
+    	requires(grabber);
     }
 
     protected void initialize() {
@@ -14,7 +14,7 @@ public class IntakeStop extends CommandBase {
     }
 
     protected void execute() {
-    	intake.stopIntake();
+    	grabber.stopIntake();
     }
 
     protected boolean isFinished() {
@@ -22,7 +22,7 @@ public class IntakeStop extends CommandBase {
     }
 
     protected void end() {
-    	intake.stopIntake();
+    	grabber.stopIntake();
     }
 
     protected void interrupted() {
