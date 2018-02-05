@@ -50,8 +50,8 @@ public class OI {
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.testLeft, MotionProfiles.testRight));
 //		driverB2.whenPressed(new DriveToCube(-0.2));
 //		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.generate1D(5, 5, 5, 0.01)));
-		driverA1.whileHeld(new IntakeIn());
-		driverB2.whileHeld(new IntakeOut());
+		driverA1.whileHeld(new GrabberIn());
+		driverB2.whileHeld(new GrabberOut());
 	}
 	
 	public double getLeftStickY() {

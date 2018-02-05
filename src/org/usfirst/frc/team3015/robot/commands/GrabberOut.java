@@ -3,9 +3,9 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  * Starts the intake to shoot out cubes
  */
-public class IntakeOut extends CommandBase {
+public class GrabberOut extends CommandBase {
 
-    public IntakeOut() {
+    public GrabberOut() {
     	requires(grabber);
     }
 
