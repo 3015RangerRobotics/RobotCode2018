@@ -21,6 +21,7 @@ public class DriveTurnMotionProfile extends CommandBase {
 
     protected void initialize() {
     	drive.resetGyro();
+    	Timer.delay(.02);
     	isFinished = false;
     	i = 0;
     	prevError = 0;
@@ -52,7 +53,7 @@ public class DriveTurnMotionProfile extends CommandBase {
 			double errorDeriv = ((error - prevError) / Constants.kPeriod) - goalVel;
 			
 			double pwm = (drive.kTurnP * error) + (drive.kTurnI * errorDeriv) + (drive.kTurnV * goalVel) + (drive.kTurnA * goalAcc);
-			
+
 			System.out.println(goalPos + ", " + drive.getAngle());
 			
 			prevError = error;

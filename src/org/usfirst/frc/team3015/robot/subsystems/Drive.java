@@ -26,16 +26,16 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveD = 0.01;
 	
 	//TODO: Tune these
-	public final double kTurnP = 0.01;
-	public final double kTurnI = 0;
-	public final double kTurnD = 0.0015;
+	public final double kTurnP = 0;//0.01;
+	public final double kTurnI = 0;//0;
+	public final double kTurnD = 0;//0.0015;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091
-	public final double kA = 0.013;// adjust kA until tracking well, then adjust pid
+	public final double kA = 0.013;// adjust kA until tracking well, then adjust pid;
 	
-	public final double kTurnV = 0;
-	public final double kTurnA = 0;
+	public final double kTurnV = 0.0016;
+	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
 	public final double kDistancePerPulse = 0.0090477405;
@@ -70,7 +70,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	
 	@Override
 	public void periodic() {
-		System.out.println(getAngle() + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
+//		System.out.println(getAngle()); // + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
 	}
 	
 	public void resetEncoders() {
@@ -87,10 +87,10 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
         // local variables to hold the computed PWM values for the motors
         double leftMotorSpeed;
         double rightMotorSpeed;
-
+        System.out.println("beepa"+rotateValue);
         moveValue = limit(moveValue);
         rotateValue = limit(rotateValue);
-
+        System.out.println("boopa"+rotateValue);
         if (squaredInputs) {
           // square the inputs (while preserving the sign) to increase fine control
           // while permitting full power
