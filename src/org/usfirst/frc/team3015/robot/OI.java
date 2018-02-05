@@ -48,6 +48,10 @@ public class OI {
 		
 	}
 	
+	public double getDriverSumTriggers(){
+		return driver.getRawAxis(3)-driver.getRawAxis(2);
+	}
+	
 	public double getLeftStickY() {
 		return -driver.getY(Hand.kLeft);
 	}
