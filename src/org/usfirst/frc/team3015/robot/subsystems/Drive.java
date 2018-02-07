@@ -38,7 +38,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
-	public final double kDistancePerPulse = 0.0090477405;
+	public final double kDistancePerPulse = 0.0096354166666667;
 	
 	public final double maxVelocity = 16.0;
 	public final double maxAcceleration = 5;
@@ -54,12 +54,13 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public Drive() {
 		leftDrive = new VictorSP(Constants.leftDriveMotor);
 		leftEncoder = new Encoder(Constants.leftDriveEncoder1, Constants.leftDriveEncoder2);
-		leftDrive.setInverted(true);
-		leftEncoder.setReverseDirection(false);
+		leftDrive.setInverted(false);
+		leftEncoder.setReverseDirection(true);
 		leftEncoder.setDistancePerPulse(kDistancePerPulse);
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
+		rightDrive.setInverted(true);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
-		rightEncoder.setReverseDirection(true);
+		rightEncoder.setReverseDirection(false);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
 	}
@@ -71,6 +72,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	@Override
 	public void periodic() {
 //		System.out.println(getAngle()); // + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
+//		System.out.println(getLeftDistance() + ", " + getRightDistance());
 	}
 	
 	public void resetEncoders() {
@@ -87,10 +89,8 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
         // local variables to hold the computed PWM values for the motors
         double leftMotorSpeed;
         double rightMotorSpeed;
-        System.out.println("beepa"+rotateValue);
         moveValue = limit(moveValue);
         rotateValue = limit(rotateValue);
-        System.out.println("boopa"+rotateValue);
         if (squaredInputs) {
           // square the inputs (while preserving the sign) to increase fine control
           // while permitting full power

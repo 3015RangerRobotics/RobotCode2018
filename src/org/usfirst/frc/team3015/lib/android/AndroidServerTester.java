@@ -17,6 +17,16 @@ public class AndroidServerTester {
     public static void main(String[] args){
         AndroidServer server = AndroidServer.getInstance();
         server.addTargetUpdateReceiver(new TestReceiver());
+        
+        try {
+        	Thread.sleep(1000);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+        double[][] thing = server.generateMotion1D(10, 10, 5, 0.01);
+        for(double[] d: thing) {
+        	System.out.println(d[0]);
+        }
         while (true){
             try{
                 Thread.sleep(100);

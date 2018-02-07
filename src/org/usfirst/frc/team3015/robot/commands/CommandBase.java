@@ -23,7 +23,7 @@ public abstract class CommandBase extends Command {
 	
 	public static void init() {
 		drive = new Drive();
-		grabber = new Grabber();
+//		grabber = new Grabber();
 //		ourCompressor = new OurCompressor();
 //		manhattan = new ManhattanProject();		
 //		climber = new Climber();

@@ -1,8 +1,5 @@
 package org.usfirst.frc.team3015.lib.android;
 
-import org.usfirst.frc.team3015.lib.android.messages.*;
-import org.usfirst.frc.team3015.lib.util.Threaded;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,6 +7,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.usfirst.frc.team3015.lib.android.messages.CommMessage;
+import org.usfirst.frc.team3015.lib.android.messages.HeartbeatMessage;
+import org.usfirst.frc.team3015.lib.android.messages.IncomingMessage;
+import org.usfirst.frc.team3015.lib.android.messages.MotionProfileMessage;
+import org.usfirst.frc.team3015.lib.android.messages.TargetUpdateReceiver;
+import org.usfirst.frc.team3015.lib.android.messages.VideoMessage;
+import org.usfirst.frc.team3015.lib.util.Threaded;
 
 public class AndroidServer extends Threaded {
     private static final int serverPort = 3015;
@@ -20,6 +28,7 @@ public class AndroidServer extends Threaded {
     private double lastMessageReceivedTime = 0;
     private ArrayList<ServerThread> serverThreads = new ArrayList<>();
     private boolean isConnected = false;
+    private volatile double[][] currentProfile = null;
 
     public static AndroidServer getInstance(){
         if(instance == null){
@@ -64,6 +73,26 @@ public class AndroidServer extends Threaded {
                 s.send(new VideoMessage(false));
             }
         }
+    }
+    
+    public double[][] generateMotion1D(double d, double maxV, double a, double period) {
+    	currentProfile = null;
+    	for(ServerThread s:serverThreads) {
+    		if(s.isAlive()) {
+    			s.send(new MotionProfileMessage(d, maxV, a, period));
+    		}
+    	}
+    	
+    	while(currentProfile == null) {
+    		try {
+    			Thread.sleep(2);
+//    			System.out.println("wait");
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	
+    	return currentProfile;
     }
 
     public boolean isConnected(){
@@ -123,6 +152,16 @@ public class AndroidServer extends Threaded {
                 }
             }else if(message.getType().equals("heartbeat")){
                 send(HeartbeatMessage.getInstance());
+            }else if(message.getType().equals("motion")) {
+            	System.out.println("motion");
+            	JSONParser parser = new JSONParser();
+            	try {
+					JSONObject jo = (JSONObject) parser.parse(message.getMessage());
+					System.out.println(jo.toJSONString());
+					currentProfile = (double[][]) jo.get("profile");
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
             }
         }
 
