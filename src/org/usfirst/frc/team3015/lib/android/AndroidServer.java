@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -153,13 +154,23 @@ public class AndroidServer extends Threaded {
             }else if(message.getType().equals("heartbeat")){
                 send(HeartbeatMessage.getInstance());
             }else if(message.getType().equals("motion")) {
-            	System.out.println("motion");
             	JSONParser parser = new JSONParser();
             	try {
-					JSONObject jo = (JSONObject) parser.parse(message.getMessage());
-					System.out.println(jo.toJSONString());
-					currentProfile = (double[][]) jo.get("profile");
-				} catch (ParseException e) {
+					JSONArray array = (JSONArray) parser.parse(message.getMessage());
+					double[][] test = new double[array.size()][3];
+					for(int i = 0; i < array.size(); i++) {
+						JSONArray array2 = (JSONArray) array.get(i);
+						for(int j = 0; j < array2.size(); j++) {
+							Object o = array2.get(j);
+							if(o instanceof Long) {
+								test[i][j] = ((Long) o).doubleValue();
+							}else {
+								test[i][j] = (double) o;
+							}
+						}
+					}
+					currentProfile = test;
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
             }
@@ -174,7 +185,7 @@ public class AndroidServer extends Threaded {
             if(socket == null) return;
             try{
                 InputStream is = socket.getInputStream();
-                byte[] buffer = new byte[2048];
+                byte[] buffer = new byte[32768];
                 int read;
                 while(socket.isConnected() && (read = is.read(buffer)) != -1){
                     lastMessageReceivedTime = getTimestamp();

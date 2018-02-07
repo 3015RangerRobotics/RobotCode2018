@@ -6,11 +6,11 @@ public class AndroidServerTester {
     public static class TestReceiver implements TargetUpdateReceiver{
         @Override
         public void onUpdateReceived(TargetUpdate update) {
-            System.out.println("Number of targets: " + update.getTargets().size());
-            for(int i = 0; i < update.getTargets().size(); i++){
-                TargetInfo target = update.getTargets().get(i);
-                System.out.println("Target: " + target.getXAngle() + ", " + target.getYAngle() + ", " + target.getDistance());
-            }
+//            System.out.println("Number of targets: " + update.getTargets().size());
+//            for(int i = 0; i < update.getTargets().size(); i++){
+//                TargetInfo target = update.getTargets().get(i);
+//                System.out.println("Target: " + target.getXAngle() + ", " + target.getYAngle() + ", " + target.getDistance());
+//            }
         }
     }
 
@@ -23,9 +23,10 @@ public class AndroidServerTester {
         }catch(Exception e) {
         	e.printStackTrace();
         }
+        
         double[][] thing = server.generateMotion1D(10, 10, 5, 0.01);
-        for(double[] d: thing) {
-        	System.out.println(d[0]);
+        for(int i =  0; i < thing.length; i++) {
+        	System.out.println(thing[i][0]);
         }
         while (true){
             try{
