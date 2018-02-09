@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3015.robot;
 
 import org.usfirst.frc.team3015.lib.android.AndroidServer;
+import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -48,7 +49,7 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(DriveMotionProfiles.generate1D(5, 10, 5, 0.01)));
+		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.loadProfile("testPathLeft"), MotionProfiles.loadProfile("testPathRight")));
 	}
 	
 	public double getDriverSumTriggers(){
