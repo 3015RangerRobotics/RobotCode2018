@@ -26,9 +26,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveD = 0.01;
 	
 	//TODO: Tune these
-	public final double kTurnP = 0;//0.01;
-	public final double kTurnI = 0;//0;
-	public final double kTurnD = 0;//0.0015;
+	public final double kTurnP = 0.0045;
+	public final double kTurnI = 0.0;
+	public final double kTurnD = 0.0015;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091

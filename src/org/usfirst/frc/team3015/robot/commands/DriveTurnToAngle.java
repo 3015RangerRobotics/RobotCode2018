@@ -2,6 +2,7 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.RobotController;
 
 /**
  * Turns to an angle using the imu
@@ -36,9 +37,9 @@ public class DriveTurnToAngle extends CommandBase {
     	System.out.println(out + ", " + drive.getAngle());
     	if(out <= minDrive && out >= -minDrive) {
     		if(out < 0) {
-    			drive.arcadeDrive(0, -minDrive, false);
+    			drive.arcadeDrive(0, -minDrive * 12.5 / RobotController.getInputVoltage(), false);
     		}else {
-    			drive.arcadeDrive(0, minDrive, false);
+    			drive.arcadeDrive(0, minDrive * 12.5 / RobotController.getInputVoltage(), false);
     		}
     	}else {
     		drive.arcadeDrive(0, out, false);

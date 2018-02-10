@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.lib.android.AndroidServer;
-import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
+import org.usfirst.frc.team3015.robot.commands.DriveTurnToAngle;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -48,7 +47,8 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile(DriveMotionProfiles.generate1D(5, 10, 5, 0.01)));
+//		driverA1.whenPressed(new DriveMotionProfile(MotionProfiles.loadProfile("testPathLeft"), MotionProfiles.loadProfile("testPathRight")));
+		driverA1.whenPressed(new DriveTurnToAngle(90));
 	}
 	
 	public double getDriverSumTriggers(){
