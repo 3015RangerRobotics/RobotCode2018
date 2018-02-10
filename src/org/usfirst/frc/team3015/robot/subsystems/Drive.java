@@ -38,14 +38,14 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
-	public final double kDistancePerPulse = 0.0096354166666667;
+	public final double kDistancePerPulse = 0.009;
 	
 	public final double maxVelocity = 16.0;
 	public final double maxAcceleration = 5;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
-	Encoder leftEncoder;
+	public Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu;
 	
