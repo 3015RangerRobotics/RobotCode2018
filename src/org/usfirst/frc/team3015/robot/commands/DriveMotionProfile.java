@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.Constants;
 import org.usfirst.frc.team3015.robot.Robot;
 
@@ -27,7 +28,13 @@ public class DriveMotionProfile extends CommandBase {
     	this.leftMotion = leftMotion;
     	this.rightMotion = rightMotion;
     }
-
+    
+    public DriveMotionProfile(String filename) {
+    	requires(drive);
+    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left");
+    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right");
+    }
+    
     protected void initialize() {
     	drive.resetEncoders();
     	isFinished = false;
