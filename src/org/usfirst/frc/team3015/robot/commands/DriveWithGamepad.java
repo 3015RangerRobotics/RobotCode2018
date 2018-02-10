@@ -14,7 +14,7 @@ public class DriveWithGamepad extends CommandBase {
 
     protected void execute() {
     	drive.arcadeDrive(oi.getLeftStickY(), oi.getRightStickX()/1.5, true);
-    	System.out.println(drive.leftEncoder.getRate());
+//    	System.out.println(drive.leftEncoder.getRate());
     }
 
     protected boolean isFinished() {

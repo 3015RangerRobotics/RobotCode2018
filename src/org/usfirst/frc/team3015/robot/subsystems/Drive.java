@@ -8,6 +8,7 @@ import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -38,16 +39,17 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
-	public final double kDistancePerPulse = 0.009;
+	public final double kDistancePerPulse = 0.00825;
 	
 	public final double maxVelocity = 16.0;
 	public final double maxAcceleration = 5;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
-	public Encoder leftEncoder;
+	Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu;
+	DigitalInput test;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -63,6 +65,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder.setReverseDirection(false);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
+		test = new DigitalInput(9);
 	}
 	
 	public void initDefaultCommand() {
@@ -73,6 +76,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public void periodic() {
 //		System.out.println(getAngle()); // + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
 //		System.out.println(getLeftDistance() + ", " + getRightDistance());
+//		System.out.println(test.get());
 	}
 	
 	public void resetEncoders() {

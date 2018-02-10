@@ -48,8 +48,10 @@ public class OI {
 	
 	public OI() {
 		driverA1.whenPressed(new DriveMotionProfile("wallToLeftSwitch"));
-		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
-		driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));	
+//		driverA1.whenPressed(new DriveMotionProfile("wallToLine"));
+//		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
+		//driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));	
+//		driverA1.whenPressed(new DriveMotionProfile("leftScaleToLeftSwitchManhattenPrep"));
 	}
 	
 	public double getDriverSumTriggers(){
