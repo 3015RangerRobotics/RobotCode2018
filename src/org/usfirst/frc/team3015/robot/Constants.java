@@ -29,6 +29,7 @@ public class Constants {
 	//Climber
 	public static final int climberChildVictorSPX= 0;
 	public static final int climberParentTalonSRX = 1;
+	public static final int climberDigitalInput = 2;
 	
 	//Buddy Climb
 	public static final int buddySolenoid = 0;
