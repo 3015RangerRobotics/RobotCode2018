@@ -2,17 +2,24 @@ package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Climber extends Subsystem {
-	DoubleSolenoid climberSolenoid;
+	VictorSPX childClimber;
+	TalonSRX parentClimber;
+	
+	final double CLIMBER_CURRENT = 1.0;
 	
 	public Climber() {
-		climberSolenoid = new DoubleSolenoid(Constants.climberSolenoid1, Constants.climberSolenoid2);
+		childClimber = new VictorSPX(Constants.climberChildVictorSPX);
+		parentClimber = new TalonSRX(Constants.climberParentTalonSRX);
 	}
 	
     public void initDefaultCommand() {
@@ -20,11 +27,13 @@ public class Climber extends Subsystem {
     }
     
     public void extendClimber() {
-    	climberSolenoid.set(DoubleSolenoid.Value.kForward);
+    	childClimber.set(ControlMode.Follower, Constants.climberParentTalonSRX);
+    	parentClimber.set(ControlMode.Current, CLIMBER_CURRENT);
     }
     
     public void retractClimber() {
-    	climberSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	childClimber.set(ControlMode.Follower, Constants.climberParentTalonSRX);
+    	parentClimber.set(ControlMode.Current, 0);
     }
 }
 

@@ -27,8 +27,8 @@ public class Constants {
 	public static final int manhattenExtender2 = 3;
 	
 	//Climber
-	public static final int climberSolenoid1 = 0;
-	public static final int climberSolenoid2 = 1;
+	public static final int climberChildVictorSPX= 0;
+	public static final int climberParentTalonSRX = 1;
 	
 	//Buddy Climb
 	public static final int buddySolenoid = 0;
