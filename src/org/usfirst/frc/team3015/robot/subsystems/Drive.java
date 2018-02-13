@@ -49,7 +49,6 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu;
-	DigitalInput test;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -65,7 +64,6 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder.setReverseDirection(false);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
-		test = new DigitalInput(9);
 	}
 	
 	public void initDefaultCommand() {
