@@ -15,22 +15,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climber extends Subsystem {
 	VictorSPX childClimber;
 	TalonSRX parentClimber;
-	DigitalInput diSensor;
+	DigitalInput diSensorBottom;
+	DigitalInput diSensorMiddle;
+	DigitalInput diSensorTop;
 	
 	final double CLIMBER_CURRENT = 1.0;
 	
 	public Climber() {
 		childClimber = new VictorSPX(Constants.climberChildVictorSPX);
 		parentClimber = new TalonSRX(Constants.climberParentTalonSRX);
-		diSensor = new DigitalInput(Constants.climberDigitalInput);
+		diSensorBottom = new DigitalInput(Constants.climberDigitalInputBottom);
+		diSensorMiddle = new DigitalInput(Constants.climberDigitalInputMiddle);
+		diSensorTop = new DigitalInput(Constants.climberDigitalInputTop);
 	}
 	
     public void initDefaultCommand() {
         
     }
     
-    public boolean getDigitalInputValue() {
-    	return diSensor.get();
+    public int getLocation() {
+    	if(!diSensorBottom.get()) {
+    		return 0;
+    	} else if (!diSensorTop.get()) {
+    		return 2;
+    	} else if (!diSensorMiddle.get()) {
+    		return 1;
+    	} else {
+    		return -1;
+    	}
     }
     
     public void extendClimber() {

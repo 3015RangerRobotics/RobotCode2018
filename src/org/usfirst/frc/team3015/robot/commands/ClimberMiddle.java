@@ -1,13 +1,12 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimberExtendAlign extends CommandBase {
+public class ClimberMiddle extends CommandBase {
 
-    public ClimberExtendAlign() {
+    public ClimberMiddle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(climber);
@@ -19,10 +18,16 @@ public class ClimberExtendAlign extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(climber.getDigitalInputValue()) {
-    		climber.extendClimber();
-    	} else {
-    		end();
+    	switch(climber.getLocation()) {
+    		case 0:
+    			climber.extendClimber();
+    			break;
+    		case 2:
+    			climber.retractClimber();
+    			break;
+			default:
+    			end();
+    			break;
     	}
     }
 
