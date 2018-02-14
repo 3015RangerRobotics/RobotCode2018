@@ -3,17 +3,26 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  *
  */
-public class ClimberExtend extends CommandBase {
+public class ClimberBottom extends CommandBase {
 
-    public ClimberExtend() {
-        requires(climber);
+    public ClimberBottom() {
+    	requires(climber);
     }
 
     protected void initialize() {
-    	climber.retractClimber();
+
     }
 
     protected void execute() {
+    	switch(climber.getLocation()) {
+			case 1:
+			case 2:
+				climber.retractClimber();
+				break;
+			default:
+				end();
+				break;
+    	}
     }
 
     protected boolean isFinished() {
@@ -21,6 +30,7 @@ public class ClimberExtend extends CommandBase {
     }
 
     protected void end() {
+    	
     }
 
     protected void interrupted() {
