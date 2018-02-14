@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
+import org.usfirst.frc.team3015.robot.commands.ElevatorManualControl;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -20,10 +21,9 @@ public class Elevator extends Subsystem {
 	public final double kElevatorD = 0.0;
 	public final double kV = 0.0;
     public final double kA = 0.0;
-	
-
+    
     public void initDefaultCommand() {
-    	
+    	this.setDefaultCommand(new ElevatorManualControl());
     }
     
     public Elevator() {

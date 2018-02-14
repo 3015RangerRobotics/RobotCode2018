@@ -6,7 +6,6 @@ import org.usfirst.frc.team3015.robot.subsystems.Climber;
 import org.usfirst.frc.team3015.robot.subsystems.Drive;
 import org.usfirst.frc.team3015.robot.subsystems.Elevator;
 import org.usfirst.frc.team3015.robot.subsystems.Grabber;
-import org.usfirst.frc.team3015.robot.subsystems.ManhattanProject;
 import org.usfirst.frc.team3015.robot.subsystems.OurCompressor;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,7 +15,6 @@ public abstract class CommandBase extends Command {
 	public static OI oi;
 	public static Grabber grabber;
 	public static OurCompressor ourCompressor;
-	public static ManhattanProject manhattan;
 	public static Climber climber;
 	public static BuddyClimb buddyClimb;
 	public static Elevator elevator;
@@ -24,8 +22,7 @@ public abstract class CommandBase extends Command {
 	public static void init() {
 		drive = new Drive();
 //		grabber = new Grabber();
-//		ourCompressor = new OurCompressor();
-//		manhattan = new ManhattanProject();		
+//		ourCompressor = new OurCompressor();	
 //		climber = new Climber();
 //		buddyClimb = new BuddyClimb();
 //		elevator = new Elevator();

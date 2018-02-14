@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToBottom;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToScale;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToSwitch;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -47,15 +49,22 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-		driverA1.whenPressed(new DriveMotionProfile("wallToLeftSwitch"));
+//		driverA1.whenPressed(new DriveMotionProfile("wallToLeftSwitch"));
 //		driverA1.whenPressed(new DriveMotionProfile("wallToLine"));
 //		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
-		//driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));	
-//		driverA1.whenPressed(new DriveMotionProfile("leftScaleToLeftSwitchManhattenPrep"));
+//		driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
+		
+//		coDriverA1.whenPressed(new ElevatorToSwitch());
+//		coDriverX3.whenPressed(new ElevatorToBottom());
+//		coDriverY4.whenPressed(new ElevatorToScale());
 	}
 	
-	public double getDriverSumTriggers(){
-		return driver.getRawAxis(3)-driver.getRawAxis(2);
+	public double getCoDriverSumTriggers(){
+		return coDriver.getRawAxis(3)-driver.getRawAxis(2);
+	}
+	
+	public boolean getCoDriverLeftStickButton() {
+		return coDriver.getStickButton(Hand.kLeft);
 	}
 	
 	public double getLeftStickY() {

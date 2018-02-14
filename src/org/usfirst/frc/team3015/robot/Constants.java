@@ -21,11 +21,6 @@ public class Constants {
 	//Compressor
 	public static final int pressureSensor = 0;
 	
-	//Manhattan Project
-	public static final int manhattenRollers = 4;
-	public static final int manhattenExtender1 = 2;
-	public static final int manhattenExtender2 = 3;
-	
 	//Climber
 	public static final int climberChildVictorSPX= 0;
 	public static final int climberParentTalonSRX = 1;
@@ -36,5 +31,10 @@ public class Constants {
 	//Elevator
 	public static final int elevatorTalonSRX = 1;
 	public static final int elevatorPotentiometer = 6;
+	public static final double elevatorMaxV = 0;
+	public static final double elevatorAcc = 0;
+	public static final double elevatorHeightBottom = 0;
+	public static final double elevatorHeightSwitch = 0;
+	public static final double elevatorHeightScale = 0;
 	
 }
