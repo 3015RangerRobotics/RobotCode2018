@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.ElevatorToBottom;
-import org.usfirst.frc.team3015.robot.commands.ElevatorToScale;
-import org.usfirst.frc.team3015.robot.commands.ElevatorToSwitch;
+import org.usfirst.frc.team3015.robot.commands.DriveMotionProfile;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -53,10 +51,16 @@ public class OI {
 //		driverA1.whenPressed(new DriveMotionProfile("wallToLine"));
 //		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
 //		driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
-		
+//		driverA1.whileHeld(new GrabberEject());
+//		driverB2.whileHeld(new GrabberIn());
+				
 //		coDriverA1.whenPressed(new ElevatorToSwitch());
 //		coDriverX3.whenPressed(new ElevatorToBottom());
 //		coDriverY4.whenPressed(new ElevatorToScale());
+//		coDriverDLeft.whenPressed(new ClimberMiddle());
+//		coDriverDUp.whenPressed(new ClimberTop());
+//		coDriverDDown.whenPressed(new ClimberBottom());
+//		coDriverDRight.whenPressed(new BuddyExtend());
 	}
 	
 	public double getCoDriverSumTriggers(){
