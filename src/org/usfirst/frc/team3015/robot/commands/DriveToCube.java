@@ -26,17 +26,17 @@ public class DriveToCube extends CommandBase {
     	pidController.setOutputRange(-1, 1);
     	pidController.setSetpoint(drive.bestTarget.getXAngle());
     	pidController.enable();
+    	this.setTimeout(2);
     }
 
     protected void execute() { 
     	drive.arcadeDrive(driveSpeed, pidController.get(), false);
+    	//intake cube
     }
 
     protected boolean isFinished() {
-    	if(drive.bestTarget.getDistance() < 2) {
-    		return true;
-    	} 
-    	return false;
+    	//Change to return true if a cube is present in the intake
+    	return isTimedOut();
     }
 
     protected void end() {
