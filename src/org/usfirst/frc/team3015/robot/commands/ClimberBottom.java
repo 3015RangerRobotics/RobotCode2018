@@ -6,6 +6,7 @@ package org.usfirst.frc.team3015.robot.commands;
 public class ClimberBottom extends CommandBase {
 
 	int pos;
+	boolean isFinished = false;
 	
     public ClimberBottom() {
     	requires(climber);
@@ -23,11 +24,13 @@ public class ClimberBottom extends CommandBase {
 				climber.retractClimber();
 				break;
 			default:
-				end();
+				climber.stopClimber();
+				isFinished = true;
 				break;
     	}
     	if(climber.getLocation() == 0) {
-    		end();
+    		climber.stopClimber();
+    		isFinished = true;
     	}
     }
 

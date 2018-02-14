@@ -52,11 +52,11 @@ public class Climber extends Subsystem {
     
     public void retractClimber() {
     	childClimber.set(ControlMode.Follower, Constants.climberParentTalonSRX);
-    	parentClimber.set(ControlMode.Current, 0);
+    	parentClimber.set(ControlMode.Current, -CLIMBER_CURRENT);
     }
     
-    while(!(diSensorBottom || diSensorMiddle || diSensorTop)) {
-    	
+    public void stopClimber() {
+    	parentClimber.set(ControlMode.Disabled, 0);
     }
     
 }

@@ -6,6 +6,7 @@ package org.usfirst.frc.team3015.robot.commands;
 public class ClimberTop extends CommandBase {
 
 	int pos;
+	boolean isFinished = false;
 	
     public ClimberTop() {
         requires(climber);
@@ -23,11 +24,13 @@ public class ClimberTop extends CommandBase {
 				climber.extendClimber();
 				break;
 			default:
-				end();
+				climber.stopClimber();
+				isFinished = true;
 				break;
     	}
     	if(climber.getLocation() == 2) {
-    		end();
+    		climber.stopClimber();
+    		isFinished = true;
     	}
     }
 
@@ -39,6 +42,6 @@ public class ClimberTop extends CommandBase {
     }
 
     protected void interrupted() {
-    	end();
+    	isFinished = true;
     }
 }

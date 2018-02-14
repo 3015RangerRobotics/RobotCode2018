@@ -7,7 +7,8 @@ package org.usfirst.frc.team3015.robot.commands;
 public class ClimberMiddle extends CommandBase {
 	
 	int pos;
-	
+	boolean isFinished = false;
+
     public ClimberMiddle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -31,11 +32,13 @@ public class ClimberMiddle extends CommandBase {
     			climber.retractClimber();
     			break;
 			default:
-    			end();
+				climber.stopClimber();
+    			isFinished = true;
     			break;
     	}
     	if(climber.getLocation() == 1) {
-    		end();
+    		climber.stopClimber();
+    		isFinished = true;
     	}
     }
 
