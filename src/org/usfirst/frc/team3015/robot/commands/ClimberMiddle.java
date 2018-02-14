@@ -5,7 +5,9 @@ package org.usfirst.frc.team3015.robot.commands;
  *
  */
 public class ClimberMiddle extends CommandBase {
-
+	
+	int pos;
+	
     public ClimberMiddle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -14,20 +16,26 @@ public class ClimberMiddle extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	pos = climber.getLocation();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	switch(climber.getLocation()) {
+    	switch(pos) {
     		case 0:
     			climber.extendClimber();
     			break;
     		case 2:
+    		case -1:
     			climber.retractClimber();
     			break;
 			default:
     			end();
     			break;
+    	}
+    	if(climber.getLocation() == 1) {
+    		end();
     	}
     }
 

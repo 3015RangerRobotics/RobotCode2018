@@ -54,5 +54,10 @@ public class Climber extends Subsystem {
     	childClimber.set(ControlMode.Follower, Constants.climberParentTalonSRX);
     	parentClimber.set(ControlMode.Current, 0);
     }
+    
+    while(!(diSensorBottom || diSensorMiddle || diSensorTop)) {
+    	
+    }
+    
 }
 
