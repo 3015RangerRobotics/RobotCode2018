@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoOneCubeInRightSwitch extends CommandGroup {
+public class AutoOneCubeRightSwitch extends CommandGroup {
 
-    public AutoOneCubeInRightSwitch() {
+    public AutoOneCubeRightSwitch() {
+    	addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile("wallToRightSwitch"));
-        addParallel(new ElevatorToSwitch());
         addSequential(new GrabberEject());
     }
 }

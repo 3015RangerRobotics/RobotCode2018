@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * LEFT SCALE RIGHT SWITCH
  */
-public class AutoOneCubeInBothRightToLeft extends CommandGroup {
+public class AutoOneCubeBothRightToLeft extends CommandGroup {
 
-    public AutoOneCubeInBothRightToLeft() {
+    public AutoOneCubeBothRightToLeft() {
+    	addParallel(new ElevatorToScale());
         addSequential(new DriveMotionProfile("wallToLeftScale"));
-        addParallel(new ElevatorToScale());
         addSequential(new GrabberEject());
-        addSequential(new DriveMotionProfile("leftScaleToRightSwitch"));
         addParallel(new ElevatorToSwitch());
+        addSequential(new DriveMotionProfile("leftScaleToRightSwitch"));
         addSequential(new GrabberEject());
         addSequential(new ElevatorToBottom());
     }
