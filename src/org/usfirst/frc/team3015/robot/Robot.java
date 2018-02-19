@@ -3,7 +3,6 @@ package org.usfirst.frc.team3015.robot;
 import org.usfirst.frc.team3015.lib.android.AndroidServer;
 import org.usfirst.frc.team3015.robot.commands.CommandBase;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -46,11 +45,6 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
-		
-		double[][] profile = AndroidServer.getInstance().generateMotion1D(10, 10, 5, 0.01);
-//		for(double[] d:profile) {
-//			System.out.println("p:" + d[0] + ", v:" + d[1] + ", a:" + d[2]);
-//		}
 	}
 
 	@Override

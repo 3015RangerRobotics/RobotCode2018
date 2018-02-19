@@ -5,10 +5,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team3015.lib.android.AndroidServer;
+import org.usfirst.frc.team3015.robot.Constants;
 
 public class MotionProfiles {
-	public static double[][] generate1D(double d, double maxV, double a, double period){
-		return AndroidServer.getInstance().generateMotion1D(d, maxV, a, period);
+	public static double[][] generate1D(double d, double maxV, double a){
+		return AndroidServer.getInstance().generateMotion1D(d, maxV, a, Constants.kPeriod);
 	}
 	
 	public static double[][] loadProfile(String profileName){

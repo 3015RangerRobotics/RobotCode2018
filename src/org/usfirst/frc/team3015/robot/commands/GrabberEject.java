@@ -1,17 +1,11 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
 public class GrabberEject extends CommandBase {
 
     public GrabberEject() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(grabber);
 //    	requires(elevator);
     }

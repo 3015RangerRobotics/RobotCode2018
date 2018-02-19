@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoOneCubeLeftSwitch extends CommandGroup {
+public class AutoOneCubeLeftScale extends CommandGroup {
 
-    public AutoOneCubeLeftSwitch() {
-    	addSequential(new GrabberClose());
-        addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
+    public AutoOneCubeLeftScale() {
+        addParallel(new ElevatorToScale());
+        addSequential(new DriveMotionProfile("wallToLeftScale"));
         addSequential(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5)));
         addSequential(new ElevatorToBottom());
