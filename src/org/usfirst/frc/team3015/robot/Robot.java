@@ -21,15 +21,16 @@ public class Robot extends TimedRobot {
 //		chooser.addObject("My Auto", new MyAutoCommand());
 //		SmartDashboard.putData("Auto mode", chooser);
 		
+		CommandBase.init();
+		
 		AndroidServer server = AndroidServer.getInstance();
 		server.addTargetUpdateReceiver(CommandBase.drive);
-		
-		CommandBase.init();
 	}
 
 	@Override
 	public void disabledInit() {
 		isEnabled = false;
+		CommandBase.drive.test.set(false);
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		CommandBase.drive.test.set(true);
 	}
 
 	@Override

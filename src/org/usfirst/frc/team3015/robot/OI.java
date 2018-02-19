@@ -47,10 +47,13 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-//		driverA1.whenPressed(new DriveMotionProfile("wallToLeftSwitch"));
+//		driverA1.whenPressed(new DriveMotionProfile("wallToLeftScale"));
 //		driverA1.whenPressed(new DriveMotionProfile("wallToLine"));
 //		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
 //		driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
+		
+//		driverA1.whenPressed(new DriveToCube(0.4));
+		
 //		driverA1.whileHeld(new GrabberEject());
 //		driverB2.whileHeld(new GrabberIn());
 				
@@ -71,15 +74,19 @@ public class OI {
 		return coDriver.getStickButton(Hand.kLeft);
 	}
 	
-	public double getLeftStickY() {
-		return -driver.getY(Hand.kLeft);
+	public double getDriverLeftStickY() {
+		if(Math.abs(driver.getY(Hand.kLeft)) > 0.05) {
+			return -driver.getY(Hand.kLeft);
+		}else {
+			return 0;
+		}
 	}
 	
-	public double getRightStickX() {
+	public double getDriverRightStickX() {
 		return driver.getX(Hand.kRight);
 	}
 	
-	public double getLeftStickX() {
+	public double getDriverLeftStickX() {
 		return driver.getX(Hand.kLeft);
 	}
 	

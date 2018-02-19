@@ -9,6 +9,7 @@ import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -27,9 +28,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveD = 0.01;
 	
 	//TODO: Tune these
-	public final double kTurnP = 0.0045;
+	public final double kTurnP = 0.02;
 	public final double kTurnI = 0.0;
-	public final double kTurnD = 0.0015;
+	public final double kTurnD = 0.0;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.0625;// kV = 1 / max velocity 0.091
@@ -39,16 +40,14 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
-	public final double kDistancePerPulse = 0.00825;
-	
-	public final double maxVelocity = 16.0;
-	public final double maxAcceleration = 5;
+	public final double kDistancePerPulse = 0.0075625;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
 	Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu;
+	public DigitalOutput test;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -64,6 +63,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder.setReverseDirection(false);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
+		test = new DigitalOutput(9);
 	}
 	
 	public void initDefaultCommand() {
@@ -172,7 +172,8 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 				shortestDistance = target;
 			}
 		}
-		bestTarget = shortestDistance;
+		if(shortestDistance != null)
+			bestTarget = shortestDistance;
 	}
 	
 	public class IMUPidSource implements PIDSource{
