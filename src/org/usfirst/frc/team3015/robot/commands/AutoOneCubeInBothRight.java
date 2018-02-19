@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoDriveToBaseline extends CommandGroup {
+public class AutoOneCubeInBothRight extends CommandGroup {
 
-    public AutoDriveToBaseline() {
-    	addSequential(new DriveMotionProfile("wallToLine"));
+    public AutoOneCubeInBothRight() {
+        addSequential(new DriveMotionProfile("wallToRightScale"));
     	addParallel(new ElevatorToScale());
     	addSequential(new DriveTurnToAngle(175));
     	addParallel(new ElevatorToBottom());
