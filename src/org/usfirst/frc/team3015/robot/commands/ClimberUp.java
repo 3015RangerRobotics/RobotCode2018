@@ -1,16 +1,16 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Manual control of the elevator, no PID
+ *
  */
-public class ElevatorManualControl extends CommandBase {
+public class ClimberUp extends CommandBase {
 
-    public ElevatorManualControl() {
+    public ClimberUp() {
         // Use requires() here to declare subsystem dependencies
-        requires(elevator);
+        // eg. requires(chassis);
+    	requires(climber);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.set(ControlMode.PercentOutput, oi.getCoDriverSumTriggers());
+    	climber.climbUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +29,7 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	elevator.set(ControlMode.PercentOutput, 0);
+    	climber.stopClimber();
     }
 
     // Called when another command which requires one or more of the same

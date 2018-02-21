@@ -1,28 +1,31 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- * Stops the intake
- */
-public class IntakeStop extends CommandBase {
+import edu.wpi.first.wpilibj.command.Command;
 
-    public IntakeStop() {
-    	requires(grabber);
+/**
+ *
+ */
+public class GrabberUp extends CommandBase {
+
+    public GrabberUp() {
+        requires(grabber);
     }
 
     protected void initialize() {
-    	
     }
 
     protected void execute() {
-    	grabber.stopIntake();
+    	if(!grabber.isAnglerUp()) {
+    		grabber.intakeUp();
+    	}
     }
 
     protected boolean isFinished() {
-        return false;
+        return grabber.isAnglerUp();
     }
 
     protected void end() {
-    	grabber.stopIntake();
+    	grabber.anglerStop();
     }
 
     protected void interrupted() {

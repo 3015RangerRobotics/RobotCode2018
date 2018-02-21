@@ -10,14 +10,16 @@ public class BuddyExtend extends CommandBase {
     }
 
     protected void initialize() {
-    	buddyClimb.buddyExtend();
+    	
     }
 
     protected void execute() {
+    	buddyClimb.buddyExtend();
+    	System.out.println("extend");
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {

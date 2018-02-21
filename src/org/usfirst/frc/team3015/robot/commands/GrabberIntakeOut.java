@@ -5,26 +5,25 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GrabberClose extends CommandBase {
+public class GrabberIntakeOut extends CommandBase {
 
-    public GrabberClose() {
+    public GrabberIntakeOut() {
         requires(grabber);
     }
 
     protected void initialize() {
-    	grabber.closeGrabber();
     }
 
     protected void execute() {
-    	
+    	grabber.intakeOut();
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {
-    	
+    	grabber.intakeStop();
     }
 
     protected void interrupted() {

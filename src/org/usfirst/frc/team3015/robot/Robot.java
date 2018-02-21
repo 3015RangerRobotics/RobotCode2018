@@ -2,6 +2,7 @@ package org.usfirst.frc.team3015.robot;
 
 import org.usfirst.frc.team3015.lib.android.AndroidServer;
 import org.usfirst.frc.team3015.robot.commands.CommandBase;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,7 +30,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		isEnabled = false;
-		CommandBase.drive.test.set(false);
 	}
 
 	@Override
@@ -58,7 +58,6 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		CommandBase.drive.test.set(true);
 	}
 
 	@Override

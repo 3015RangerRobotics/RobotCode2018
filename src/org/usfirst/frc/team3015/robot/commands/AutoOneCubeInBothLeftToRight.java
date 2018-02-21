@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoOneCubeInBothLeftToRight extends CommandGroup {
 
     public AutoOneCubeInBothLeftToRight() {
-        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
-        addParallel(new ElevatorToSwitch());
-        addSequential(new GrabberEject());
-        addSequential(new DriveMotionProfile("leftSwitchToRightScale"));
-        addParallel(new ElevatorToScale());
-        addSequential(new GrabberEject());
-        addSequential(new ElevatorToBottom());
+//        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
+//        addParallel(new ElevatorToSwitch());
+//        addSequential(new GrabberEject());
+//        addSequential(new DriveMotionProfile("leftSwitchToRightScale"));
+//        addParallel(new ElevatorToScale());
+//        addSequential(new GrabberEject());
+//        addSequential(new ElevatorToBottom());
     }
 }

@@ -10,11 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoOneCubeRightScale extends CommandGroup {
 
     public AutoOneCubeRightScale() {
-    	addSequential(new GrabberClose());
-    	addParallel(new ElevatorToScale());
-    	addSequential(new DriveMotionProfile("wallToRightScale"));
-    	addSequential(new GrabberOpen());
-    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5)));
-    	addSequential(new ElevatorToBottom());
+//    	addParallel(new ElevatorToScale());
+//    	addSequential(new DriveMotionProfile("wallToRightScale"));
+//    	addSequential(new GrabberEject());
+//    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5, 60)));
+//    	addSequential(new ElevatorToBottom());
     }
 }

@@ -1,28 +1,30 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- * Starts the intake to shoot out cubes
- */
-public class GrabberOut extends CommandBase {
+import edu.wpi.first.wpilibj.command.Command;
 
-    public GrabberOut() {
-    	requires(grabber);
+/**
+ *
+ */
+public class GrabberEjectorOut extends CommandBase {
+
+    public GrabberEjectorOut() {
+        requires(grabber);
     }
 
     protected void initialize() {
-    	
+    	grabber.ejectorOut();
     }
 
     protected void execute() {
-    	grabber.reverseIntake();
+    	
     }
 
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {
-    	grabber.stopIntake();
+    	
     }
 
     protected void interrupted() {

@@ -5,26 +5,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GrabberClose extends CommandBase {
+public class GrabberIntakeTilCube extends CommandBase {
 
-    public GrabberClose() {
+    public GrabberIntakeTilCube() {
         requires(grabber);
     }
 
     protected void initialize() {
-    	grabber.closeGrabber();
     }
 
     protected void execute() {
-    	
+    	if(!grabber.isCubePresent()) {
+    		grabber.intakeIn();
+    	}
     }
 
     protected boolean isFinished() {
-        return true;
+        return grabber.isCubePresent() || oi.getDriverLB();
     }
 
     protected void end() {
-    	
+    	grabber.intakeStop();
     }
 
     protected void interrupted() {

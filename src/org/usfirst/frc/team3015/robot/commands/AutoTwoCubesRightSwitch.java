@@ -10,18 +10,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoTwoCubesRightSwitch extends CommandGroup {
 
     public AutoTwoCubesRightSwitch() {
-    	addSequential(new GrabberClose());
-    	addParallel(new ElevatorToSwitch());  	
-    	addSequential(new DriveMotionProfile("wallToRightSwitch"));
-    	addSequential(new GrabberOpen());
-    	addParallel(new ElevatorToBottom());
-    	addSequential(new DriveMotionProfile("rightSwitchToCubePrep"));
-    	addSequential(new DriveToCube(.25));
-    	addSequential(new ElevatorToSwitch());
-    	addSequential(new DriveForTime(.5, 1));
-    	addSequential(new GrabberOpen());
-    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5)));
-    	addSequential(new ElevatorToBottom());
-    	
+//    	addParallel(new ElevatorToSwitch());  	
+//    	addSequential(new DriveMotionProfile("wallToRightSwitch"));
+//    	addSequential(new GrabberEject());
+//    	addParallel(new ElevatorToBottom());
+//    	addSequential(new DriveMotionProfile("rightSwitchToCubePrep"));
+//    	addSequential(new ObtainCube());
+//    	addSequential(new ElevatorToSwitch());
+//    	addSequential(new DriveForTime(.5, 1));
+//    	addSequential(new GrabberEject());
+//    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5, 60)));
+//    	addSequential(new ElevatorToBottom());
     }
 }

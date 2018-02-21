@@ -2,29 +2,29 @@ package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class BuddyClimb extends Subsystem {
-	Solenoid buddySolenoid;
+	DoubleSolenoid buddySolenoid;
 
     public BuddyClimb() {
-    	buddySolenoid = new Solenoid(Constants.buddySolenoid);
+    	buddySolenoid = new DoubleSolenoid(Constants.buddySolenoid1, Constants.buddySolenoid2);
     }
 
     public void initDefaultCommand() {
-        
+//        setDefaultCommand(new BuddyRetract());
     }
     
     public void buddyExtend() {
-    	buddySolenoid.set(true);
+    	buddySolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void buddyRetract() {
-    	buddySolenoid.set(false);
+    	buddySolenoid.set(DoubleSolenoid.Value.kForward);
     }
 }
 

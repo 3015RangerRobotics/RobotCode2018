@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot;
 
+import org.usfirst.frc.team3015.robot.commands.*;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,7 +15,7 @@ public class OI {
 	Button driverB2 = new JoystickButton(driver, 2);
 	Button driverX3 = new JoystickButton(driver, 3);
 	Button driverY4 = new JoystickButton(driver, 4);
-	Button driverLB5 = new JoystickButton(driver, 5);
+	public Button driverLB5 = new JoystickButton(driver, 5);
 	Button driverRB6 = new JoystickButton(driver, 6);
 	Button driverSEL7 = new JoystickButton(driver, 7);
 	Button driverSTART8 = new JoystickButton(driver, 8);
@@ -45,15 +47,27 @@ public class OI {
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
 	public OI() {
-//		driverA1.whenPressed(new DriveMotionProfile("wallToLeftScale"));
-//		driverA1.whenPressed(new DriveMotionProfile("wallToLine"));
-//		driverB2.whenPressed(new DriveMotionProfile("wallToLeftScale"));
-//		driverX3.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
+//		driverA1.whenPressed(new GrabberClose());
+//		driverB2.whenPressed(new GrabberOpen());
+//		driverX3.whenPressed(new GrabberEjectorIn());
+//		driverY4.whenPressed(new GrabberEjectorOut());
 		
 //		driverA1.whenPressed(new DriveToCube(0.4));
 		
-//		driverA1.whileHeld(new GrabberEject());
-//		driverB2.whileHeld(new GrabberIn());
+//		driverA1.whileHeld(new GrabberCubeControl());
+//		driverA1.whenReleased(new GrabberCubeUp());
+		
+		driverA1.whenPressed(new GrabberOpen());
+		driverB2.whenPressed(new GrabberDown());
+		driverX3.whenPressed(new GrabberIntakeTilCube());
+		driverY4.whileHeld(new GrabberIntakeOut());
+		
+//		driverA1.whileHeld(new ClimberUp());
+//		driverB2.whileHeld(new ClimberDown());
+//		driverX3.whileHeld(new ClimberThing());
+//		driverY4.whileHeld(new ClimberHold());
+//		driverDRight.whileHeld(new BuddyExtend());
+//		driverDRight.whenReleased(new BuddyRetract());
 				
 //		coDriverA1.whenPressed(new ElevatorToSwitch());
 //		coDriverX3.whenPressed(new ElevatorToBottom());
@@ -62,10 +76,20 @@ public class OI {
 //		coDriverDUp.whenPressed(new ClimberTop());
 //		coDriverDDown.whenPressed(new ClimberBottom());
 //		coDriverDRight.whenPressed(new BuddyExtend());
+//		coDriverDRight.whenReleased(new BuddyRetract());
+//		coDriverLS9.whileHeld(new ElevatorManualControl());
+	}
+	
+	public boolean getDriverAButton() {
+		return driverA1.get();
+	}
+	
+	public boolean getDriverLB() {
+		return driverLB5.get();
 	}
 	
 	public double getCoDriverSumTriggers(){
-		return coDriver.getRawAxis(3)-driver.getRawAxis(2);
+		return coDriver.getTriggerAxis(Hand.kRight) - coDriver.getTriggerAxis(Hand.kLeft);
 	}
 	
 	public boolean getCoDriverLeftStickButton() {

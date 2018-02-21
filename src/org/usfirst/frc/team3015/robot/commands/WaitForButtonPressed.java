@@ -1,33 +1,30 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  *
  */
-public class GrabberClose extends CommandBase {
+public class WaitForButtonPressed extends CommandBase {
+	private Button button;
 
-    public GrabberClose() {
-        requires(grabber);
+    public WaitForButtonPressed(Button button) {
+        this.button = button;
     }
 
     protected void initialize() {
-    	grabber.closeGrabber();
     }
 
     protected void execute() {
-    	
     }
 
     protected boolean isFinished() {
-        return true;
+        return button.get();
     }
 
     protected void end() {
-    	
     }
 
     protected void interrupted() {
-    	end();
     }
 }

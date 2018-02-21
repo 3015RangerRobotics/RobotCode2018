@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoOneCubeInRightSwitch extends CommandGroup {
 
     public AutoOneCubeInRightSwitch() {
-        addSequential(new DriveMotionProfile("wallToRightSwitch"));
-        addParallel(new ElevatorToSwitch());
-        addSequential(new GrabberEject());
+//        addSequential(new DriveMotionProfile("wallToRightSwitch"));
+//        addParallel(new ElevatorToSwitch());
+//        addSequential(new GrabberEject());
     }
 }

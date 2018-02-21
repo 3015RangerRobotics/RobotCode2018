@@ -5,29 +5,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GrabberClose extends CommandBase {
+public class GrabberDown extends CommandBase {
 
-    public GrabberClose() {
+    public GrabberDown() {
         requires(grabber);
     }
 
     protected void initialize() {
-    	grabber.closeGrabber();
     }
 
     protected void execute() {
-    	
+    	if(!grabber.isAnglerDown()) {
+    		grabber.intakeDown();
+    	}
     }
 
     protected boolean isFinished() {
-        return true;
+        return grabber.isAnglerDown();
     }
 
     protected void end() {
-    	
+    	grabber.anglerStop();
     }
 
     protected void interrupted() {
-    	end();
+    	
     }
 }

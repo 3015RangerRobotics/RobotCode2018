@@ -23,13 +23,14 @@ public class OurCompressorAuto extends CommandBase {
 
     protected void execute() {
     	SmartDashboard.putNumber("pressureSensor", Math.round(ourCompressor.getPressure()));
+//    	System.out.println(Math.round(ourCompressor.getPressure()));
 
     	if(DriverStation.getInstance().isAutonomous() || RobotController.getBatteryVoltage() <= CUTOFF_VOLTAGE){
     		ourCompressor.stopCompressor();
     	}else{
     		if(fillCompressor){
     			ourCompressor.startCompressor();
-    			if(ourCompressor.getPressure() >= 118){
+    			if(ourCompressor.getPressure() >= 120){
     				fillCompressor = false;
     			}
     		}else{

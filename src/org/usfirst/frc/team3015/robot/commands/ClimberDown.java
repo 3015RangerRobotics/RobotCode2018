@@ -1,13 +1,16 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */
-public class GrabberEject extends CommandBase {
+public class ClimberDown extends CommandBase {
 
-    public GrabberEject() {
-    	requires(grabber);
-//    	requires(elevator);
+    public ClimberDown() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(climber);
     }
 
     // Called just before this Command runs the first time
@@ -16,12 +19,7 @@ public class GrabberEject extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(elevator.getDistance() < 10) {
-    		grabber.reverseIntake();
-    		grabber.openGrabber();
-    	} else {
-    		grabber.openGrabber();
-    	}
+    	climber.retractClimber();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,7 +29,7 @@ public class GrabberEject extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	grabber.stopIntake();
+    	climber.stopClimber();
     }
 
     // Called when another command which requires one or more of the same

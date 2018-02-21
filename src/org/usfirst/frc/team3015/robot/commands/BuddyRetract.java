@@ -10,14 +10,15 @@ public class BuddyRetract extends CommandBase {
     }
 
     protected void initialize() {
-    	buddyClimb.buddyRetract();
+    	
     }
 
     protected void execute() {
+    	buddyClimb.buddyRetract();
     }
-    
+
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {

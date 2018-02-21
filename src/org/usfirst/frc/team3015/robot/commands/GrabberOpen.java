@@ -1,12 +1,14 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /**
- * Opens the grabber, runs once
+ *
  */
 public class GrabberOpen extends CommandBase {
 
     public GrabberOpen() {
-    	requires(grabber);
+        requires(grabber);
     }
 
     protected void initialize() {
@@ -14,7 +16,6 @@ public class GrabberOpen extends CommandBase {
     }
 
     protected void execute() {
-    	
     }
 
     protected boolean isFinished() {

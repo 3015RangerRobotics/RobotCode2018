@@ -8,8 +8,6 @@ import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -40,14 +38,14 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kTurnA = 0.0;
 	
 	//TODO: Find this
-	public final double kDistancePerPulse = 0.0075625;
+	public final double kDistancePerPulse = 0.00904774;
+//	public final double kDistancePerPulse = 0.0075625;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
 	Encoder leftEncoder;
 	Encoder rightEncoder;
 	AHRS imu;
-	public DigitalOutput test;
 	
 	public TargetInfo bestTarget = null;
 	
@@ -55,15 +53,14 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		leftDrive = new VictorSP(Constants.leftDriveMotor);
 		leftEncoder = new Encoder(Constants.leftDriveEncoder1, Constants.leftDriveEncoder2);
 		leftDrive.setInverted(false);
-		leftEncoder.setReverseDirection(true);
+		leftEncoder.setReverseDirection(false);
 		leftEncoder.setDistancePerPulse(kDistancePerPulse);
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
 		rightDrive.setInverted(true);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
-		rightEncoder.setReverseDirection(false);
+		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
-		test = new DigitalOutput(9);
 	}
 	
 	public void initDefaultCommand() {

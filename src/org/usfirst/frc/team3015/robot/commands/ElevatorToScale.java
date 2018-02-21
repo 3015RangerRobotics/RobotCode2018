@@ -16,9 +16,9 @@ public class ElevatorToScale extends CommandBase {
     	double d = Constants.elevatorHeightScale - elevator.getDistance();
     	
     	if(d < 0) {
-    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, -Constants.elevatorMaxV, -Constants.elevatorAcc)).start();
+    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, -Constants.elevatorMaxV, -Constants.elevatorAcc, 60)).start();
     	}else {
-    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, Constants.elevatorMaxV, Constants.elevatorAcc)).start();
+    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, Constants.elevatorMaxV, Constants.elevatorAcc, 60)).start();
     	}
     	
     }

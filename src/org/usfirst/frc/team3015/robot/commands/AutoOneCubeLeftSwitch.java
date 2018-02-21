@@ -10,11 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoOneCubeLeftSwitch extends CommandGroup {
 
     public AutoOneCubeLeftSwitch() {
-    	addSequential(new GrabberClose());
-        addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
-        addSequential(new GrabberOpen());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5)));
-        addSequential(new ElevatorToBottom());
+//        addParallel(new ElevatorToSwitch());
+//        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
+//        addSequential(new GrabberEject());
+//        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(-1, -10, -5, 60)));
+//        addSequential(new ElevatorToBottom());
     }
 }

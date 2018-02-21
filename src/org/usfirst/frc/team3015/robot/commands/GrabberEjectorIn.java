@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GrabberClose extends CommandBase {
+public class GrabberEjectorIn extends CommandBase {
 
-    public GrabberClose() {
+    public GrabberEjectorIn() {
         requires(grabber);
     }
 
     protected void initialize() {
-    	grabber.closeGrabber();
+    	grabber.ejectorIn();
     }
 
     protected void execute() {

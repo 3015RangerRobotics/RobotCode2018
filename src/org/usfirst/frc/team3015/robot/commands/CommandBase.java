@@ -21,11 +21,11 @@ public abstract class CommandBase extends Command {
 	
 	public static void init() {
 		drive = new Drive();
-//		grabber = new Grabber();
-//		ourCompressor = new OurCompressor();	
-//		climber = new Climber();
-//		buddyClimb = new BuddyClimb();
-//		elevator = new Elevator();
+		grabber = new Grabber();
+		ourCompressor = new OurCompressor();	
+		climber = new Climber();
+		buddyClimb = new BuddyClimb();
+		elevator = new Elevator();
 		
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
