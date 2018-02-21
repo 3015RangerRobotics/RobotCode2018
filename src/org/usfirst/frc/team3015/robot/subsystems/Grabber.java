@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
-import org.usfirst.frc.team3015.robot.commands.GrabberControl;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -41,7 +40,7 @@ public class Grabber extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new GrabberControl());
+        
     }
     
     @Override

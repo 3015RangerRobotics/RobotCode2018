@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * LEFT SWITCH RIGHT SCALE
  */
-public class AutoOneCubeInBothLeftToRight extends CommandGroup {
+public class AutoOneCubeBothLeftToRight extends CommandGroup {
 
-    public AutoOneCubeInBothLeftToRight() {
+    public AutoOneCubeBothLeftToRight() {
 //        addSequential(new DriveMotionProfile("wallToLeftSwitch"));
 //        addParallel(new ElevatorToSwitch());
 //        addSequential(new GrabberEject());
