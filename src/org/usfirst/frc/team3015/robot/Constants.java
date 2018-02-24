@@ -16,10 +16,10 @@ public class Constants {
 	public static final int intakeMotor1 = 2;
 	public static final int intakeMotor2 = 3;
 	public static final int intakeAngler = 4;
-	public static final int grabberSolenoid1 = 1;
-	public static final int grabberSolenoid2 = 6;
-	public static final int grabberEjectorSolenoid1 = 0;
-	public static final int grabberEjectorSolenoid2 = 7;
+	public static final int grabberSolenoid1 = 0;
+	public static final int grabberSolenoid2 = 7;
+	public static final int grabberEjectorSolenoid1 = 1;
+	public static final int grabberEjectorSolenoid2 = 6;
 	public static final int cubeDetector1 = 8;
 	public static final int cubeDetector2 = 9;
 	public static final int anglerPosUp = 7;
@@ -39,10 +39,10 @@ public class Constants {
 	
 	//Elevator
 	public static final int elevatorTalonSRX = 3;
-	public static final double elevatorMaxV = 8.0;
-	public static final double elevatorAcc = 8.0;
+	public static final double elevatorMaxV = 10.0;
+	public static final double elevatorAcc = 15.0;
 	public static final double elevatorHeightBottom = 0;
-	public static final double elevatorHeightSwitch = 0;
+	public static final double elevatorHeightSwitch = 20;
 	public static final double elevatorHeightScale = 0;
 	
 }

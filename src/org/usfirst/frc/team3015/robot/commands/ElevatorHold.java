@@ -18,6 +18,7 @@ public class ElevatorHold extends CommandBase {
 
     protected void execute() {
     	elevator.set(ControlMode.Position, startPos);
+    	
     }
 
     protected boolean isFinished() {

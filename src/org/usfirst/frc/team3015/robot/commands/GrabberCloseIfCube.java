@@ -1,28 +1,33 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-
 /**
  *
  */
-public class WaitForButtonPressed extends CommandBase {
+public class GrabberCloseIfCube extends CommandBase {
 
-    public WaitForButtonPressed() {
+    public GrabberCloseIfCube() {
+        requires(grabber);
     }
 
     protected void initialize() {
+    	if(grabber.isCubePresent()) {
+    		grabber.closeGrabber();
+    	}
     }
 
     protected void execute() {
+    	
     }
 
     protected boolean isFinished() {
-        return oi.getDriverLB();
+        return true;
     }
 
     protected void end() {
+    	
     }
 
     protected void interrupted() {
+    	end();
     }
 }

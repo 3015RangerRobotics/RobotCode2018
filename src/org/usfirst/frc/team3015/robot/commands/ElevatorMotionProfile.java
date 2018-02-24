@@ -58,7 +58,7 @@ public class ElevatorMotionProfile extends CommandBase {
 			
 			prevError = error;
 			
-			elevator.set(ControlMode.PercentOutput, pwm);
+			elevator.setPercent(pwm);
 			i++;
 		}else {
 			isFinished = true;
@@ -74,7 +74,7 @@ public class ElevatorMotionProfile extends CommandBase {
     }
 
     protected void end() {
-    	elevator.set(ControlMode.PercentOutput, 0);
+    	elevator.setPercent(0);
     }
 
     protected void interrupted() {

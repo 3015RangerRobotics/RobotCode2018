@@ -22,8 +22,8 @@ public class Grabber extends Subsystem {
     private DigitalInput anglerPosUp;
     private DigitalInput anglerPosDown;
     
-    private final double ANGLER_UP_SPEED = -0.5;
-    private final double ANGLER_DOWN_SPEED = 0.5;
+    private final double ANGLER_UP_SPEED = -1.0;
+    private final double ANGLER_DOWN_SPEED = 1.0;
     private final double INTAKE_SPEED = 1.0;
     private final double OUTTAKE_SPEED = -1.0;
 
@@ -52,11 +52,11 @@ public class Grabber extends Subsystem {
     }
     
     public void closeGrabber() {
-    	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
+    	grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void openGrabber() {
-    	grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
+    	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
     public void ejectorIn() {

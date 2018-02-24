@@ -4,7 +4,7 @@ package org.usfirst.frc.team3015.robot.commands;
  * Driver control with gamepad
  */
 public class DriveWithGamepad extends CommandBase {
-	private double maxControllerChange = 0.01;
+	private double maxControllerChange = 0.02;
 	private double lastValue = 0;
 
     public DriveWithGamepad() {
