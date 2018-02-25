@@ -13,11 +13,13 @@ public class GrabberIntakeOut extends CommandBase {
     }
 
     protected void execute() {
-    	grabber.intakeOut();
+    	if(elevator.getDistance() > 10) {
+    		grabber.intakeOut();
+    	}
     }
 
     protected boolean isFinished() {
-        return false;
+   		return elevator.getDistance() > 10;
     }
 
     protected void end() {

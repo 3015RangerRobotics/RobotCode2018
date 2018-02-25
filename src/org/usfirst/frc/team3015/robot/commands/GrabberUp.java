@@ -13,13 +13,13 @@ public class GrabberUp extends CommandBase {
     }
 
     protected void execute() {
-    	if(!grabber.isAnglerUp()) {
-    		grabber.intakeUp();
+        if(!grabber.isAnglerUp()) {
+       		grabber.intakeUp();
     	}
     }
 
     protected boolean isFinished() {
-        return grabber.isAnglerUp();
+        return grabber.isAnglerUp() || elevator.getDistance() < 10;
     }
 
     protected void end() {

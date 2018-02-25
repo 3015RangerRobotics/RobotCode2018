@@ -10,16 +10,19 @@ public class GrabberDown extends CommandBase {
     }
 
     protected void initialize() {
+    	
     }
 
     protected void execute() {
-    	if(!grabber.isAnglerDown()) {
-    		grabber.intakeDown();
-    	}
+    	if(elevator.getDistance() < 10) {
+    		if(!grabber.isAnglerDown()) {
+        		grabber.intakeDown();
+        	}
+      	}
     }
 
     protected boolean isFinished() {
-        return grabber.isAnglerDown();
+    		return grabber.isAnglerDown() || elevator.getDistance() > 10;
     }
 
     protected void end() {

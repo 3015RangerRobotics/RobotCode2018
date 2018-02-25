@@ -11,6 +11,5 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/json-simple-1.1.1.jar"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/pathfinder.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
