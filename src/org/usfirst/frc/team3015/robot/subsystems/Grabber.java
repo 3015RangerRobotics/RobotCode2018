@@ -71,6 +71,10 @@ public class Grabber extends Subsystem {
     	return !cubeDetector1.get() && !cubeDetector2.get();
     }
     
+    public boolean isOneCubeDetectorPressed() {
+    	return !cubeDetector1.get() || !cubeDetector2.get();
+    }
+    
     public void setAngler(double speed) {
     	angler.set(speed);
     }

@@ -25,7 +25,7 @@ public abstract class CommandBase extends Command {
 		ourCompressor = new OurCompressor();	
 //		climber = new Climber();
 //		buddyClimb = new BuddyClimb();
-//		elevator = new Elevator();
+		elevator = new Elevator();
 		
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();

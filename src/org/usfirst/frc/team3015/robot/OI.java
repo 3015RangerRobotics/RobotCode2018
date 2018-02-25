@@ -57,6 +57,8 @@ public class OI {
 		driverA1.whileHeld(new GrabberCubeControl());
 		driverA1.whenReleased(new GrabberCubeUp());
 		
+		driverLB5.whileHeld(new GrabberCubeEject());
+		
 //		coDriverA1.whileHeld(new ClimberUp());
 //		coDriverB2.whileHeld(new ClimberDown());
 //		driverX3.whileHeld(new ClimberThing());
@@ -72,7 +74,7 @@ public class OI {
 //		coDriverDDown.whenPressed(new ClimberBottom());
 //		coDriverDRight.whenPressed(new BuddyExtend());
 //		coDriverDRight.whenReleased(new BuddyRetract());
-//		coDriverA1.whenPressed(new ElevatorManualControl());
+		coDriverLS9.whileHeld(new ElevatorManualControl());
 //		coDriverA1.whenReleased(new ElevatorStop());
 	}
 	

@@ -19,9 +19,7 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	elevator.setPercent(oi.getCoDriverSumTriggers());
-    	elevator.set(ControlMode.PercentOutput, oi.getCoDriverLeftStickY());
-    	System.out.println(oi.getCoDriverSumTriggers());
+    	elevator.set(ControlMode.PercentOutput, oi.getCoDriverSumTriggers());
     }
 
     // Make this return true when this Command no longer needs to run execute()
