@@ -26,6 +26,7 @@ public class Grabber extends Subsystem {
     private final double ANGLER_DOWN_SPEED = 1.0;
     private final double INTAKE_SPEED = 1.0;
     private final double OUTTAKE_SPEED = -1.0;
+    private final double OUTTAKE_SPEED_SLOW = -.25;
 
 	public Grabber() {
 		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
@@ -117,9 +118,15 @@ public class Grabber extends Subsystem {
     	intakeMotor2.set(-OUTTAKE_SPEED);
     }
     
+    public void intakeOutSlowly() {
+    	intakeMotor1.set(OUTTAKE_SPEED_SLOW);
+    	intakeMotor2.set(-OUTTAKE_SPEED_SLOW);
+    }
+    
     public void intakeStop() {
     	intakeMotor1.set(0);
     	intakeMotor2.set(0);
     }
+    
 }
 

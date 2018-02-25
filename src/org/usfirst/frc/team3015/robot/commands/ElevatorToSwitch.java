@@ -1,32 +1,32 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
  */
 public class ElevatorToSwitch extends CommandBase {
+	private double startTime; 
 
     public ElevatorToSwitch() {
         requires(elevator);
+        requires(grabber);
     }
 
     protected void initialize() {
-//    	double d = Constants.elevatorHeightSwitch - elevator.getDistance();
-//    	System.out.println(d);
-//    	
-//    	if(d < 0) {
-//    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, -Constants.elevatorMaxV, -Constants.elevatorAcc, -60)).start();
-//    	}else {
-//    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, Constants.elevatorMaxV, Constants.elevatorAcc, 60)).start();
-//    	}
+    	startTime = Timer.getFPGATimestamp();
     }
 
     protected void execute() {
     	elevator.set(ControlMode.Position, Constants.elevatorHeightSwitch * elevator.pulsesPerInch);
+    	
+    	if(Timer.getFPGATimestamp() - startTime < 1) {
+    		grabber.intakeOutSlowly();
+    	}
     }
 
     protected boolean isFinished() {
