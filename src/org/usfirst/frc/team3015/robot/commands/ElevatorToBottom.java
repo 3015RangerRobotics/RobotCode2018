@@ -3,6 +3,8 @@ package org.usfirst.frc.team3015.robot.commands;
 import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.Constants;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  *
  */
@@ -13,26 +15,26 @@ public class ElevatorToBottom extends CommandBase {
     }
 
     protected void initialize() {
-    	double d = Constants.elevatorHeightBottom - elevator.getDistance();
-    	
-    	if(d < 0) {
-    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, -Constants.elevatorMaxV, -Constants.elevatorAcc, 60)).start();
-    	}else {
-    		new ElevatorMotionProfile(MotionProfiles.generate1D(d, Constants.elevatorMaxV, Constants.elevatorAcc, 60)).start();
-    	}
     	
     }
 
     protected void execute() {
+    	elevator.set(ControlMode.Position, Constants.elevatorHeightBottom);
+    	System.out.println(elevator.getDistance());
+    	if(elevator.elevatorTalonSRX.getMotorOutputVoltage() > 4){
+    		System.err.println("ELEVATOR VOLTAGE OVER 4");
+    	}
     }
 
     protected boolean isFinished() {
-        return true;
+        return elevator.getDistance() < 3;
     }
     
     protected void end() {
+    	elevator.setPercent(0);
     }
 
     protected void interrupted()  {
+    	end();
     }
 }

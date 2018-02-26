@@ -10,7 +10,7 @@ public class GrabberCubeUp extends CommandGroup {
 
     public GrabberCubeUp() {
         addSequential(new GrabberUp());
-        addSequential(new WaitCommand(.25));
-        addSequential(new GrabberCloseIfCube());
+        addSequential(new GrabberClose());
+        addSequential(new DriverStopVibration());
     }
 }

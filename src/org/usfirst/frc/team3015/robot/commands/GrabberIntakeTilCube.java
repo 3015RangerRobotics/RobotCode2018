@@ -15,7 +15,7 @@ public class GrabberIntakeTilCube extends CommandBase {
     }
 
     protected void execute() {
-    	if(!grabber.isCubePresent()) {
+    	if(!grabber.isOneCubeDetectorPressed()) {
     		grabber.intakeIn();
     		cubeCount = 0;
     	}else {

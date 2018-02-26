@@ -14,7 +14,7 @@ public class ElevatorToSwitch extends CommandBase {
 
     public ElevatorToSwitch() {
         requires(elevator);
-        requires(grabber);
+//        requires(grabber);
     }
 
     protected void initialize() {
@@ -23,9 +23,12 @@ public class ElevatorToSwitch extends CommandBase {
 
     protected void execute() {
     	elevator.set(ControlMode.Position, Constants.elevatorHeightSwitch * elevator.pulsesPerInch);
+    	System.out.println(elevator.getDistance());
     	
     	if(Timer.getFPGATimestamp() - startTime < 1) {
     		grabber.intakeOutSlowly();
+    	}else {
+    		grabber.intakeStop();
     	}
     }
 

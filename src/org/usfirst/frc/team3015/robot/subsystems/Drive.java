@@ -22,13 +22,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem implements TargetUpdateReceiver{
 	//TODO: Tune these
 	public final double kDriveP = 2.0;//Drive base:1.3
-	public final double kDriveI = 0.0;//Drive base:0.0
 	public final double kDriveD = 0.02;//Drive base:0.01
 	
 	//TODO: Tune these
-	public final double kTurnP = 0.0;
-	public final double kTurnI = 0.0;
-	public final double kTurnD = 0.0;
+	public final double kTurnP = 4.0;
+	public final double kTurnD = 0.02;
+	public final double kTurnVOffset = 0.03;
 	
 	//TODO: Tune these: conversion from real-world units to percentage output.
 	public final double kV = 0.067;//Drive base:0.0625

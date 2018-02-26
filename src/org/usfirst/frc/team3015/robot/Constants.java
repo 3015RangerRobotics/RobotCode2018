@@ -42,7 +42,7 @@ public class Constants {
 	public static final double elevatorMaxV = 10.0;
 	public static final double elevatorAcc = 15.0;
 	public static final double elevatorHeightBottom = 0;
-	public static final double elevatorHeightSwitch = 20;
-	public static final double elevatorHeightScale = 0;
+	public static final double elevatorHeightSwitch = 26;
+	public static final double elevatorHeightScale = 65;
 	
 }

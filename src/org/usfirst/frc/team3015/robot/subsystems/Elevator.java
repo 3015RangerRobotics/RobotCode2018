@@ -18,9 +18,10 @@ public class Elevator extends Subsystem {
 	
 	//331 per inch
 	
-	public final double kElevatorP = 0.1;
+	public final double kElevatorP = 0.6;
 	public final double kElevatorI = 0.0;
-	public final double kElevatorD = 0.0;
+	public final double kElevatorD = 0.2;
+	public final double kElevatorF = 0.005;
 	public final double kV = 0.04;
     public final double kA = 0.01;
     
@@ -39,18 +40,21 @@ public class Elevator extends Subsystem {
     
     public Elevator() {
     	elevatorTalonSRX = new TalonSRX(Constants.elevatorTalonSRX);
-//    	elevatorTalonSRX.configVoltageCompSaturation(0, 0);
-    	elevatorTalonSRX.enableVoltageCompensation(false);
+    	elevatorTalonSRX.configVoltageCompSaturation(13, 10);
+    	elevatorTalonSRX.enableVoltageCompensation(true);
     	elevatorTalonSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     	elevatorTalonSRX.setSensorPhase(true);
     	elevatorTalonSRX.setSelectedSensorPosition(0, 0, 0);
-    	elevatorTalonSRX.setInverted(true);
+    	elevatorTalonSRX.setInverted(false);
     	elevatorTalonSRX.configPeakCurrentDuration(0, 10);
     	elevatorTalonSRX.configPeakCurrentLimit(0, 10);
     	//middle value
     	elevatorTalonSRX.config_kP(0, kElevatorP, 0);
     	elevatorTalonSRX.config_kI(0, kElevatorI, 0);
     	elevatorTalonSRX.config_kD(0, kElevatorD, 0);
+    	elevatorTalonSRX.config_kF(0, kElevatorF, 0);
+    	elevatorTalonSRX.configPeakOutputForward(1.0, 10);
+    	elevatorTalonSRX.configPeakOutputReverse(-0.4, 10);
     }
     
     public void set(ControlMode mode, double value) {
