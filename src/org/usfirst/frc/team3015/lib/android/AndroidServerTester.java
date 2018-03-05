@@ -18,7 +18,7 @@ public class AndroidServerTester {
     public static void main(String[] args){
     	
     	
-    	double[][] ah = MotionProfiles.loadProfile("testPathLeft");
+    	double[][] ah = MotionProfiles.loadProfile("testPathLeft", false);
     	for(double[] no : ah) {
     		System.out.println(no[0] + ", " + no[1] + ", " + no[2]);
     	}

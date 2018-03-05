@@ -94,7 +94,7 @@ public class MotionProfiles {
 		return map;
 	}
 	
-	public static double[][] loadProfile(String profileName){
+	public static double[][] loadProfile(String profileName, boolean reversed){
 		double[][] profile = new double[][] {};
 		try {
 			ArrayList<double[]> points = new ArrayList<double[]>();
@@ -111,7 +111,9 @@ public class MotionProfiles {
 			}
 			profile = new double[points.size()][3];
 			for(int i = 0; i < points.size(); i++) {
-				profile[i] = points.get(i);
+				profile[i][0] = (reversed) ? -points.get(i)[0] : points.get(i)[0];
+				profile[i][1] = (reversed) ? -points.get(i)[1] : points.get(i)[1];
+				profile[i][2] = (reversed) ? -points.get(i)[2] : points.get(i)[2];
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

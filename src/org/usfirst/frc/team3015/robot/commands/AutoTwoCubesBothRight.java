@@ -14,7 +14,7 @@ public class AutoTwoCubesBothRight extends CommandGroup {
     public AutoTwoCubesBothRight() {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScaleDelayed(3.75));
-        addSequential(new DriveMotionProfile("wallToRightScale"));
+        addSequential(new DriveMotionProfile("wallToRightScale", false));
         addSequential(new GrabberCubeEject());
 //        addParallel(new ElevatorToBottomDelayed(2));
 //        addParallel(new ObtainCubeToSwitch());

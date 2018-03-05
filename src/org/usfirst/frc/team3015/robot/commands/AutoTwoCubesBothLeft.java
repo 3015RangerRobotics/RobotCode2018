@@ -12,7 +12,7 @@ public class AutoTwoCubesBothLeft extends CommandGroup {
 
     public AutoTwoCubesBothLeft() {
         addParallel(new ElevatorToScale());
-        addSequential(new DriveMotionProfile("wallToLeftScale"));
+        addSequential(new DriveMotionProfile("wallToLeftScale", false));
         addParallel(new GrabberCubeEject());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 12, 6, 60, true)));
         addParallel(new ElevatorToBottom());

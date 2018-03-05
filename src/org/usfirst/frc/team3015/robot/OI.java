@@ -47,7 +47,7 @@ public class OI {
 	Button coDriverLTrigger = new TriggerButton(coDriver, Hand.kLeft);
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
-	Button bothSelects = new DoubleButton(driverSEL7, coDriverSEL7);
+	Button coDriverStartSelect = new DoubleButton(coDriverSTART8, coDriverSEL7);
 	
 	public OI() {
 //		driverA1.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
@@ -56,8 +56,8 @@ public class OI {
 //		driverX3.whenPressed(new GrabberEjectorIn());
 //		driverY4.whenPressed(new GrabberEjectorOut());
 		
-		driverA1.whenPressed(new GrabberCubeControl());
-		driverA1.whenReleased(new GrabberCubeUp());
+//		driverA1.whenPressed(new GrabberCubeControl());
+//		driverA1.whenReleased(new GrabberCubeUp());
 		driverB2.whileHeld(new GrabberIntakeTilCube());
 		driverX3.whenPressed(new GrabberOpen());
 		driverY4.whileHeld(new GrabberIntakeOut());
@@ -66,6 +66,8 @@ public class OI {
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown(true));
 		driverLTrigger.whenPressed(new GrabberClose());
+		
+		driverA1.whileHeld(new DriveMotionProfile("test", true));
 		
 		coDriverDUp.whileHeld(new ClimberUp());
 		coDriverDDown.whileHeld(new ClimberDown());
@@ -78,8 +80,8 @@ public class OI {
 		coDriverY4.whenPressed(new ElevatorToScale());
 		coDriverLS9.whileHeld(new ElevatorManualControl());
 		
-		bothSelects.whenPressed(new BuddyExtend());
-		bothSelects.whenReleased(new BuddyRetract());
+		coDriverStartSelect.whenPressed(new BuddyExtend());
+		coDriverStartSelect.whenReleased(new BuddyRetract());
 	}
 	
 	public boolean getDriverAButton() {

@@ -32,10 +32,10 @@ public class DriveMotionProfile extends CommandBase {
     	this.isTurning = isTurning;
     }
     
-    public DriveMotionProfile(String filename) {
+    public DriveMotionProfile(String filename, boolean reversed) {
     	requires(drive);
-    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left");
-    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right");
+    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left", reversed);
+    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right", reversed);
     	isTurning = false;
     }
     
