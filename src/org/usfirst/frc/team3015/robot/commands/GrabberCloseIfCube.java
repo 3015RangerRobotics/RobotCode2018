@@ -10,7 +10,7 @@ public class GrabberCloseIfCube extends CommandBase {
     }
 
     protected void initialize() {
-    	if(grabber.isOneCubeDetectorPressed()) {
+    	if(grabber.isCubePresent()) {
     		grabber.closeGrabber();
     	}
     }

@@ -4,15 +4,15 @@ import org.usfirst.frc.team3015.lib.android.TargetInfo;
 import org.usfirst.frc.team3015.lib.android.TargetUpdate;
 import org.usfirst.frc.team3015.lib.android.messages.TargetUpdateReceiver;
 import org.usfirst.frc.team3015.robot.Constants;
+import org.usfirst.frc.team3015.robot.DriveHelper;
+import org.usfirst.frc.team3015.robot.DriveSignal;
 import org.usfirst.frc.team3015.robot.commands.DriveWithGamepad;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -38,6 +38,8 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	
 	//TODO: Find this
 	public final double kDistancePerPulse = 0.00904774;
+	
+	public final double kDeadband = 0.02;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
@@ -77,60 +79,19 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder.reset();
 	}
     
-    public void tankDrive(double left, double right) {
-    	leftDrive.set(left);
-    	rightDrive.set(right);
+    public void setMotorOutputs(double left, double right) {
+    	leftDrive.set(left * 13.0 / RobotController.getBatteryVoltage());
+    	rightDrive.set(right * 13.0 / RobotController.getBatteryVoltage());
     }
     
     public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
-        // local variables to hold the computed PWM values for the motors
-        double leftMotorSpeed;
-        double rightMotorSpeed;
-        moveValue = limit(moveValue);
-        rotateValue = -limit(rotateValue);
-        if (squaredInputs) {
-          // square the inputs (while preserving the sign) to increase fine control
-          // while permitting full power
-        	if (moveValue >= 0.0) {
-        		moveValue = moveValue * moveValue;
-        	} else {
-	            moveValue = -(moveValue * moveValue);
-	        }
-	        if (rotateValue >= 0.0) {
-	        	rotateValue = rotateValue * rotateValue;
-	        } else {
-	        	rotateValue = -(rotateValue * rotateValue);
-	        }
-        }
-
-        if (moveValue > 0.0) {
-        	if (rotateValue > 0.0) {
-        		leftMotorSpeed = moveValue - rotateValue;
-        		rightMotorSpeed = Math.max(moveValue, rotateValue);
-	        } else {
-	        	leftMotorSpeed = Math.max(moveValue, -rotateValue);
-	        	rightMotorSpeed = moveValue + rotateValue;
-	        }
-	    } else {
-	    	if (rotateValue > 0.0) {
-	    		leftMotorSpeed = -Math.max(-moveValue, rotateValue);
-	    		rightMotorSpeed = moveValue + rotateValue;
-	        } else {
-	        	leftMotorSpeed = moveValue - rotateValue;
-	        	rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
-	        }
-	    }	
-	    tankDrive(leftMotorSpeed, rightMotorSpeed);
+        DriveSignal ds = DriveHelper.arcadeDrive(moveValue, rotateValue, squaredInputs);
+        setMotorOutputs(ds.leftSignal, ds.rightSignal);
     }
     
-    protected static double limit(double num) {
-        if (num > 1.0) {
-        	return 1.0;
-        }
-        if (num < -1.0) {
-        	return -1.0;
-        }
-        return num;
+    public void curvatureDrive(double throttle, double turn, boolean isQuickTurn) {
+    	DriveSignal ds = DriveHelper.curvatureDrive(throttle, turn, isQuickTurn);
+    	setMotorOutputs(ds.leftSignal, ds.rightSignal);
     }
     
     public double getLeftDistance() {
@@ -169,45 +130,6 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		}
 		if(shortestDistance != null)
 			bestTarget = shortestDistance;
-	}
-	
-	public class IMUPidSource implements PIDSource{
-
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource) {
-			
-		}
-
-		@Override
-		public PIDSourceType getPIDSourceType() {
-			return PIDSourceType.kDisplacement;
-		}
-
-		@Override
-		public double pidGet() {
-			return getAngle();
-		}
-		
-	}
-	
-	public class TurnPidOutput implements PIDOutput{
-		@Override
-		public void pidWrite(double turnSpeed) {
-			arcadeDrive(0, turnSpeed, false);
-			System.out.print(turnSpeed);
-		}
-	}
-	
-	public class DriveToCubePidOutput implements PIDOutput{
-		double driveSpeed;
-		
-		public DriveToCubePidOutput(double driveSpeed) {
-			this.driveSpeed = driveSpeed;
-		}
-		@Override
-		public void pidWrite(double turnSpeed) {
-			arcadeDrive(driveSpeed, turnSpeed, false);
-		}
 	}
 }
 

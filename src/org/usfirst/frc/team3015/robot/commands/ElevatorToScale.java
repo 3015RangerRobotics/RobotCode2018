@@ -23,7 +23,7 @@ public class ElevatorToScale extends CommandBase {
 
     protected void execute() {
     	elevator.set(ControlMode.Position, Constants.elevatorHeightScale * elevator.pulsesPerInch);
-    	System.out.println(elevator.getDistance());
+//    	System.out.println(elevator.getDistance());
     	
     	if(Timer.getFPGATimestamp() - startTime < 1) {
     		grabber.intakeOutSlowly();
@@ -38,6 +38,7 @@ public class ElevatorToScale extends CommandBase {
     
     protected void end() {
     	elevator.set(ControlMode.PercentOutput, 0);
+    	grabber.intakeStop();
     }
 
     protected void interrupted()  {

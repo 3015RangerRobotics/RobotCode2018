@@ -17,6 +17,7 @@ public class DriveWithGamepad extends CommandBase {
     protected void execute() {
     	double driveValue = oi.getDriverLeftStickY();
     	
+    	
 	    if(driveValue > lastValue + maxControllerChange) {
 	    	driveValue = lastValue + maxControllerChange;
 	    } else if(driveValue < lastValue - maxControllerChange) {
@@ -27,7 +28,7 @@ public class DriveWithGamepad extends CommandBase {
 	    	driveValue = oi.getDriverLeftStickY();
 	    }
 	    
-    	drive.arcadeDrive(driveValue, oi.getDriverLeftStickX()/1.5, true);
+    	drive.arcadeDrive(driveValue, oi.getDriverLeftStickX()/1.25, true);
     	lastValue = driveValue;
     }
 
@@ -36,7 +37,7 @@ public class DriveWithGamepad extends CommandBase {
     }
 
     protected void end() {
-    	drive.arcadeDrive(0, 0, false);
+    	drive.setMotorOutputs(0, 0);
     }
 
     protected void interrupted() {

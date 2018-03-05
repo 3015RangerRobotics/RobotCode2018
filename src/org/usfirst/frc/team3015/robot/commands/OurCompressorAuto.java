@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Stops if lower than set match time or voltage
  */
 public class OurCompressorAuto extends CommandBase {
-	private final double CUTOFF_VOLTAGE = 8.0;
+	private final double CUTOFF_VOLTAGE = 9.0;
 	private boolean fillCompressor = true;
 	
     public OurCompressorAuto() {

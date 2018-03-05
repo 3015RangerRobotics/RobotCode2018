@@ -13,7 +13,7 @@ public class GrabberCubeEject extends CommandGroup {
         addSequential(new GrabberDown(false));
         addSequential(new GrabberIntakeOut());
         addSequential(new GrabberEjectorOut());
-        addSequential(new WaitCommand(1));
+        addSequential(new WaitCommand(0.25));
         addSequential(new GrabberEjectorIn());
     }
 }

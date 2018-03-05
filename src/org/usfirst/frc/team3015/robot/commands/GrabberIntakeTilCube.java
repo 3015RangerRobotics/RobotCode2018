@@ -15,7 +15,7 @@ public class GrabberIntakeTilCube extends CommandBase {
     }
 
     protected void execute() {
-    	if(!grabber.isOneCubeDetectorPressed()) {
+    	if(!grabber.isCubePresent()) {
     		grabber.intakeIn();
     		cubeCount = 0;
     	}else {
@@ -25,7 +25,7 @@ public class GrabberIntakeTilCube extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return cubeCount >= 20 || oi.getDriverLB();
+        return cubeCount >= 5;
     }
 
     protected void end() {

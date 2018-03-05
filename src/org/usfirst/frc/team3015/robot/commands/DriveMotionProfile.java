@@ -98,7 +98,7 @@ public class DriveMotionProfile extends CommandBase {
 			prevErrorL = errorL;
 			prevErrorR = errorR;
 			
-			drive.tankDrive(pwmL, pwmR);
+			drive.setMotorOutputs(pwmL, pwmR);
 			i++;
 		}else {
 			isFinished = true;
@@ -114,7 +114,7 @@ public class DriveMotionProfile extends CommandBase {
     }
 
     protected void end() {
-    	drive.tankDrive(0, 0);
+    	drive.setMotorOutputs(0, 0);
     }
 
     protected void interrupted() {

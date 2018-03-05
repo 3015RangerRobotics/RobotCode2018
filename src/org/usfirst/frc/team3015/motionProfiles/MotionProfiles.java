@@ -29,6 +29,39 @@ public class MotionProfiles {
 		return profile;
 	}
 	
+	public static HashMap<Side, double[][]> generate2D(double dx, double dy, double endAngle, double maxV, double a, double jerk, boolean reversed){
+		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(dx, dy, endAngle)};
+		Trajectory.Config config = new Trajectory.Config(FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kPeriod, maxV, a, jerk);
+		Trajectory trajectory = Pathfinder.generate(waypoints, config);
+		TankModifier modifier = new TankModifier(trajectory).modify(Constants.wheelBaseWidth);
+		
+		double[][] left = new double[trajectory.length()][3];
+		double[][] right = new double[trajectory.length()][3];
+		for(int i = 0; i < trajectory.length(); i++) {
+			if(reversed) {
+				left[i][0] = -modifier.getRightTrajectory().get(i).position;
+				left[i][1] = -modifier.getRightTrajectory().get(i).velocity;
+				left[i][2] = -modifier.getRightTrajectory().get(i).acceleration;
+				right[i][0] = -modifier.getLeftTrajectory().get(i).position;
+				right[i][1] = -modifier.getLeftTrajectory().get(i).velocity;
+				right[i][2] = -modifier.getLeftTrajectory().get(i).acceleration;
+			}else {
+				left[i][0] = modifier.getLeftTrajectory().get(i).position;
+				left[i][1] = modifier.getLeftTrajectory().get(i).velocity;
+				left[i][2] = modifier.getLeftTrajectory().get(i).acceleration;
+				right[i][0] = modifier.getRightTrajectory().get(i).position;
+				right[i][1] = modifier.getRightTrajectory().get(i).velocity;
+				right[i][2] = modifier.getRightTrajectory().get(i).acceleration;
+			}
+		}
+		
+		HashMap<Side, double[][]> map = new HashMap<Side, double[][]>();
+		map.put(Side.kLeft, left);
+		map.put(Side.kRight, right);
+		
+		return map;
+	}
+	
 	public static HashMap<Side, double[][]> generateProfileToCube(double angle, double distance, double maxV, double a, double jerk){
 		double x = Math.cos(angle) * distance;
 		double y = Math.sin(angle) * distance;

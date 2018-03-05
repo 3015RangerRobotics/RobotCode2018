@@ -22,6 +22,7 @@ public class Constants {
 	public static final int grabberEjectorSolenoid2 = 6;
 	public static final int cubeDetector1 = 8;
 	public static final int cubeDetector2 = 9;
+	public static final int cubeDetector = 1;
 	public static final int anglerPosUp = 7;
 	public static final int anglerPosDown = 6;
 	
@@ -31,11 +32,12 @@ public class Constants {
 	//Climber
 	public static final int climberParentTalonSRX = 1;
 	public static final int climberChildVictorSPX = 2;
-	public static final int climberLock = 5;
+	public static final int climberLock1 = 3;
+	public static final int climberLock2 = 4;
 	
 	//Buddy Climb
-	public static final int buddySolenoid1 = 3;
-	public static final int buddySolenoid2 = 4;
+	public static final int buddySolenoid1 = 2;
+	public static final int buddySolenoid2 = 5;
 	
 	//Elevator
 	public static final int elevatorTalonSRX = 3;
@@ -43,6 +45,7 @@ public class Constants {
 	public static final double elevatorAcc = 15.0;
 	public static final double elevatorHeightBottom = 0;
 	public static final double elevatorHeightSwitch = 26;
-	public static final double elevatorHeightScale = 65;
+	public static final double elevatorHeightScale = 69;
+	public static final int elevatorBottomLimit = 4;
 	
 }

@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climber extends Subsystem {
 	TalonSRX climber1;
 	VictorSPX climber2;
-	VictorSP climberLock;
+	DoubleSolenoid climberLock;
 //	DigitalInput diSensorBottom;
 //	DigitalInput diSensorMiddle;
 //	DigitalInput diSensorTop;
@@ -25,7 +26,7 @@ public class Climber extends Subsystem {
 	public Climber() {
 		climber1 = new TalonSRX(Constants.climberParentTalonSRX);
 		climber2 = new VictorSPX(Constants.climberChildVictorSPX);
-		climberLock = new VictorSP(Constants.climberLock);
+		climberLock = new DoubleSolenoid(Constants.climberLock1, Constants.climberLock2);
 //		diSensorBottom = new DigitalInput(Constants.climberDigitalInputBottom);
 //		diSensorMiddle = new DigitalInput(Constants.climberDigitalInputMiddle);
 //		diSensorTop = new DigitalInput(Constants.climberDigitalInputTop);
@@ -79,11 +80,11 @@ public class Climber extends Subsystem {
     }
     
     public void climberLockOut() {
-    	climberLock.set(-1);
+    	climberLock.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void climberLockStop() {
-    	climberLock.set(0);
+    public void climberLockIn() {
+    	climberLock.set(DoubleSolenoid.Value.kReverse);
     }
 }
 

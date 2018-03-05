@@ -56,27 +56,30 @@ public class OI {
 //		driverX3.whenPressed(new GrabberEjectorIn());
 //		driverY4.whenPressed(new GrabberEjectorOut());
 		
-		driverA1.whileHeld(new GrabberCubeControl());
-//		driverA1.whenPressed(new DriveTurnToAngle(360));
+		driverA1.whenPressed(new GrabberCubeControl());
 		driverA1.whenReleased(new GrabberCubeUp());
-		driverB2.whenPressed(new GrabberOpen());
-		driverX3.whenPressed(new GrabberClose());
+		driverB2.whileHeld(new GrabberIntakeTilCube());
+		driverX3.whenPressed(new GrabberOpen());
+		driverY4.whileHeld(new GrabberIntakeOut());
 		driverLB5.whenPressed(new GrabberCubeEject());
-		driverLB5.whenReleased(new GrabberUp());
+		driverLB5.whenReleased(new GrabberReset());
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown(true));
+		driverLTrigger.whenPressed(new GrabberClose());
 		
-//		coDriverA1.whileHeld(new ClimberUp());
-//		coDriverB2.whileHeld(new ClimberDown());
-//		coDriverX3.whileHeld(new ClimberThing());
-//		coDriverY4.whileHeld(new ClimberHold());
+		coDriverDUp.whileHeld(new ClimberUp());
+		coDriverDDown.whileHeld(new ClimberDown());
+		coDriverDRight.whenPressed(new ClimberLockOut());
+		coDriverDLeft.whenPressed(new ClimberLockIn());
+		coDriverX3.whileHeld(new ClimberHold());
 				
 		coDriverA1.whenPressed(new ElevatorToBottom());
 		coDriverB2.whenPressed(new ElevatorToSwitch());
 		coDriverY4.whenPressed(new ElevatorToScale());
-//		coDriverDRight.whenPressed(new BuddyExtend());
-//		coDriverDRight.whenReleased(new BuddyRetract());
 		coDriverLS9.whileHeld(new ElevatorManualControl());
+		
+		bothSelects.whenPressed(new BuddyExtend());
+		bothSelects.whenReleased(new BuddyRetract());
 	}
 	
 	public boolean getDriverAButton() {

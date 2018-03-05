@@ -30,7 +30,7 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	elevator.setPercent(0);
+    	elevator.set(ControlMode.PercentOutput, 0);
     }
 
     // Called when another command which requires one or more of the same

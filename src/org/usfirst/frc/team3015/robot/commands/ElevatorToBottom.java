@@ -20,10 +20,10 @@ public class ElevatorToBottom extends CommandBase {
 
     protected void execute() {
     	elevator.set(ControlMode.Position, Constants.elevatorHeightBottom);
-    	System.out.println(elevator.getDistance());
-    	if(elevator.elevatorTalonSRX.getMotorOutputVoltage() > 4){
-    		System.err.println("ELEVATOR VOLTAGE OVER 4");
-    	}
+//    	System.out.println(elevator.getDistance());
+//    	if(elevator.elevatorTalonSRX.getMotorOutputVoltage() > 4){
+//    		System.err.println("ELEVATOR VOLTAGE OVER 4");
+//    	}
     }
 
     protected boolean isFinished() {
@@ -31,7 +31,7 @@ public class ElevatorToBottom extends CommandBase {
     }
     
     protected void end() {
-    	elevator.setPercent(0);
+    	elevator.set(ControlMode.PercentOutput, 0);
     }
 
     protected void interrupted()  {
