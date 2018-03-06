@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Two Cube Both Left", new AutoTwoCubesBothLeft());
 		chooser.addObject("Two Cube Both Right", new AutoTwoCubesBothRight());
 		chooser.addObject("Two Right Left", new AutoTwoCubesRightLeft());
+		chooser.addObject("Two Cube Left Right", new AutoTwoCubesLeftRight());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		AndroidServer server = AndroidServer.getInstance();

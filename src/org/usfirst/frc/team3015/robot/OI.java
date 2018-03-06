@@ -67,17 +67,22 @@ public class OI {
 		driverRTrigger.whenPressed(new GrabberDown(true));
 		driverLTrigger.whenPressed(new GrabberClose());
 		
+		
+		
 //		driverA1.whileHeld(new DriveMotionProfile("test", true));
 		
 		coDriverDUp.whileHeld(new ClimberUp());
 		coDriverDDown.whileHeld(new ClimberDown());
 		coDriverDRight.whenPressed(new ClimberLockOut());
 		coDriverDLeft.whenPressed(new ClimberLockIn());
-		coDriverX3.whileHeld(new ClimberHold());
+//		coDriverX3.whileHeld(new ClimberHold());
+		
+		coDriverX3.whenPressed(new ElevatorToScaleLow());
 				
 		coDriverA1.whenPressed(new ElevatorToBottom());
 		coDriverB2.whenPressed(new ElevatorToSwitch());
 		coDriverY4.whenPressed(new ElevatorToScale());
+		coDriverLB5.whenPressed(new GrabberCubeEject());
 		coDriverLS9.whileHeld(new ElevatorManualControl());
 		
 		coDriverStartSelect.whenPressed(new BuddyExtend());

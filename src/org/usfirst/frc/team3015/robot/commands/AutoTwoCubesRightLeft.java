@@ -15,7 +15,9 @@ public class AutoTwoCubesRightLeft extends CommandGroup {
         addSequential(new DriveMotionProfile("wallToLeftScale", false));
         addParallel(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(1));
-        addSequential(new DriveMotionProfile("test", true));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 10, 60, true)));
+        addSequential(new DriveTurnToAngle(45, true));
+        addSequential(new DriveMotionProfile("test", false));
 //        addParallel(new ObtainCubeToScale());
 //        addSequential(new DriveTurnToAngle(120, false));
 //        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 10, 60, false)));

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class ObtainCubeToScale extends CommandGroup {
 	
     public ObtainCubeToScale() {
+    	addParallel(new ElevatorToBottom());
         addSequential(new GrabberDown(true));
         addSequential(new GrabberIntakeTilCube());
         addSequential(new GrabberUp());

@@ -45,7 +45,8 @@ public class Constants {
 	public static final double elevatorAcc = 15.0;
 	public static final double elevatorHeightBottom = 0;
 	public static final double elevatorHeightSwitch = 26;
-	public static final double elevatorHeightScale = 69;
+	public static final double elevatorHeightScale = 66;
+	public static final double elevatorHeightScaleLow = 57;
 	public static final int elevatorBottomLimit = 4;
 	
 }
