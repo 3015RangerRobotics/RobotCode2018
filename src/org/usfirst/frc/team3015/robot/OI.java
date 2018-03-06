@@ -56,8 +56,8 @@ public class OI {
 //		driverX3.whenPressed(new GrabberEjectorIn());
 //		driverY4.whenPressed(new GrabberEjectorOut());
 		
-//		driverA1.whenPressed(new GrabberCubeControl());
-//		driverA1.whenReleased(new GrabberCubeUp());
+		driverA1.whenPressed(new GrabberCubeControl());
+		driverA1.whenReleased(new GrabberCubeUp());
 		driverB2.whileHeld(new GrabberIntakeTilCube());
 		driverX3.whenPressed(new GrabberOpen());
 		driverY4.whileHeld(new GrabberIntakeOut());
@@ -67,7 +67,7 @@ public class OI {
 		driverRTrigger.whenPressed(new GrabberDown(true));
 		driverLTrigger.whenPressed(new GrabberClose());
 		
-		driverA1.whileHeld(new DriveMotionProfile("test", true));
+//		driverA1.whileHeld(new DriveMotionProfile("test", true));
 		
 		coDriverDUp.whileHeld(new ClimberUp());
 		coDriverDDown.whileHeld(new ClimberDown());
