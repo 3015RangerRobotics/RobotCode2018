@@ -1,12 +1,17 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
+
 /**
  *
  */
 public class GrabberDown extends CommandBase {
+	private boolean override;
 
-    public GrabberDown() {
+    public GrabberDown(boolean override) {
         requires(grabber);
+        this.override = override;
     }
 
     protected void initialize() {
@@ -14,7 +19,7 @@ public class GrabberDown extends CommandBase {
     }
 
     protected void execute() {
-    	if(elevator.getDistance() < 10) {
+    	if(elevator.getDistance() < 10 || override) {
     		if(!grabber.isAnglerDown()) {
         		grabber.intakeDown();
         	}
@@ -22,7 +27,7 @@ public class GrabberDown extends CommandBase {
     }
 
     protected boolean isFinished() {
-    		return grabber.isAnglerDown() || elevator.getDistance() > 10;
+    		return grabber.isAnglerDown() || (elevator.getDistance() > 10 && !override);
     }
 
     protected void end() {
@@ -30,6 +35,6 @@ public class GrabberDown extends CommandBase {
     }
 
     protected void interrupted() {
-    	
+    	end();
     }
 }

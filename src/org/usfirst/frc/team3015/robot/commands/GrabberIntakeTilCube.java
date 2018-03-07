@@ -25,7 +25,7 @@ public class GrabberIntakeTilCube extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return cubeCount >= 20 || oi.getDriverLB();
+        return cubeCount >= 5;
     }
 
     protected void end() {

@@ -3,25 +3,26 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  *
  */
-public class ClimberThing extends CommandBase {
+public class ClimberLockIn extends CommandBase {
 
-    public ClimberThing() {
+    public ClimberLockIn() {
     	requires(climber);
     }
 
     protected void initialize() {
+    	climber.climberLockIn();
     }
 
     protected void execute() {
-    	climber.climberLockOut();
+    	
     }
 
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {
-    	climber.climberLockStop();
+    	
     }
 
     protected void interrupted() {

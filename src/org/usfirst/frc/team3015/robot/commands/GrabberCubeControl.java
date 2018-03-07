@@ -10,10 +10,12 @@ public class GrabberCubeControl extends CommandGroup {
 
     public GrabberCubeControl() {
         addSequential(new GrabberOpen());
-        addSequential(new WaitCommand(.5));
-        addSequential(new GrabberDown());
+        addSequential(new GrabberEjectorIn());
+//        addSequential(new WaitCommand(.1));
+        addSequential(new GrabberDown(false));
         addSequential(new GrabberIntakeTilCube());
-        addSequential(new WaitForButtonPressed());
-        addSequential(new GrabberIntakeOut());
+        addSequential(new DriverStartVibration());
+//        addSequential(new WaitForButtonPressed());
+//        addSequential(new GrabberIntakeOut());
     }
 }

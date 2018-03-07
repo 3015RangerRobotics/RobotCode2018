@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3015.robot;
 
 import org.usfirst.frc.team3015.lib.android.AndroidServer;
-import org.usfirst.frc.team3015.robot.commands.CommandBase;
+import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,21 +14,26 @@ public class Robot extends TimedRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	public static volatile boolean isEnabled = false;
-	PowerDistributionPanel beep;
+//	PowerDistributionPanel beep;
 
 	@Override
 	public void robotInit() {
 		this.setPeriod(Constants.kPeriod);
 		
-		chooser.addDefault("None", null);
-//		chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		
 		CommandBase.init();
+		
+		chooser.addDefault("None", null);
+		chooser.addObject("Two Left Scale", new AutoTwoCubesLeftScale());
+		chooser.addObject("Two Right Scale", new AutoTwoCubesRightScale());
+		chooser.addObject("Two Cube Both Left", new AutoTwoCubesBothLeft());
+		chooser.addObject("Two Cube Both Right", new AutoTwoCubesBothRight());
+		chooser.addObject("Two Right Left", new AutoTwoCubesRightLeft());
+		chooser.addObject("Two Cube Left Right", new AutoTwoCubesLeftRight());
+		SmartDashboard.putData("Auto mode", chooser);
 		
 		AndroidServer server = AndroidServer.getInstance();
 		server.addTargetUpdateReceiver(CommandBase.drive);
-		beep = new PowerDistributionPanel();
+//		beep = new PowerDistributionPanel();
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putData(beep);
+//		SmartDashboard.putData(beep);
 	}
 
 	@Override
@@ -55,7 +60,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putData(beep);
+//		SmartDashboard.putData(beep);
 	}
 
 	@Override
@@ -69,7 +74,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putData(beep);
+//		SmartDashboard.putData(beep);
 	}
 
 	@Override

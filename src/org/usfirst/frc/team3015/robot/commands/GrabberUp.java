@@ -19,7 +19,7 @@ public class GrabberUp extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return grabber.isAnglerUp() || elevator.getDistance() < 10;
+        return grabber.isAnglerUp();
     }
 
     protected void end() {

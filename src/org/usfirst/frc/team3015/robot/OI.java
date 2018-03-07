@@ -47,35 +47,46 @@ public class OI {
 	Button coDriverLTrigger = new TriggerButton(coDriver, Hand.kLeft);
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
 	
+	Button coDriverStartSelect = new DoubleButton(coDriverSTART8, coDriverSEL7);
+	
 	public OI() {
 //		driverA1.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
 //		driverA1.whenPressed(new GrabberClose());
 //		driverB2.whenPressed(new GrabberOpen());
-		driverX3.whenPressed(new GrabberEjectorIn());
-		driverY4.whenPressed(new GrabberEjectorOut());
+//		driverX3.whenPressed(new GrabberEjectorIn());
+//		driverY4.whenPressed(new GrabberEjectorOut());
 		
-		driverA1.whileHeld(new GrabberCubeControl());
+		driverA1.whenPressed(new GrabberCubeControl());
 		driverA1.whenReleased(new GrabberCubeUp());
+		driverB2.whileHeld(new GrabberIntakeTilCube());
+		driverX3.whenPressed(new GrabberOpen());
+		driverY4.whileHeld(new GrabberIntakeOut());
+		driverLB5.whenPressed(new GrabberCubeEject());
+		driverLB5.whenReleased(new GrabberReset());
+		driverRB6.whenPressed(new GrabberUp());
+		driverRTrigger.whenPressed(new GrabberDown(true));
+		driverLTrigger.whenPressed(new GrabberClose());
 		
-		driverLB5.whileHeld(new GrabberCubeEject());
 		
-//		coDriverA1.whileHeld(new ClimberUp());
-//		coDriverB2.whileHeld(new ClimberDown());
-//		driverX3.whileHeld(new ClimberThing());
-//		coDriverY4.whileHeld(new ClimberHold());
-//		driverDRight.whileHeld(new BuddyExtend());
-//		driverDRight.whenReleased(new BuddyRetract());
+		
+//		driverA1.whileHeld(new DriveMotionProfile("test", true));
+		
+		coDriverDUp.whileHeld(new ClimberUp());
+		coDriverDDown.whileHeld(new ClimberDown());
+		coDriverDRight.whenPressed(new ClimberLockOut());
+		coDriverDLeft.whenPressed(new ClimberLockIn());
+//		coDriverX3.whileHeld(new ClimberHold());
+		
+		coDriverX3.whenPressed(new ElevatorToScaleLow());
 				
-//		coDriverA1.whileHeld(new ElevatorToSwitch());
-//		coDriverX3.whenPressed(new ElevatorToBottom());
-//		coDriverY4.whenPressed(new ElevatorToScale());
-//		coDriverDLeft.whenPressed(new ClimberMiddle());
-//		coDriverDUp.whenPressed(new ClimberTop());
-//		coDriverDDown.whenPressed(new ClimberBottom());
-//		coDriverDRight.whenPressed(new BuddyExtend());
-//		coDriverDRight.whenReleased(new BuddyRetract());
+		coDriverA1.whenPressed(new ElevatorToBottom());
+		coDriverB2.whenPressed(new ElevatorToSwitch());
+		coDriverY4.whenPressed(new ElevatorToScale());
+		coDriverLB5.whenPressed(new GrabberCubeEject());
 		coDriverLS9.whileHeld(new ElevatorManualControl());
-//		coDriverA1.whenReleased(new ElevatorStop());
+		
+		coDriverStartSelect.whenPressed(new BuddyExtend());
+		coDriverStartSelect.whenReleased(new BuddyRetract());
 	}
 	
 	public boolean getDriverAButton() {
@@ -119,57 +130,22 @@ public class OI {
 	}
 	
 	/**
-	 * Rumble driver's left side of the joypad
+	 * Rumble driver's joypad
 	 * In the case of Xbox joypads, this is a stronger rumble
 	 * @param value Strength of rumble
 	 */
-	public void driverLeftRumble(double value) {
+	public void driverRumble(double value) {
+		driver.setRumble(RumbleType.kRightRumble, value);
 		driver.setRumble(RumbleType.kLeftRumble, value);
 	}
 	
 	/**
-	 * Rumble codriver's right side of the joypad
+	 * Rumble codriver's joypad
 	 * In the case of Xbox joypads, this is a softer rumble
 	 * @param value Strength of rumble
 	 */
-	public void coDriverRightRumble(double value) {
+	public void coDriverRumble(double value) {
 		coDriver.setRumble(RumbleType.kRightRumble, value);
-	}
-	
-	/**
-	 * Rumble codriver's left side of the joypad
-	 * In the case of Xbox joypads, this is a stronger rumble
-	 * @param value Strength of rumble
-	 */
-	public void coDriverLeftRumble(double value) {
 		coDriver.setRumble(RumbleType.kLeftRumble, value);
-	}
-	
-	/**
-	 * Stops rumble on right side of driver's joypad
-	 */
-	public void driverStopRightRumble(){
-		driver.setRumble(RumbleType.kRightRumble, 0);
-	}
-	
-	/**
-	 * Stops rumble on left side of driver's joypad
-	 */
-	public void driverStopLeftRumble(){
-		driver.setRumble(RumbleType.kLeftRumble, 0);
-	}
-	
-	/**
-	 * Stops rumble on right side of codriver's joypad
-	 */
-	public void coDriverStopRightRumble(){
-		coDriver.setRumble(RumbleType.kRightRumble, 0);
-	}
-	
-	/**
-	 * Stops rumble on left side of codriver's joypad
-	 */
-	public void coDriverStopLeftRumble(){
-		coDriver.setRumble(RumbleType.kLeftRumble, 0);
 	}
 }

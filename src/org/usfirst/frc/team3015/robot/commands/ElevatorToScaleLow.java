@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class ElevatorToScale extends CommandBase {
+public class ElevatorToScaleLow extends CommandBase {
 	private double startTime;
 
-    public ElevatorToScale() {
+    public ElevatorToScaleLow() {
         requires(elevator);
 //        requires(grabber);
     }
@@ -22,7 +22,7 @@ public class ElevatorToScale extends CommandBase {
     }
 
     protected void execute() {
-    	elevator.set(ControlMode.Position, Constants.elevatorHeightScale * elevator.pulsesPerInch);
+    	elevator.set(ControlMode.Position, Constants.elevatorHeightScaleLow * elevator.pulsesPerInch);
 //    	System.out.println(elevator.getDistance());
     	
     	if(Timer.getFPGATimestamp() - startTime < 1) {

@@ -13,7 +13,7 @@ public class GrabberIntakeOut extends CommandBase {
     }
 
     protected void execute() {
-    	if(elevator.getDistance() > 10) {
+    	if(elevator.getDistance() < 10) {
     		grabber.intakeOut();
     	}
     }

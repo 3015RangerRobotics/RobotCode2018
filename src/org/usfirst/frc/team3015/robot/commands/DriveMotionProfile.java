@@ -16,23 +16,27 @@ public class DriveMotionProfile extends CommandBase {
 	private volatile int i =  0;
 	private volatile double prevErrorL = 0;
 	private volatile double prevErrorR = 0;
+	private boolean isTurning;
 
     public DriveMotionProfile(double[][] motionProfile) {
     	requires(drive);
     	this.leftMotion = motionProfile;
     	this.rightMotion = motionProfile;
+    	isTurning = false;
     }
     
-    public DriveMotionProfile(double[][] leftMotion, double[][] rightMotion) {
+    public DriveMotionProfile(double[][] leftMotion, double[][] rightMotion, boolean isTurning) {
     	requires(drive);
     	this.leftMotion = leftMotion;
     	this.rightMotion = rightMotion;
+    	this.isTurning = isTurning;
     }
     
-    public DriveMotionProfile(String filename) {
+    public DriveMotionProfile(String filename, boolean reversed) {
     	requires(drive);
-    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left");
-    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right");
+    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left", reversed);
+    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right", reversed);
+    	isTurning = false;
     }
     
     protected void initialize() {
@@ -82,16 +86,19 @@ public class DriveMotionProfile extends CommandBase {
 			double errorDerivR = ((errorR - prevErrorR) / Constants.kPeriod) - goalVelR;
 			
 //			System.out.println(errorL + ", " + errorR);
+			double kP = (isTurning) ? drive.kTurnP : drive.kDriveP;
+			double kD = (isTurning) ? drive.kTurnD : drive.kDriveD;
+			double kV = (isTurning) ? drive.kV + drive.kTurnV : drive.kV;
 			
-			double pwmL = (drive.kDriveP * errorL) + (drive.kDriveD * errorDerivL) + (drive.kV * goalVelL) + (drive.kA * goalAccL);
-			double pwmR = (drive.kDriveP * errorR) + (drive.kDriveD * errorDerivR) + (drive.kV * goalVelR) + (drive.kA * goalAccR);
+			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (drive.kA * goalAccL);
+			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (drive.kA * goalAccR);
 			
 			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			
 			prevErrorL = errorL;
 			prevErrorR = errorR;
 			
-			drive.tankDrive(pwmL, pwmR);
+			drive.setMotorOutputs(pwmL, pwmR);
 			i++;
 		}else {
 			isFinished = true;
@@ -107,7 +114,7 @@ public class DriveMotionProfile extends CommandBase {
     }
 
     protected void end() {
-    	drive.tankDrive(0, 0);
+    	drive.setMotorOutputs(0, 0);
     }
 
     protected void interrupted() {
