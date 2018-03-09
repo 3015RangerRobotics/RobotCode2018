@@ -1,19 +1,12 @@
 
 package org.usfirst.frc.team3015.robot.commands;
 
-import java.util.HashMap;
-
 import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
-import org.usfirst.frc.team3015.motionProfiles.MotionProfiles.Side;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
-public class AutoTwoCubesRightScale extends CommandGroup {
+public class AutoRightScaleOnly extends CommandGroup {
 
-    public AutoTwoCubesRightScale() {
+    public AutoRightScaleOnly() {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScaleDelayed(3.75));
         addSequential(new DriveMotionProfile("wallToRightScale", false));

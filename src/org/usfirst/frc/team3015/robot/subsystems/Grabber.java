@@ -26,8 +26,8 @@ public class Grabber extends Subsystem {
     
     private final double ANGLER_UP_SPEED = -1.0;
     private final double ANGLER_DOWN_SPEED = 1.0;
-    private final double INTAKE_SPEED = 0.75;
-    private final double OUTTAKE_SPEED = -0.75;
+    private final double INTAKE_SPEED = 0.9;
+    private final double OUTTAKE_SPEED = -0.9;
     private final double OUTTAKE_SPEED_SLOW = -.65;
     private final double CUBE_PRESENT_VOLTAGE = 1.5;
 

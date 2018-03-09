@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -45,17 +44,10 @@ public class OI {
 	Button coDriverDDown = new DPad(coDriver, DPad.Value.kDPadDown);
 	Button coDriverDRight = new DPad(coDriver, DPad.Value.kDPadRight);
 	Button coDriverLTrigger = new TriggerButton(coDriver, Hand.kLeft);
-	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);
-	
+	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);	
 	Button coDriverStartSelect = new DoubleButton(coDriverSTART8, coDriverSEL7);
 	
 	public OI() {
-//		driverA1.whenPressed(new DriveMotionProfile("wallToRightSwitch"));
-//		driverA1.whenPressed(new GrabberClose());
-//		driverB2.whenPressed(new GrabberOpen());
-//		driverX3.whenPressed(new GrabberEjectorIn());
-//		driverY4.whenPressed(new GrabberEjectorOut());
-		
 		driverA1.whenPressed(new GrabberCubeControl());
 		driverA1.whenReleased(new GrabberCubeUp());
 		driverB2.whileHeld(new GrabberIntakeTilCube());
@@ -66,25 +58,18 @@ public class OI {
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown(true));
 		driverLTrigger.whenPressed(new GrabberClose());
-		
-		
-		
-//		driverA1.whileHeld(new DriveMotionProfile("test", true));
-		
+				
+		coDriverA1.whenPressed(new ElevatorToBottom());
+		coDriverB2.whenPressed(new ElevatorToSwitch());
+		coDriverX3.whenPressed(new ElevatorToScaleLow());
+		coDriverY4.whenPressed(new ElevatorToScale());
+		coDriverLB5.whenPressed(new GrabberCubeEject());
+		coDriverLS9.whileHeld(new ElevatorManualControl());
+		coDriverRS10.whenPressed(new ClimberHold());
 		coDriverDUp.whileHeld(new ClimberUp());
 		coDriverDDown.whileHeld(new ClimberDown());
 		coDriverDRight.whenPressed(new ClimberLockOut());
 		coDriverDLeft.whenPressed(new ClimberLockIn());
-//		coDriverX3.whileHeld(new ClimberHold());
-		
-		coDriverX3.whenPressed(new ElevatorToScaleLow());
-				
-		coDriverA1.whenPressed(new ElevatorToBottom());
-		coDriverB2.whenPressed(new ElevatorToSwitch());
-		coDriverY4.whenPressed(new ElevatorToScale());
-		coDriverLB5.whenPressed(new GrabberCubeEject());
-		coDriverLS9.whileHeld(new ElevatorManualControl());
-		
 		coDriverStartSelect.whenPressed(new BuddyExtend());
 		coDriverStartSelect.whenReleased(new BuddyRetract());
 	}

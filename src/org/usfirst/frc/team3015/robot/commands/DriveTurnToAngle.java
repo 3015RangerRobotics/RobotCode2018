@@ -2,8 +2,8 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.Constants;
-import org.usfirst.frc.team3015.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -61,7 +61,7 @@ public class DriveTurnToAngle extends CommandBase {
     	new Thread(() -> {
     		double lastTime = 0;
     		
-    		while(!isFinished && Robot.isEnabled) {
+    		while(!isFinished && DriverStation.getInstance().isEnabled()) {
     			if(Timer.getFPGATimestamp() >= lastTime + 0.01) {
     				lastTime = Timer.getFPGATimestamp();
     				threadedExecute();

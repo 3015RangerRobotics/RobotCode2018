@@ -7,19 +7,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Climber extends Subsystem {
 	TalonSRX climber1;
 	VictorSPX climber2;
 	DoubleSolenoid climberLock;
-//	DigitalInput diSensorBottom;
-//	DigitalInput diSensorMiddle;
-//	DigitalInput diSensorTop;
 	
 	final double CLIMBER_PERCENT = 1.0;
 	
@@ -27,26 +20,10 @@ public class Climber extends Subsystem {
 		climber1 = new TalonSRX(Constants.climberParentTalonSRX);
 		climber2 = new VictorSPX(Constants.climberChildVictorSPX);
 		climberLock = new DoubleSolenoid(Constants.climberLock1, Constants.climberLock2);
-//		diSensorBottom = new DigitalInput(Constants.climberDigitalInputBottom);
-//		diSensorMiddle = new DigitalInput(Constants.climberDigitalInputMiddle);
-//		diSensorTop = new DigitalInput(Constants.climberDigitalInputTop);
 	}
 	
     public void initDefaultCommand() {
         
-    }
-    
-    public int getLocation() {
-//    	if(!diSensorBottom.get()) {
-//    		return 0;
-//    	} else if (!diSensorTop.get()) {
-//    		return 2;
-//    	} else if (!diSensorMiddle.get()) {
-//    		return 1;
-//    	} else {
-//    		return -1;
-//    	}
-    	return -1;
     }
     
     public void climberHold() {

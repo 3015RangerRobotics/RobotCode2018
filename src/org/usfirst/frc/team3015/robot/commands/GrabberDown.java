@@ -1,11 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
-
-/**
- *
- */
 public class GrabberDown extends CommandBase {
 	private boolean override;
 

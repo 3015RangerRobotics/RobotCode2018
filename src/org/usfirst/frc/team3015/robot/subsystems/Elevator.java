@@ -18,8 +18,12 @@ public class Elevator extends Subsystem {
 	public TalonSRX elevatorTalonSRX;
 	DigitalInput elevatorBottomLimit;
 	
-	//331 per inch
-	
+	public final double elevatorMaxV = 10.0;
+	public final double elevatorAcc = 15.0;
+	public final double elevatorHeightBottom = 0;
+	public final double elevatorHeightSwitch = 26;
+	public final double elevatorHeightScale = 66;
+	public final double elevatorHeightScaleLow = 57;
 	public final double kElevatorP = 0.6;
 	public final double kElevatorI = 0.0;
 	public final double kElevatorD = 0.2;

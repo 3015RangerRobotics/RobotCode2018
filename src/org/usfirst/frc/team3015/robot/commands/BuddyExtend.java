@@ -15,7 +15,6 @@ public class BuddyExtend extends CommandBase {
 
     protected void execute() {
     	buddyClimb.buddyExtend();
-    	System.out.println("extend");
     }
 
     protected boolean isFinished() {

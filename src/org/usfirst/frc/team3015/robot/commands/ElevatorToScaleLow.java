@@ -1,20 +1,13 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.robot.Constants;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.Timer;
 
-/**
- *
- */
 public class ElevatorToScaleLow extends CommandBase {
 	private double startTime;
 
     public ElevatorToScaleLow() {
         requires(elevator);
-//        requires(grabber);
     }
 
     protected void initialize() {
@@ -22,8 +15,7 @@ public class ElevatorToScaleLow extends CommandBase {
     }
 
     protected void execute() {
-    	elevator.set(ControlMode.Position, Constants.elevatorHeightScaleLow * elevator.pulsesPerInch);
-//    	System.out.println(elevator.getDistance());
+    	elevator.set(ControlMode.Position, elevator.elevatorHeightScaleLow * elevator.pulsesPerInch);
     	
     	if(Timer.getFPGATimestamp() - startTime < 1) {
     		grabber.intakeOutSlowly();

@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class AutoTwoCubesBothRight extends CommandGroup {
+public class AutoRightScalePriority extends CommandGroup {
 
-    public AutoTwoCubesBothRight() {
+    public AutoRightScalePriority() {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScaleDelayed(3.75));
         addSequential(new DriveMotionProfile("wallToRightScale", false));

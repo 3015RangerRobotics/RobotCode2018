@@ -9,6 +9,7 @@ import org.usfirst.frc.team3015.robot.subsystems.Grabber;
 import org.usfirst.frc.team3015.robot.subsystems.OurCompressor;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public abstract class CommandBase extends Command {
 	public static Drive drive;
@@ -26,7 +27,7 @@ public abstract class CommandBase extends Command {
 		climber = new Climber();
 		buddyClimb = new BuddyClimb();
 		elevator = new Elevator();
-		
+		SmartDashboard.putData(climber);
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
 	}
