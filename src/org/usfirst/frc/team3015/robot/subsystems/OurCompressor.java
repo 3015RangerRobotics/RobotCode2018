@@ -6,6 +6,7 @@ import org.usfirst.frc.team3015.robot.commands.OurCompressorAuto;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Compressor subsystem
@@ -23,6 +24,12 @@ public class OurCompressor extends Subsystem {
 	public void initDefaultCommand() {
     	setDefaultCommand(new OurCompressorAuto());
     }
+	
+	@Override
+	public void periodic() {
+		SmartDashboard.putNumber("Pressure", Math.round(getPressure()));
+		
+	}
 	
 	/**
 	 * Make the compressor run based on the state of the pressure switch.

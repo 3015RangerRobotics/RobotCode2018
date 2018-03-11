@@ -3,20 +3,19 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  *
  */
-public class GrabberEjectorOut extends CommandBase {
+public class GrabberOpenIfUp extends CommandBase {
 
-    public GrabberEjectorOut() {
+    public GrabberOpenIfUp() {
         requires(grabber);
     }
 
     protected void initialize() {
     	if(elevator.getDistance() > 5) {
-    		grabber.ejectorOut();
+    		grabber.openGrabber();
     	}
     }
 
     protected void execute() {
-    	
     }
 
     protected boolean isFinished() {

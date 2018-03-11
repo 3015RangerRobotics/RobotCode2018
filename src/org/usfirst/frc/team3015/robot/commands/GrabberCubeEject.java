@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class GrabberCubeEject extends CommandGroup {
 
     public GrabberCubeEject() {
-        addSequential(new GrabberOpen());
-        addSequential(new GrabberDown(false));
-        addSequential(new GrabberIntakeOut());
+        addSequential(new GrabberOpenIfUp());
+//        addSequential(new GrabberDown(false));
+//        addSequential(new GrabberIntakeOut());
         addSequential(new GrabberEjectorOut());
         addSequential(new WaitCommand(0.25));
         addSequential(new GrabberEjectorIn());

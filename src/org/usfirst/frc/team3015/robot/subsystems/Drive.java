@@ -15,31 +15,26 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drive Subsystem, used for driving
  */
 public class Drive extends Subsystem implements TargetUpdateReceiver{
-	//TODO: Tune these
-	public final double kDriveP = 2.0;//Drive base:1.3
-	public final double kDriveD = 0.02;//Drive base:0.01
+	public final double kDriveP = 2.0;
+	public final double kDriveD = 0.02;
 	
 	//TODO: Tune these
 	public final double kTurnP = 4.0;
 	public final double kTurnD = 0.02;
 	public final double kTurnVOffset = 0.03;
 	
-	//TODO: Tune these: conversion from real-world units to percentage output.
-	public final double kV = 0.067;//Drive base:0.0625
-	public final double kA = 0.023;//Drive base: 0.013
+	public final double kV = 0.067;
+	public final double kA = 0.023;
 	
-	public final double kTurnV = 0.0;
-	public final double kTurnA = 0.0;
-	
-	//TODO: Find this
 	public final double kDistancePerPulse = 0.00904774;
 	
-	public final double kDeadband = 0.02;
+	public final double kDeadzone = 0.02;
 	
 	VictorSP leftDrive;
 	VictorSP rightDrive;
@@ -58,9 +53,12 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
 		rightDrive.setInverted(true);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
-		rightEncoder.setReverseDirection(true);
+		rightEncoder.setReverseDirection(false);//true
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
+		SmartDashboard.putData("Gyro", imu);
+		SmartDashboard.putData("Left Encoder", leftEncoder);
+		SmartDashboard.putData("Right Encoder", rightEncoder);
 	}
 	
 	public void initDefaultCommand() {
@@ -72,6 +70,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 //		System.out.println(getAngle()); // + ", " + ((bestTarget != null) ? bestTarget.getXAngle() : "null"));
 //		System.out.println(getLeftDistance() + ", " + getRightDistance());
 //		System.out.println(test.get());
+//		System.out.println(getAngle());
 	}
 	
 	public void resetEncoders() {

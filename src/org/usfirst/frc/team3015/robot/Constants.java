@@ -44,9 +44,10 @@ public class Constants {
 	//Auto Modes
 	public enum AutoMode{
 		kScaleOnly,
-		kSwitchOnly,
-		kScalePriority,
-		kSwitchPriority,
+//		kSwitchOnly,
+//		kScalePriority,
+//		kSwitchPriority,
+		kBoth,
 		kBaseline,
 		kNone
 	}

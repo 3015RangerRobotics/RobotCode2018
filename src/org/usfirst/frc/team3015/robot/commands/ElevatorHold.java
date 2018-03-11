@@ -13,7 +13,7 @@ public class ElevatorHold extends CommandBase {
     }
 
     protected void initialize() {
-    	startPos = elevator.getDistance();
+    	startPos = elevator.getRawDistance();
     }
 
     protected void execute() {

@@ -12,6 +12,7 @@ public class ObtainCube extends CommandGroup {
     	addParallel(new ElevatorToBottom());
         addSequential(new GrabberDown(true));
         addSequential(new GrabberIntakeTilCube());
+        addSequential(new WaitCommand(.1));
         addSequential(new GrabberUp());
         addSequential(new WaitCommand(.1));
         addSequential(new GrabberClose());

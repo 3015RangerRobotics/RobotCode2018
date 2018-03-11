@@ -16,27 +16,23 @@ public class DriveMotionProfile extends CommandBase {
 	private volatile int i =  0;
 	private volatile double prevErrorL = 0;
 	private volatile double prevErrorR = 0;
-	private boolean isTurning;
 
     public DriveMotionProfile(double[][] motionProfile) {
     	requires(drive);
     	this.leftMotion = motionProfile;
     	this.rightMotion = motionProfile;
-    	isTurning = false;
     }
     
-    public DriveMotionProfile(double[][] leftMotion, double[][] rightMotion, boolean isTurning) {
+    public DriveMotionProfile(double[][] leftMotion, double[][] rightMotion) {
     	requires(drive);
     	this.leftMotion = leftMotion;
     	this.rightMotion = rightMotion;
-    	this.isTurning = isTurning;
     }
     
     public DriveMotionProfile(String filename, boolean reversed) {
     	requires(drive);
     	this.leftMotion = MotionProfiles.loadProfile(filename + "Left", reversed);
     	this.rightMotion = MotionProfiles.loadProfile(filename + "Right", reversed);
-    	isTurning = false;
     }
     
     protected void initialize() {
@@ -86,12 +82,13 @@ public class DriveMotionProfile extends CommandBase {
 			double errorDerivR = ((errorR - prevErrorR) / Constants.kPeriod) - goalVelR;
 			
 //			System.out.println(errorL + ", " + errorR);
-			double kP = (isTurning) ? drive.kTurnP : drive.kDriveP;
-			double kD = (isTurning) ? drive.kTurnD : drive.kDriveD;
-			double kV = (isTurning) ? drive.kV + drive.kTurnV : drive.kV;
+			double kP = drive.kDriveP;
+			double kD = drive.kDriveD;
+			double kV = drive.kV;
+			double kA = drive.kA;
 			
-			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (drive.kA * goalAccL);
-			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (drive.kA * goalAccR);
+			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (kA * goalAccL);
+			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (kA * goalAccR);
 			
 			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			

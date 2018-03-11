@@ -9,20 +9,18 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class AutoRightScalePriority extends CommandGroup {
+public class AutoRightScaleFirst extends CommandGroup {
 
-    public AutoRightScalePriority() {
+    public AutoRightScaleFirst() {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScaleDelayed(3.75));
         addSequential(new DriveMotionProfile("wallToRightScale", false));
-        addSequential(new GrabberCubeEject());
-//        addParallel(new ElevatorToBottomDelayed(2));
-//        addParallel(new ObtainCubeToSwitch());
-        addSequential(new DriveTurnToAngle(157, true));
-//        addSequential(new ElevatorToBottom());
-//        addSequential(new ElevatorToBottom());
+        addParallel(new GrabberCubeEject());
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 10, 60, true)));
+        addParallel(new ElevatorToBottom());
+        addSequential(new DriveTurnToAngle(130, true));
         addParallel(new ObtainCubeToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 60, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.35, 14, 10, 60, false)));
         addSequential(new WaitCommand(1));
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 14, 10, 60, false)));
         addSequential(new GrabberCubeEject());

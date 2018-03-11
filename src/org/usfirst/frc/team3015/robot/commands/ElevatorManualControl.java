@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
  * Manual control of the elevator, no PID
  */
 public class ElevatorManualControl extends CommandBase {
+	double position = 0;
 
     public ElevatorManualControl() {
         // Use requires() here to declare subsystem dependencies
@@ -15,12 +16,14 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	this.position = elevator.getRawDistance();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.set(ControlMode.PercentOutput, oi.getCoDriverSumTriggers());
-    	System.out.println(elevator.getDistance());
+    	this.position += oi.getCoDriverSumTriggers() * 100;
+    	elevator.set(ControlMode.Position, position);
+//    	System.out.println(elevator.getDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()

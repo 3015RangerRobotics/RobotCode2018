@@ -6,6 +6,7 @@ import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,16 +17,10 @@ public class Robot extends TimedRobot {
 	Command autonomousCommand;
 	Command leftScaleOnly,
 		rightScaleOnly,
-		leftSwitchOnly,
-		rightSwitchOnly,
-		bothLeftScalePriority,
-		bothRightScalePriority,
-		bothLeftSwitchPriority,
-		bothRightSwitchPriority,
-		rightLeftScalePriority,
-		leftRightScalePriority,
-		rightLeftSwitchPriority,
-		leftRightSwitchPriority,
+		leftBoth,
+		rightBoth,
+		leftRightBoth,
+		rightLeftBoth,
 		baseline;
 	SendableChooser<AutoMode> chooser = new SendableChooser<>();
 
@@ -37,23 +32,15 @@ public class Robot extends TimedRobot {
 		
 		leftScaleOnly = new AutoLeftScaleOnly();
 		rightScaleOnly = new AutoRightScaleOnly();
-		leftSwitchOnly = new AutoLeftSwitchOnly();
-		rightSwitchOnly = null;
-		bothLeftScalePriority = new AutoLeftScalePriority();
-		bothRightScalePriority = new AutoRightScalePriority();
-		bothLeftSwitchPriority = null;
-		bothRightSwitchPriority = null;
-		rightLeftScalePriority = new AutoRightLeftScalePriority();
-		leftRightScalePriority = null;
-		rightLeftSwitchPriority = null;
-		leftRightSwitchPriority = new AutoLeftRightSwitchPriority();
+		leftBoth = new AutoLeftScaleFirst();
+		rightBoth = new AutoRightScaleFirst();
+		rightLeftBoth = new AutoRightLeftScaleFirst();
+		leftRightBoth = new AutoLeftRightSwitchFirst();
 		baseline = new AutoBaseline();
 		
 		chooser.addDefault("None", AutoMode.kNone);
 		chooser.addObject("Scale Only", AutoMode.kScaleOnly);
-		chooser.addObject("Switch Only", AutoMode.kSwitchOnly);
-		chooser.addObject("Scale Priority", AutoMode.kScalePriority);
-		chooser.addObject("Switch Priority", AutoMode.kSwitchPriority);
+		chooser.addObject("Scale & Switch", AutoMode.kBoth);
 		chooser.addObject("Baseline", AutoMode.kBaseline);
 		
 		SmartDashboard.putData("Auto Mode", chooser);
@@ -61,7 +48,7 @@ public class Robot extends TimedRobot {
 		AndroidServer server = AndroidServer.getInstance();
 		server.addTargetUpdateReceiver(CommandBase.drive);
 		
-		SmartDashboard.putData(new PowerDistributionPanel());
+//		SmartDashboard.putData(new PowerDistributionPanel());
 	}
 
 	@Override
@@ -72,6 +59,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
 	}
 
 	@Override
@@ -92,29 +80,16 @@ public class Robot extends TimedRobot {
 				DriverStation.reportError("Invalid Game Data!", false);
 				autonomousCommand = null;
 			}
-		}else if(autoMode == AutoMode.kSwitchOnly) {
-			if(gameData.charAt(0) == 'L') {
-				autonomousCommand = this.leftSwitchOnly;
-			}else if(gameData.charAt(0) == 'R') {
-				autonomousCommand = this.rightSwitchOnly;
-			}else {
-				DriverStation.reportError("Invalid Game Data!", false);
-				autonomousCommand = null;
-			}
-		}else if(autoMode == AutoMode.kScalePriority) {
+		}else if(autoMode == AutoMode.kBoth) {
 			if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R') {
-				autonomousCommand = this.leftRightScalePriority;
+				autonomousCommand = this.leftRightBoth;
 			}else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L') {
-				autonomousCommand = this.rightLeftScalePriority;
-			}else {
-				DriverStation.reportError("Invalid Game Data!", false);
-				autonomousCommand = null;
-			}
-		}else if(autoMode == AutoMode.kSwitchPriority) {
-			if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R') {
-				autonomousCommand = this.leftRightSwitchPriority;
-			}else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L') {
-				autonomousCommand = this.rightLeftSwitchPriority;
+				autonomousCommand = this.rightLeftBoth;
+			}else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L'){
+				autonomousCommand = this.leftBoth;
+				System.out.println("what");
+			}else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R'){
+				autonomousCommand = this.rightBoth;
 			}else {
 				DriverStation.reportError("Invalid Game Data!", false);
 				autonomousCommand = null;
@@ -135,6 +110,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
 	}
 
 	@Override
@@ -147,6 +123,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
 	}
 
 	@Override

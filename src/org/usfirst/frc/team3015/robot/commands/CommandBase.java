@@ -27,7 +27,6 @@ public abstract class CommandBase extends Command {
 		climber = new Climber();
 		buddyClimb = new BuddyClimb();
 		elevator = new Elevator();
-		SmartDashboard.putData(climber);
 		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
 	}

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3015.robot.commands;
+  package org.usfirst.frc.team3015.robot.commands;
 
 /**
  * Driver control with gamepad
@@ -12,6 +12,7 @@ public class DriveWithGamepad extends CommandBase {
     }
 
     protected void initialize() {
+    	drive.resetGyro();
     }
 
     protected void execute() {

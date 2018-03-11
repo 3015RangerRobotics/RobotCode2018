@@ -42,7 +42,6 @@ public class Elevator extends Subsystem {
     public void periodic() {
 //    	System.out.println(elevatorBottomLimit.get());
 //    	System.out.println(elevatorTalonSRX.getOutputCurrent());
-    	SmartDashboard.putData(this);
     }
     
     public Elevator() {
@@ -63,7 +62,7 @@ public class Elevator extends Subsystem {
     	elevatorTalonSRX.config_kD(0, kElevatorD, 0);
     	elevatorTalonSRX.config_kF(0, kElevatorF, 0);
     	elevatorTalonSRX.configPeakOutputForward(1.0, 10);
-    	elevatorTalonSRX.configPeakOutputReverse(-0.4, 10);
+    	elevatorTalonSRX.configPeakOutputReverse(-0.25, 10);
     	
     	elevatorBottomLimit = new DigitalInput(Constants.elevatorBottomLimit);
     }
@@ -80,5 +79,9 @@ public class Elevator extends Subsystem {
     
     public double getDistance() {
     	return elevatorTalonSRX.getSelectedSensorPosition(0) / pulsesPerInch;
+    }
+    
+    public double getRawDistance() {
+    	return elevatorTalonSRX.getSelectedSensorPosition(0);
     }
 }

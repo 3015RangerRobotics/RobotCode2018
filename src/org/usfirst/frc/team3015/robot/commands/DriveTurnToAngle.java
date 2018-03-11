@@ -98,10 +98,11 @@ public class DriveTurnToAngle extends CommandBase {
 //			System.out.println(errorL + ", " + errorR);
 			double kP = drive.kTurnP;
 			double kD = drive.kTurnD;
-			double kV = drive.kV + drive.kTurnV;
+			double kV = drive.kV;
+			double kA = drive.kA;
 			
-			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (drive.kA * goalAccL);
-			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (drive.kA * goalAccR);
+			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (kA * goalAccL);
+			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (kA * goalAccR);
 			
 //			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			

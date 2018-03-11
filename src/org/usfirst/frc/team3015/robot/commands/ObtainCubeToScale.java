@@ -12,10 +12,10 @@ public class ObtainCubeToScale extends CommandGroup {
     	addSequential(new ElevatorToBottom());
         addSequential(new GrabberDown(true));
         addSequential(new GrabberIntakeTilCube());
+        addSequential(new WaitCommand(.1));
         addSequential(new GrabberUp());
         addSequential(new WaitCommand(.1));
         addSequential(new GrabberClose());
-        addSequential(new WaitCommand(.25));
         addSequential(new ElevatorToScale());
     }
 }
