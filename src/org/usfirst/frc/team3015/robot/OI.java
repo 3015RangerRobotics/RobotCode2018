@@ -50,7 +50,7 @@ public class OI {
 	public OI() {
 		driverA1.whenPressed(new GrabberCubeControl());
 		driverA1.whenReleased(new GrabberCubeUp());
-		driverB2.whileHeld(new GrabberIntakeTilCube());
+		driverB2.whileHeld(new GrabberIntakeIn());
 		driverX3.whenPressed(new GrabberOpen());
 		driverY4.whileHeld(new GrabberIntakeOut());
 		driverLB5.whenPressed(new GrabberCubeOuttake());
@@ -58,12 +58,15 @@ public class OI {
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown(true));
 		driverLTrigger.whenPressed(new GrabberClose());
+		
+//		driverDUp.whenPressed(new DriveTurnToAngle(100, false));
 				
 		coDriverA1.whenPressed(new ElevatorToBottom());
-		coDriverB2.whenPressed(new ElevatorToSwitch());
-		coDriverX3.whenPressed(new ElevatorToScaleLow());
+		coDriverB2.whenPressed(new ElevatorToScaleLow());
+		coDriverX3.whenPressed(new ElevatorToSwitch());
 		coDriverY4.whenPressed(new ElevatorToScale());
 		coDriverLB5.whenPressed(new GrabberCubeEject());
+		coDriverRB6.whenPressed(new GrabberOpen());
 		coDriverLS9.whileHeld(new ElevatorManualControl());
 		coDriverLS9.whenReleased(new ElevatorHold());
 		coDriverRS10.whenPressed(new ClimberHold());

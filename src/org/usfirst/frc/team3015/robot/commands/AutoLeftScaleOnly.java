@@ -14,8 +14,8 @@ public class AutoLeftScaleOnly extends CommandGroup {
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 10, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngle(110, false));
-        addParallel(new ObtainCubeToScale());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5.5, 12, 8, 60, false)));
+        addSequential(new ObtainCube(5.5));
+        addParallel(new ElevatorToScale());
         addSequential(new DriveTurnToAngle(140, true));
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 60, false)));
         addSequential(new GrabberCubeEject());

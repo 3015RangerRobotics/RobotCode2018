@@ -25,8 +25,9 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveD = 0.02;
 	
 	//TODO: Tune these
-	public final double kTurnP = 4.0;
-	public final double kTurnD = 0.02;
+	public final double kTurnP = 4.0;//4.0//encoders: 4.0
+	public final double kTurnI = 0.0;
+	public final double kTurnD = 0.02;//0.05//encoders: 0.02;
 	public final double kTurnVOffset = 0.03;
 	
 	public final double kV = 0.067;
@@ -40,7 +41,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	VictorSP rightDrive;
 	Encoder leftEncoder;
 	Encoder rightEncoder;
-	AHRS imu;
+	public AHRS imu;
 	
 	public TargetInfo bestTarget = null;
 	

@@ -25,7 +25,7 @@ public class GrabberIntakeTilCube extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return cubeCount >= 10;
+        return cubeCount >= 50;
     }
 
     protected void end() {

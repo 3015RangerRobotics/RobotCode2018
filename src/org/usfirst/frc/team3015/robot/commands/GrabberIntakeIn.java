@@ -3,9 +3,9 @@ package org.usfirst.frc.team3015.robot.commands;
 /**
  *
  */
-public class GrabberUp extends CommandBase {
+public class GrabberIntakeIn extends CommandBase {
 
-    public GrabberUp() {
+    public GrabberIntakeIn() {
         requires(grabber);
     }
 
@@ -13,18 +13,16 @@ public class GrabberUp extends CommandBase {
     }
 
     protected void execute() {
-        if(!grabber.isAnglerUp()) {
-       		grabber.intakeUp();
-       		grabber.intakeInSlowly();
+    	if(elevator.getDistance() < 10) {
+    		grabber.intakeIn();
     	}
     }
 
     protected boolean isFinished() {
-        return grabber.isAnglerUp();
+   		return elevator.getDistance() > 10;
     }
 
     protected void end() {
-    	grabber.anglerStop();
     	grabber.intakeStop();
     }
 

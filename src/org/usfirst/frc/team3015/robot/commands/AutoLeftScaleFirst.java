@@ -13,13 +13,13 @@ public class AutoLeftScaleFirst extends CommandGroup {
     public AutoLeftScaleFirst() {
         addParallel(new ElevatorToScale());
         addSequential(new DriveMotionProfile("wallToLeftScale", false));
-        addParallel(new GrabberCubeEject());
+        addParallel(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 12, 6, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngle(110, false));
-        addParallel(new ObtainCubeToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5.5, 12, 6, 60, false)));
-        addSequential(new WaitCommand(1));
+        addSequential(new ObtainCube(5.5));
+        addSequential(new WaitCommand(0.5));
+        addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 12, 6, 60, false)));
         addSequential(new GrabberCubeEject());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 12, 6, 60, true)));

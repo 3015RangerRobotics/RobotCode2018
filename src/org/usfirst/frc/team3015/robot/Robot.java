@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
+		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 	}
 
 	@Override
@@ -110,7 +111,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
+		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 	}
 
 	@Override
@@ -123,7 +124,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
+		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 	}
 
 	@Override

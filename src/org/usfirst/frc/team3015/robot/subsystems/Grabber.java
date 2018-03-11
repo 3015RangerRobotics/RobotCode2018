@@ -3,6 +3,7 @@ package org.usfirst.frc.team3015.robot.subsystems;
 import org.usfirst.frc.team3015.robot.Constants;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -22,14 +23,15 @@ public class Grabber extends Subsystem {
 //    private DigitalInput cubeDetector2;
     private DigitalInput anglerPosUp;
     private DigitalInput anglerPosDown;
-    private AnalogInput cubeDetector;
+    private AnalogPotentiometer cubeDetector;
     
     private final double ANGLER_UP_SPEED = -1.0;
     private final double ANGLER_DOWN_SPEED = 1.0;
-    private final double INTAKE_SPEED = 0.8;
-    private final double OUTTAKE_SPEED = -0.8;
+    private final double INTAKE_SPEED = 0.85;
+    private final double INTAKE_SPEED_SLOW = 0.3;
+    private final double OUTTAKE_SPEED = -0.85;
     private final double OUTTAKE_SPEED_SLOW = -.65;
-    private final double CUBE_PRESENT_VOLTAGE = 2.0;
+    private final double CUBE_PRESENT_VALUE = 0.325;
 
 	public Grabber() {
 		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
@@ -39,7 +41,7 @@ public class Grabber extends Subsystem {
     	angler = new VictorSP(Constants.intakeAngler);
 //    	cubeDetector1 = new DigitalInput(Constants.cubeDetector1);
 //    	cubeDetector2 = new DigitalInput(Constants.cubeDetector2);
-    	cubeDetector = new AnalogInput(Constants.cubeDetector);
+    	cubeDetector = new AnalogPotentiometer(Constants.cubeDetector);
     	anglerPosUp = new DigitalInput(Constants.anglerPosUp);
     	anglerPosDown = new DigitalInput(Constants.anglerPosDown);
 	}
@@ -50,7 +52,7 @@ public class Grabber extends Subsystem {
     
     @Override
     public void periodic() {
-//    	System.out.println(cubeDetector.getVoltage());
+//    	System.out.println(cubeDetector.get());
     }
     
     public void closeGrabber() {
@@ -71,7 +73,7 @@ public class Grabber extends Subsystem {
     
     public boolean isCubePresent() {
 //    	return !cubeDetector1.get() && !cubeDetector2.get();
-    	return cubeDetector.getVoltage() < CUBE_PRESENT_VOLTAGE;
+    	return cubeDetector.get() > CUBE_PRESENT_VALUE;
     }
     
 //    public boolean isOneCubeDetectorPressed() {
@@ -113,6 +115,11 @@ public class Grabber extends Subsystem {
     public void intakeIn() {
     	intakeMotor1.set(INTAKE_SPEED);
     	intakeMotor2.set(-INTAKE_SPEED);
+    }
+    
+    public void intakeInSlowly() {
+    	intakeMotor1.set(INTAKE_SPEED_SLOW);
+    	intakeMotor2.set(-INTAKE_SPEED_SLOW);
     }
     
     public void intakeOut() {
