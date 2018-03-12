@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoLeftScaleOnly extends CommandGroup {
 
     public AutoLeftScaleOnly() {
-    	addSequential(new GrabberClose());
         addParallel(new ElevatorToScale());
         addSequential(new DriveMotionProfile("wallToLeftScale", false));
         addParallel(new GrabberCubeEject());
@@ -18,7 +17,7 @@ public class AutoLeftScaleOnly extends CommandGroup {
         addParallel(new ElevatorToScale());
         addSequential(new DriveTurnToAngle(140, true));
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 60, false)));
-        addSequential(new GrabberCubeEject());
+        addSequential(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 10, 60, true)));
         addSequential(new ElevatorToBottom());
     }

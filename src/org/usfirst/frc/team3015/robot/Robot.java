@@ -34,7 +34,8 @@ public class Robot extends TimedRobot {
 		rightScaleOnly = new AutoRightScaleOnly();
 		leftBoth = new AutoLeftScaleFirst();
 		rightBoth = new AutoRightScaleFirst();
-		rightLeftBoth = new AutoRightLeftScaleFirst();
+//		rightLeftBoth = new AutoRightLeftScaleFirst();
+		rightLeftBoth = new AutoRightSwitchOnly();
 		leftRightBoth = new AutoLeftRightSwitchFirst();
 		baseline = new AutoBaseline();
 		
