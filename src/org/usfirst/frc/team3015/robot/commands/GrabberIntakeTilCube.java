@@ -1,8 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- *
- */
 public class GrabberIntakeTilCube extends CommandBase {
 	private int cubeCount = 0;
 	

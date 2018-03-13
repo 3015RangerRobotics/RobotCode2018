@@ -43,8 +43,8 @@ public class Elevator extends Subsystem {
     	if(isAtBottom()) {
     		elevatorTalonSRX.setSelectedSensorPosition(0, 0, 0);
     	}
-    	
-//    	System.out.println(elevatorTalonSRX.getOutputCurrent());
+    	SmartDashboard.putNumber("Elevator Encoder", getDistance());
+    	SmartDashboard.putBoolean("Bottom Limit", isAtBottom());
     }
     
     public Elevator() {

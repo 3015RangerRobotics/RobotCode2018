@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- *
- */
+
 public class DriveForTime extends CommandBase {
 	private double driveSpeed;
 	private double time;

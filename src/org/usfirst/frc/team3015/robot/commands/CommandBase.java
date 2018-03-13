@@ -1,15 +1,8 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 import org.usfirst.frc.team3015.robot.OI;
-import org.usfirst.frc.team3015.robot.subsystems.BuddyClimb;
-import org.usfirst.frc.team3015.robot.subsystems.Climber;
-import org.usfirst.frc.team3015.robot.subsystems.Drive;
-import org.usfirst.frc.team3015.robot.subsystems.Elevator;
-import org.usfirst.frc.team3015.robot.subsystems.Grabber;
-import org.usfirst.frc.team3015.robot.subsystems.OurCompressor;
-
+import org.usfirst.frc.team3015.robot.subsystems.*;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public abstract class CommandBase extends Command {
 	public static Drive drive;
@@ -27,7 +20,6 @@ public abstract class CommandBase extends Command {
 		climber = new Climber();
 		buddyClimb = new BuddyClimb();
 		elevator = new Elevator();
-		//SUBSYSTEMS BEFORE THIS POINT!!!!!!!
 		oi = new OI();
 	}
 }

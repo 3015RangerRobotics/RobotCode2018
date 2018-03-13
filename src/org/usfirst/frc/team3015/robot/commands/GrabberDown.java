@@ -14,14 +14,14 @@ public class GrabberDown extends CommandBase {
 
     protected void execute() {
     	if(elevator.getDistance() < 10 || override) {
-    		if(!grabber.isAnglerDown()) {
+    		if(!grabber.isIntakeDown()) {
         		grabber.intakeDown();
         	}
       	}
     }
 
     protected boolean isFinished() {
-    		return grabber.isAnglerDown() || (elevator.getDistance() > 10 && !override);
+    		return grabber.isIntakeDown() || (elevator.getDistance() > 10 && !override);
     }
 
     protected void end() {

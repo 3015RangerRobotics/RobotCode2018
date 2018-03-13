@@ -6,9 +6,6 @@ import org.usfirst.frc.team3015.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
-/**
- * Turns to an angle using the imu
- */
 public class DriveTurnToAngleEncoders extends CommandBase {
 	private double[][] leftMotion;
 	private double[][] rightMotion;
@@ -16,33 +13,20 @@ public class DriveTurnToAngleEncoders extends CommandBase {
 	private int i = 0;
 	private double prevErrorL = 0;
 	private double prevErrorR = 0;
+	private boolean isAbsolute;
+	private double angle;
 	
-    public DriveTurnToAngleEncoders(double angle, boolean reverseDirection) {
+    public DriveTurnToAngleEncoders(double angle, boolean isAbsolute) {
         requires(drive);
-        double arcLength = (Constants.wheelBaseWidth * Math.PI) * (angle / 360);
-        arcLength *= 1.13;
-        
-        double[][] profile = MotionProfiles.generate1D(arcLength, 14, 12, 60, false);
-        leftMotion = new double[profile.length][3];
-        rightMotion = new double[profile.length][3];
-        
-        for(int i = 0; i < profile.length; i++) {
-        	if(!reverseDirection) {
-	        	rightMotion[i][0] = -profile[i][0];
-	        	rightMotion[i][1] = -profile[i][1];
-	        	rightMotion[i][2] = -profile[i][2];
-	        	leftMotion[i][0] = profile[i][0];
-	        	leftMotion[i][1] = profile[i][1];
-	        	leftMotion[i][2] = profile[i][2];
-        	}else {
-        		rightMotion[i][0] = profile[i][0];
-	        	rightMotion[i][1] = profile[i][1];
-	        	rightMotion[i][2] = profile[i][2];
-	        	leftMotion[i][0] = -profile[i][0];
-	        	leftMotion[i][1] = -profile[i][1];
-	        	leftMotion[i][2] = -profile[i][2];
-        	}
+        this.angle = angle;
+        this.isAbsolute = isAbsolute;
+        if(!isAbsolute) {
+        	generateProfile(angle);
         }
+    }
+    
+    public DriveTurnToAngleEncoders(double angle) {
+    	this(angle, false);
     }
 
     protected void initialize() {
@@ -51,6 +35,11 @@ public class DriveTurnToAngleEncoders extends CommandBase {
     	i = 0;
     	prevErrorL = 0;
     	prevErrorR = 0;
+    	
+    	if(isAbsolute) {
+        	angle -= drive.getAngle();
+        	generateProfile(angle);
+        }
     	
     	if(leftMotion.length != rightMotion.length) {
     		System.out.println("Left and right profiles not of equal length!");
@@ -95,7 +84,6 @@ public class DriveTurnToAngleEncoders extends CommandBase {
 			double errorR = goalPosR - drive.getRightDistance();
 			double errorDerivR = ((errorR - prevErrorR) / Constants.kPeriod) - goalVelR;
 			
-//			System.out.println(errorL + ", " + errorR);
 			double kP = drive.kTurnPEncoder;
 			double kD = drive.kTurnDEncoder;
 			double kV = drive.kV;
@@ -126,5 +114,32 @@ public class DriveTurnToAngleEncoders extends CommandBase {
 
     protected void interrupted() {
     	end();
+    }
+    
+    private void generateProfile(double profileAngle) {
+    	double arcLength = (Constants.wheelBaseWidth * Math.PI) * (Math.abs(profileAngle) / 360);
+        arcLength *= 1.13;
+        
+        double[][] profile = MotionProfiles.generate1D(arcLength, 14, 12, 60, false);
+        leftMotion = new double[profile.length][3];
+        rightMotion = new double[profile.length][3];
+        
+        for(int i = 0; i < profile.length; i++) {
+        	if(profileAngle > 0) {
+	        	rightMotion[i][0] = -profile[i][0];
+	        	rightMotion[i][1] = -profile[i][1];
+	        	rightMotion[i][2] = -profile[i][2];
+	        	leftMotion[i][0] = profile[i][0];
+	        	leftMotion[i][1] = profile[i][1];
+	        	leftMotion[i][2] = profile[i][2];
+        	}else {
+        		rightMotion[i][0] = profile[i][0];
+	        	rightMotion[i][1] = profile[i][1];
+	        	rightMotion[i][2] = profile[i][2];
+	        	leftMotion[i][0] = -profile[i][0];
+	        	leftMotion[i][1] = -profile[i][1];
+	        	leftMotion[i][2] = -profile[i][2];
+        	}
+        }
     }
 }

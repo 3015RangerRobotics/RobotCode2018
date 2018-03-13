@@ -2,14 +2,9 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Runs the compressor
- * Stops if lower than set match time or voltage
- */
 public class OurCompressorAuto extends CommandBase {
-	private final double CUTOFF_VOLTAGE = 9.0;
+	private final double CUTOFF_VOLTAGE = 10.0;
 	private boolean fillCompressor = true;
 	
     public OurCompressorAuto() {
@@ -22,9 +17,8 @@ public class OurCompressorAuto extends CommandBase {
     }
 
     protected void execute() {
-//    	System.out.println(Math.round(ourCompressor.getPressure()));
-
-    	if(DriverStation.getInstance().isAutonomous() || RobotController.getBatteryVoltage() <= CUTOFF_VOLTAGE){
+    	if(DriverStation.getInstance().isAutonomous() || RobotController.getBatteryVoltage() <= CUTOFF_VOLTAGE ||
+    			(DriverStation.getInstance().getMatchTime() < 20 && DriverStation.getInstance().getMatchTime() > 0)){
     		ourCompressor.stopCompressor();
     	}else{
     		if(fillCompressor){

@@ -26,6 +26,9 @@ public class Climber extends Subsystem {
         
     }
     
+    /**
+     * Give the climber a small amount of power to hold it when climbing
+     */
     public void climberHold() {
     	climber1.configVoltageCompSaturation(13.0, 10);
     	climber1.enableVoltageCompensation(true);
@@ -35,6 +38,9 @@ public class Climber extends Subsystem {
     	climber2.set(ControlMode.PercentOutput, 1.5/13);
     }
     
+    /**
+     * Drive the climber up
+     */
     public void climbUp() {
     	climber1.enableVoltageCompensation(false);
     	climber1.set(ControlMode.PercentOutput, CLIMBER_PERCENT);
@@ -42,6 +48,9 @@ public class Climber extends Subsystem {
     	climber2.set(ControlMode.PercentOutput, -CLIMBER_PERCENT);
     }
     
+    /**
+     * Drive the climber down
+     */
     public void retractClimber() {
     	climber1.enableVoltageCompensation(false);
     	climber1.set(ControlMode.PercentOutput, -CLIMBER_PERCENT);
@@ -49,6 +58,9 @@ public class Climber extends Subsystem {
     	climber2.set(ControlMode.PercentOutput, CLIMBER_PERCENT);
     }
     
+    /**
+     * Stop the climber motors
+     */
     public void stopClimber() {
     	climber1.enableVoltageCompensation(false);
     	climber1.set(ControlMode.PercentOutput, 0);
@@ -56,10 +68,16 @@ public class Climber extends Subsystem {
     	climber2.set(ControlMode.PercentOutput, 0);
     }
     
+    /**
+     * Deploy the anti-sway bar
+     */
     public void climberLockOut() {
     	climberLock.set(DoubleSolenoid.Value.kForward);
     }
     
+    /**
+     * Retract the anti-sway bar
+     */
     public void climberLockIn() {
     	climberLock.set(DoubleSolenoid.Value.kReverse);
     }

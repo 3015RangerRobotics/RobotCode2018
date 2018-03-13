@@ -6,9 +6,6 @@ import org.usfirst.frc.team3015.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
-/**
- * Follows a motion profile
- */
 public class DriveMotionProfile extends CommandBase {
 	private volatile boolean isFinished = false;
 	private double[][] leftMotion;
@@ -29,10 +26,10 @@ public class DriveMotionProfile extends CommandBase {
     	this.rightMotion = rightMotion;
     }
     
-    public DriveMotionProfile(String filename, boolean reversed) {
+    public DriveMotionProfile(String filename) {
     	requires(drive);
-    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left", reversed);
-    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right", reversed);
+    	this.leftMotion = MotionProfiles.loadProfile(filename + "Left");
+    	this.rightMotion = MotionProfiles.loadProfile(filename + "Right");
     }
     
     protected void initialize() {
@@ -81,7 +78,6 @@ public class DriveMotionProfile extends CommandBase {
 			double errorR = goalPosR - drive.getRightDistance();
 			double errorDerivR = ((errorR - prevErrorR) / Constants.kPeriod) - goalVelR;
 			
-//			System.out.println(errorL + ", " + errorR);
 			double kP = drive.kDriveP;
 			double kD = drive.kDriveD;
 			double kV = drive.kV;
@@ -90,7 +86,7 @@ public class DriveMotionProfile extends CommandBase {
 			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (kA * goalAccL);
 			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (kA * goalAccR);
 			
-			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
+//			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			
 			prevErrorL = errorL;
 			prevErrorR = errorR;

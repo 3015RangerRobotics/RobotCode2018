@@ -3,7 +3,7 @@ package org.usfirst.frc.team3015.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-public class DPad extends Button{
+public class DPadButton extends Button{
 	private int dPadDegree;
 	private XboxController controller;
 	
@@ -17,8 +17,12 @@ public class DPad extends Button{
 		kDPadDown,
 		kDPadDownRight
 	}
-	
-	public DPad(XboxController controller, Value value) {
+	/**
+	 * Creates a dpad button
+	 * @param controller The controller to attatch the button to
+	 * @param value the dpad value
+	 */
+	public DPadButton(XboxController controller, Value value) {
 		this.controller = controller;
 		switch (value){
 			case kDPadRight:

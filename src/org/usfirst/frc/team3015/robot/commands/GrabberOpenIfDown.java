@@ -1,8 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- *
- */
 public class GrabberOpenIfDown extends CommandBase {
 
     public GrabberOpenIfDown() {

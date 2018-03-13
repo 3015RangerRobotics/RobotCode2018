@@ -1,12 +1,9 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.lib.android.AndroidServer;
 import org.usfirst.frc.team3015.robot.Constants.AutoMode;
 import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -46,10 +43,8 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		AndroidServer server = AndroidServer.getInstance();
-		server.addTargetUpdateReceiver(CommandBase.drive);
-		
-//		SmartDashboard.putData(new PowerDistributionPanel());
+//		AndroidServer server = AndroidServer.getInstance();
+//		server.addTargetUpdateReceiver(CommandBase.drive);
 	}
 
 	@Override
@@ -60,7 +55,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
 		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 	}
 
@@ -118,7 +112,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		CommandBase.drive.resetGyro();
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}

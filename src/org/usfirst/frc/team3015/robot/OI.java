@@ -21,10 +21,10 @@ public class OI {
 	Button driverSTART8 = new JoystickButton(driver, 8);
 	Button driverLS9 = new JoystickButton(driver, 9);
 	Button driverRS10 = new JoystickButton(driver, 10);
-	Button driverDLeft = new DPad(driver, DPad.Value.kDPadLeft);
-	Button driverDUp = new DPad(driver, DPad.Value.kDPadUp);
-	Button driverDDown = new DPad(driver, DPad.Value.kDPadDown);
-	Button driverDRight = new DPad(driver, DPad.Value.kDPadRight);
+	Button driverDLeft = new DPadButton(driver, DPadButton.Value.kDPadLeft);
+	Button driverDUp = new DPadButton(driver, DPadButton.Value.kDPadUp);
+	Button driverDDown = new DPadButton(driver, DPadButton.Value.kDPadDown);
+	Button driverDRight = new DPadButton(driver, DPadButton.Value.kDPadRight);
 	Button driverLTrigger = new TriggerButton(driver, Hand.kLeft);
 	Button driverRTrigger = new TriggerButton(driver, Hand.kRight);
 	//Buttons for coDriver
@@ -39,10 +39,10 @@ public class OI {
 	Button coDriverSTART8 = new JoystickButton(coDriver, 8);
 	Button coDriverLS9 = new JoystickButton(coDriver, 9);
 	Button coDriverRS10 = new JoystickButton(coDriver, 10);
-	Button coDriverDLeft = new DPad(coDriver, DPad.Value.kDPadLeft);
-	Button coDriverDUp = new DPad(coDriver, DPad.Value.kDPadUp);
-	Button coDriverDDown = new DPad(coDriver, DPad.Value.kDPadDown);
-	Button coDriverDRight = new DPad(coDriver, DPad.Value.kDPadRight);
+	Button coDriverDLeft = new DPadButton(coDriver, DPadButton.Value.kDPadLeft);
+	Button coDriverDUp = new DPadButton(coDriver, DPadButton.Value.kDPadUp);
+	Button coDriverDDown = new DPadButton(coDriver, DPadButton.Value.kDPadDown);
+	Button coDriverDRight = new DPadButton(coDriver, DPadButton.Value.kDPadRight);
 	Button coDriverLTrigger = new TriggerButton(coDriver, Hand.kLeft);
 	Button coDriverRTrigger = new TriggerButton(coDriver, Hand.kRight);	
 	Button coDriverStartSelect = new DoubleButton(coDriverSTART8, coDriverSEL7);

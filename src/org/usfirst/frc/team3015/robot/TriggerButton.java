@@ -8,7 +8,11 @@ public class TriggerButton extends Button{
 	private XboxController controller;
 	private Hand hand;
 	
-	
+	/**
+	 * Creates a button using a trigger on a controller
+	 * @param controller The controller to use
+	 * @param hand The left/right side of the controller
+	 */
 	public TriggerButton(XboxController controller, Hand hand) {
 		this.controller = controller;
 		this.hand = hand;

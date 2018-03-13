@@ -2,9 +2,6 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-/**
- *
- */
 public class ClimberHold extends CommandBase {
 
     public ClimberHold() {

@@ -5,9 +5,6 @@ import org.usfirst.frc.team3015.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class BuddyClimb extends Subsystem {
 	DoubleSolenoid buddySolenoid;
 
@@ -16,13 +13,19 @@ public class BuddyClimb extends Subsystem {
     }
 
     public void initDefaultCommand() {
-//        setDefaultCommand(new BuddyRetract());
+    	
     }
     
+    /**
+     * Deploy the buddy climb forks
+     */
     public void buddyExtend() {
     	buddySolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
+    /**
+     * Lock the buddy climb forks
+     */
     public void buddyRetract() {
     	buddySolenoid.set(DoubleSolenoid.Value.kForward);
     }

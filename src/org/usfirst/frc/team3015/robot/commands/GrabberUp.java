@@ -1,8 +1,5 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-/**
- *
- */
 public class GrabberUp extends CommandBase {
 
     public GrabberUp() {
@@ -13,14 +10,14 @@ public class GrabberUp extends CommandBase {
     }
 
     protected void execute() {
-        if(!grabber.isAnglerUp()) {
+        if(!grabber.isIntakeUp()) {
        		grabber.intakeUp();
        		grabber.intakeInSlowly();
     	}
     }
 
     protected boolean isFinished() {
-        return grabber.isAnglerUp();
+        return grabber.isIntakeUp();
     }
 
     protected void end() {

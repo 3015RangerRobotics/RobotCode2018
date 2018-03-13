@@ -55,6 +55,8 @@ public class Grabber extends Subsystem {
     public void periodic() {
 //    	System.out.println(cubeDetector.get());
     	SmartDashboard.putNumber("Cube Detector", cubeDetector.get());
+    	SmartDashboard.putBoolean("Intake Down", isIntakeDown());
+    	SmartDashboard.putBoolean("Intake Up", isIntakeUp());
     }
     
     public void closeGrabber() {
@@ -86,16 +88,16 @@ public class Grabber extends Subsystem {
     	angler.set(speed);
     }
     
-    public boolean isAnglerUp() {
+    public boolean isIntakeUp() {
     	return !anglerPosUp.get();
     }
     
-    public boolean isAnglerDown() {
+    public boolean isIntakeDown() {
     	return !anglerPosDown.get();
     }
     
     public void intakeUp() {
-    	if(!isAnglerUp()) {
+    	if(!isIntakeUp()) {
     		setAngler(ANGLER_UP_SPEED);
     	}else {
     		anglerStop();
@@ -103,7 +105,7 @@ public class Grabber extends Subsystem {
     }
     
     public void intakeDown() {
-    	if(!isAnglerDown()) {
+    	if(!isIntakeDown()) {
     		setAngler(ANGLER_DOWN_SPEED);
     	}else {
     		anglerStop();

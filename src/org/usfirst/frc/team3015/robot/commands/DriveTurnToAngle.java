@@ -2,16 +2,12 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class DriveTurnToAngle extends CommandBase implements PIDOutput{
 	PIDController turnController;
 	double setpoint = 0;
 	int onTargetCount = 0;
-	double minTurn = 0.1; // 0.23;
+	double minTurn = 0.1;
 	private boolean isAbsolute;
 
     public DriveTurnToAngle(double angle, boolean isAbsolute) {

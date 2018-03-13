@@ -2,11 +2,6 @@ package org.usfirst.frc.team3015.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-/**
- * a button that returns true when 2 buttons are pressed
- * @author ngiano
- *
- */
 public class DoubleButton extends Button{
 	Button button1;
 	Button button2;

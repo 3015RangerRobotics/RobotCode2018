@@ -2,9 +2,6 @@ package org.usfirst.frc.team3015.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-/**
- *
- */
 public class ElevatorHold extends CommandBase {
 	private double startPos;
 
