@@ -13,7 +13,7 @@ public class AutoRightLeftScaleFirst extends CommandGroup {
         addParallel(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 12, 60, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngle(62, true));
+        addSequential(new DriveTurnToAngleEncoders(62, true));
         addSequential(new DriveMotionProfile("leftScaleToRightSwitch", false));
         addSequential(new ObtainCube(3.25));
         addParallel(new ElevatorToSwitch());

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  *
  */
@@ -10,7 +12,9 @@ public class ClimberLockOut extends CommandBase {
     }
 
     protected void initialize() {
-    	climber.climberLockOut();
+    	if(DriverStation.getInstance().getMatchTime() < 30) {
+    		climber.climberLockOut();
+    	}
     }
 
     protected void execute() {

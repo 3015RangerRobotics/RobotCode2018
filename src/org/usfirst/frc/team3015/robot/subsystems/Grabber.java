@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Grabber that can open and close to contain power cubes, Intake that rolls the power cubes in
@@ -31,7 +32,7 @@ public class Grabber extends Subsystem {
     private final double INTAKE_SPEED_SLOW = 0.3;
     private final double OUTTAKE_SPEED = -0.85;
     private final double OUTTAKE_SPEED_SLOW = -.65;
-    private final double CUBE_PRESENT_VALUE = 0.325;
+    private final double CUBE_PRESENT_VALUE = 0.35;
 
 	public Grabber() {
 		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
@@ -53,6 +54,7 @@ public class Grabber extends Subsystem {
     @Override
     public void periodic() {
 //    	System.out.println(cubeDetector.get());
+    	SmartDashboard.putNumber("Cube Detector", cubeDetector.get());
     }
     
     public void closeGrabber() {

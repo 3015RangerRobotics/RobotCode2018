@@ -16,7 +16,7 @@ public class AutoLeftScaleFirst extends CommandGroup {
         addParallel(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 12, 6, 60, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngle(110, false));
+        addSequential(new DriveTurnToAngleEncoders(110, false));
         addSequential(new ObtainCube(5.5));
         addSequential(new WaitCommand(0.5));
         addParallel(new ElevatorToSwitch());

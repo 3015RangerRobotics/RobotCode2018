@@ -1,130 +1,78 @@
 package org.usfirst.frc.team3015.robot.commands;
 
-import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
-import org.usfirst.frc.team3015.robot.Constants;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Turns to an angle using the imu
+ *
  */
-public class DriveTurnToAngle extends CommandBase {
-	private double[][] leftMotion;
-	private double[][] rightMotion;
-	private boolean isFinished = false;
-	private int i = 0;
-	private double prevErrorL = 0;
-	private double prevErrorR = 0;
-	
-    public DriveTurnToAngle(double angle, boolean reverseDirection) {
+public class DriveTurnToAngle extends CommandBase implements PIDOutput{
+	PIDController turnController;
+	double setpoint = 0;
+	int onTargetCount = 0;
+	double minTurn = 0.1; // 0.23;
+	private boolean isAbsolute;
+
+    public DriveTurnToAngle(double angle, boolean isAbsolute) {
         requires(drive);
-        double arcLength = (Constants.wheelBaseWidth * Math.PI) * (angle / 360);
-        arcLength *= 1.13;
-        
-        double[][] profile = MotionProfiles.generate1D(arcLength, 14, 12, 60, false);
-        leftMotion = new double[profile.length][3];
-        rightMotion = new double[profile.length][3];
-        
-        for(int i = 0; i < profile.length; i++) {
-        	if(!reverseDirection) {
-	        	rightMotion[i][0] = -profile[i][0];
-	        	rightMotion[i][1] = -profile[i][1];
-	        	rightMotion[i][2] = -profile[i][2];
-	        	leftMotion[i][0] = profile[i][0];
-	        	leftMotion[i][1] = profile[i][1];
-	        	leftMotion[i][2] = profile[i][2];
-        	}else {
-        		rightMotion[i][0] = profile[i][0];
-	        	rightMotion[i][1] = profile[i][1];
-	        	rightMotion[i][2] = profile[i][2];
-	        	leftMotion[i][0] = -profile[i][0];
-	        	leftMotion[i][1] = -profile[i][1];
-	        	leftMotion[i][2] = -profile[i][2];
-        	}
-        }
+        this.setpoint = angle;
+        this.isAbsolute = isAbsolute;
+        turnController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.imu, this);
+        turnController.setInputRange(-180.0, 180.0);
+        turnController.setOutputRange(-1.0 + minTurn, 1.0 - minTurn);
+        turnController.setAbsoluteTolerance(1.0);
+        turnController.setContinuous(true);
     }
 
     protected void initialize() {
-    	drive.resetEncoders();
-    	isFinished = false;
-    	i = 0;
-    	prevErrorL = 0;
-    	prevErrorR = 0;
-    	
-    	if(leftMotion.length != rightMotion.length) {
-    		System.out.println("Left and right profiles not of equal length!");
-    		this.cancel();
-    		return;
+    	if(!isAbsolute) {
+	    	setpoint += drive.getAngle();
+	    	
+	    	if(setpoint > 180) {
+	    		setpoint -= 360;
+	    	}else if(setpoint < -180) {
+	    		setpoint += 360;
+	    	}
     	}
-    	
-    	new Thread(() -> {
-    		double lastTime = 0;
-    		
-    		while(!isFinished && DriverStation.getInstance().isEnabled()) {
-    			if(Timer.getFPGATimestamp() >= lastTime + 0.01) {
-    				lastTime = Timer.getFPGATimestamp();
-    				threadedExecute();
-    			}
-    			try {
-    				Thread.sleep(2);
-    			}catch(InterruptedException e) {
-    				e.printStackTrace();
-    			}
-    		}
-    	}).start();
+    	turnController.setSetpoint(setpoint);
+    	turnController.enable();
+    	onTargetCount = 0;
     }
 
     protected void execute() {
+    	double output = turnController.get();
     	
-    }
-    
-    protected synchronized void threadedExecute() {
-    	if(i < leftMotion.length) {
-			double goalPosL = leftMotion[i][0];
-			double goalVelL = leftMotion[i][1];
-			double goalAccL = leftMotion[i][2];
-			
-			double goalPosR = rightMotion[i][0];
-			double goalVelR = rightMotion[i][1];
-			double goalAccR = rightMotion[i][2];
-			
-			double errorL = goalPosL - drive.getLeftDistance();
-			double errorDerivL = ((errorL - prevErrorL) / Constants.kPeriod) - goalVelL;
-			
-			double errorR = goalPosR - drive.getRightDistance();
-			double errorDerivR = ((errorR - prevErrorR) / Constants.kPeriod) - goalVelR;
-			
-//			System.out.println(errorL + ", " + errorR);
-			double kP = drive.kTurnP;
-			double kD = drive.kTurnD;
-			double kV = drive.kV;
-			double kA = drive.kA;
-			
-			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (kA * goalAccL);
-			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (kA * goalAccR);
-			
-//			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
-			
-			prevErrorL = errorL;
-			prevErrorR = errorR;
-			
-			drive.setMotorOutputs(pwmL, pwmR);
-			i++;
-		}else {
-			isFinished = true;
-		}
+    	if(output < 0) {
+    		System.out.println(output - minTurn);
+    		drive.arcadeDrive(0, output - minTurn, false);
+    	}else {
+    		System.out.println(output + minTurn);
+    		drive.arcadeDrive(0, output + minTurn, false);
+    	}
+    	
+    	if(turnController.onTarget()) {
+    		onTargetCount++;
+    	}else {
+    		onTargetCount = 0;
+    	}
     }
 
     protected boolean isFinished() {
-        return isFinished;
+        return onTargetCount >= 10;
     }
 
     protected void end() {
     	drive.setMotorOutputs(0, 0);
+    	turnController.disable();
     }
 
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	public void pidWrite(double output) {
+		
+	}
 }

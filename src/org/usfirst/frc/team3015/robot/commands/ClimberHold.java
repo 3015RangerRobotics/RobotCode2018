@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  *
  */
@@ -13,11 +15,13 @@ public class ClimberHold extends CommandBase {
     }
 
     protected void execute() {
-    	climber.climberHold();
+    	if(DriverStation.getInstance().getMatchTime() < 30) {
+    		climber.climberHold();
+    	}
     }
 
     protected boolean isFinished() {
-        return false;
+    	return false;
     }
 
     protected void end() {

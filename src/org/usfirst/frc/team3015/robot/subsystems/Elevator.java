@@ -40,7 +40,10 @@ public class Elevator extends Subsystem {
     
     @Override
     public void periodic() {
-//    	System.out.println(elevatorBottomLimit.get());
+    	if(isAtBottom()) {
+    		elevatorTalonSRX.setSelectedSensorPosition(0, 0, 0);
+    	}
+    	
 //    	System.out.println(elevatorTalonSRX.getOutputCurrent());
     }
     
@@ -62,7 +65,7 @@ public class Elevator extends Subsystem {
     	elevatorTalonSRX.config_kD(0, kElevatorD, 0);
     	elevatorTalonSRX.config_kF(0, kElevatorF, 0);
     	elevatorTalonSRX.configPeakOutputForward(1.0, 10);
-    	elevatorTalonSRX.configPeakOutputReverse(-0.25, 10);
+    	elevatorTalonSRX.configPeakOutputReverse(-0.1, 10);
     	
     	elevatorBottomLimit = new DigitalInput(Constants.elevatorBottomLimit);
     }
@@ -83,5 +86,9 @@ public class Elevator extends Subsystem {
     
     public double getRawDistance() {
     	return elevatorTalonSRX.getSelectedSensorPosition(0);
+    }
+    
+    public boolean isAtBottom() {
+    	return !elevatorBottomLimit.get();
     }
 }

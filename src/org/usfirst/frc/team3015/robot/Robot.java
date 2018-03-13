@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		CommandBase.drive.resetGyro();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		AutoMode autoMode = chooser.getSelected();
 		
@@ -117,6 +118,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		CommandBase.drive.resetGyro();
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}

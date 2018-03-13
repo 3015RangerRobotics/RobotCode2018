@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  *
  */
@@ -13,7 +15,9 @@ public class ClimberDown extends CommandBase {
     }
 
     protected void execute() {
-    	climber.retractClimber();
+    	if(DriverStation.getInstance().getMatchTime() < 30) {
+    		climber.retractClimber();
+    	}
     }
 
     protected boolean isFinished() {

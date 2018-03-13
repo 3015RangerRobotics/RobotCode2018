@@ -13,7 +13,7 @@ public class ZAutoLeftSwitchOnly extends CommandGroup {
     public ZAutoLeftSwitchOnly() {
     	addParallel(new ElevatorToScaleDelayed(3));
     	addSequential(new DriveMotionProfile("wallToLeftSwitch", false));
-    	addSequential(new DriveTurnToAngle(65, false));
+    	addSequential(new DriveTurnToAngleEncoders(65, false));
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 12, 8, 60, false)));
     	addSequential(new GrabberCubeEject());
     	addParallel(new ElevatorToBottom());

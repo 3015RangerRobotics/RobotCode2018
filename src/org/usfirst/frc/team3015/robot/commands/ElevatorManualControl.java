@@ -21,7 +21,9 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.position += oi.getCoDriverSumTriggers() * 100;
+    	if(!elevator.isAtBottom()) {
+    		this.position += oi.getCoDriverSumTriggers() * 100;
+    	}
     	elevator.set(ControlMode.Position, position);
 //    	System.out.println(elevator.getDistance());
     }

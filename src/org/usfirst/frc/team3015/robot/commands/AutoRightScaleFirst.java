@@ -15,12 +15,12 @@ public class AutoRightScaleFirst extends CommandGroup {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScaleDelayed(3.75));
         addSequential(new DriveMotionProfile("wallToRightScale", false));
-        addParallel(new GrabberCubeEject());
+        addParallel(new GrabberOpen());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 10, 60, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngle(127, true));
+        addSequential(new DriveTurnToAngleEncoders(127, true));
         addSequential(new ObtainCube(5));
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(.5));
         addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 14, 10, 60, false)));
         addSequential(new GrabberCubeEject());

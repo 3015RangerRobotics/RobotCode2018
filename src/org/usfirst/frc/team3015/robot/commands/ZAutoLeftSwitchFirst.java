@@ -13,7 +13,7 @@ public class ZAutoLeftSwitchFirst extends CommandGroup {
     public ZAutoLeftSwitchFirst() {
     	addParallel(new ElevatorToScaleDelayed(3));
     	addSequential(new DriveMotionProfile("wallToLeftSwitch", false));
-    	addSequential(new DriveTurnToAngle(65, false));
+    	addSequential(new DriveTurnToAngleEncoders(65, false));
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 14, 10, 60, false)));
     	addSequential(new GrabberCubeEject());
     	addParallel(new ElevatorToBottom());
@@ -23,7 +23,7 @@ public class ZAutoLeftSwitchFirst extends CommandGroup {
     	addSequential(new WaitCommand(1));
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(.5, 14, 10, 60, true)));
 //    	addParallel(new ElevatorToScale());
-    	addSequential(new DriveTurnToAngle(140, true));
+    	addSequential(new DriveTurnToAngleEncoders(140, true));
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 10, 60, false)));
     	addSequential(new GrabberCubeEject());
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 14, 10, 60, true)));

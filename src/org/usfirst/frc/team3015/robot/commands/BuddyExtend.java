@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  *
  */
@@ -14,7 +16,9 @@ public class BuddyExtend extends CommandBase {
     }
 
     protected void execute() {
-    	buddyClimb.buddyExtend();
+    	if(DriverStation.getInstance().getMatchTime() < 30) {
+        	buddyClimb.buddyExtend();	
+    	}
     }
 
     protected boolean isFinished() {
