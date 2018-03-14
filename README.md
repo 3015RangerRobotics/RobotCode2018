@@ -6,7 +6,9 @@ Code for FRC Team 3015's 2018 robot
 * [navX Libraries](https://www.kauailabs.com/public_files/navx-mxp/navx-mxp.zip)
 * [JSON-Simple](https://drive.google.com/open?id=188naQ8WDw7zlc8RGCrY_azCPX_wL7d6S)
 
-## Motion Profile Generator
-* Edidted version of [this](https://github.com/vannaka/Motion_Profile_Generator)
-* [Download](https://drive.google.com/open?id=10KINa6uWYdMgwD4EWw0xhPPwYrNcUu8u)
-* [This is a test](https://drive.google.com/open?id=1z5ccneNORENjUyTTYRvgL2G1wVxaRuEt)
+## Motion Profile Generators
+* ### PathGenerator:
+  Edidted version of [this](https://github.com/vannaka/Motion_Profile_Generator)
+* ### AutoPlanner:
+  Used for curvy paths, very janky
+* Both files in project
