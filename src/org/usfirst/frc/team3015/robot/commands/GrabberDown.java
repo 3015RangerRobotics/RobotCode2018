@@ -25,7 +25,7 @@ public class GrabberDown extends CommandBase {
     }
 
     protected void end() {
-    	grabber.anglerStop();
+    	grabber.intakeAnglerStop();
     }
 
     protected void interrupted() {

@@ -8,10 +8,6 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Compressor subsystem
- * Prefixed with "Our" to prevent naming conflicts
- */
 public class OurCompressor extends Subsystem {
 	private Compressor compressor;
 	private AnalogPotentiometer pressureSensor;

@@ -15,6 +15,15 @@ import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.modifiers.TankModifier;
 
 public class MotionProfiles {
+	/**
+	 * Generate a one-dimensional motion profile
+	 * @param d Distance
+	 * @param maxV Max velocity
+	 * @param a Max acceleration
+	 * @param jerk Max jerk
+	 * @param reverse Drive backwards
+	 * @return A motion profile to apply to both sides of the drive
+	 */
 	public static double[][] generate1D(double d, double maxV, double a, double jerk, boolean reverse){
 		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(d, 0, 0)};
 		Trajectory.Config config = new Trajectory.Config(FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_FAST, Constants.kPeriod, maxV, a, jerk);
@@ -29,6 +38,17 @@ public class MotionProfiles {
 		return profile;
 	}
 	
+	/**
+	 * Generate a two-dimensional motion profile
+	 * @param dx Change in x-position
+	 * @param dy Change in y-position
+	 * @param endAngle Angle to end at
+	 * @param maxV Max velocity
+	 * @param a Max acceleration
+	 * @param jerk Max jerk
+	 * @param reversed Drive backwards
+	 * @return A hash map containing a motion profile for the left and right side
+	 */
 	public static HashMap<Side, double[][]> generate2D(double dx, double dy, double endAngle, double maxV, double a, double jerk, boolean reversed){
 		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(dx, dy, endAngle)};
 		Trajectory.Config config = new Trajectory.Config(FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kPeriod, maxV, a, jerk);
@@ -62,38 +82,27 @@ public class MotionProfiles {
 		return map;
 	}
 	
+	/**
+	 * Generate a motion profile to drive to a cube using vision
+	 * @param angle Angle to the cube
+	 * @param distance Distance to the cube
+	 * @param maxV Max velocity
+	 * @param a Max acceleration
+	 * @param jerk Max jerk
+	 * @return A hash map containing a motion profile for the left and right side
+	 */
 	public static HashMap<Side, double[][]> generateProfileToCube(double angle, double distance, double maxV, double a, double jerk){
 		double x = Math.cos(angle) * distance;
 		double y = Math.sin(angle) * distance;
 		
-		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(x, y, 0)};
-		Trajectory.Config config = new Trajectory.Config(FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kPeriod, maxV, a, jerk);
-		Trajectory trajectory = Pathfinder.generate(waypoints, config);
-			
-		TankModifier modifier = new TankModifier(trajectory).modify(Constants.wheelBaseWidth);
-		double[][] leftProfile = new double[trajectory.length()][3];
-		double[][] rightProfile = new double[trajectory.length()][3];
-		
-		for(int i = 0; i < trajectory.length(); i++) {
-			Segment leftSeg = modifier.getLeftTrajectory().get(i);
-			Segment rightSeg = modifier.getRightTrajectory().get(i);
-			
-			leftProfile[i][0] = leftSeg.position;
-			leftProfile[i][1] = leftSeg.velocity;
-			leftProfile[i][2] = leftSeg.acceleration;
-			
-			rightProfile[i][0] = rightSeg.position;
-			rightProfile[i][1] = rightSeg.velocity;
-			rightProfile[i][2] = rightSeg.acceleration;
-		}
-		
-		HashMap<Side, double[][]> map = new HashMap<Side, double[][]>();
-		map.put(Side.kLeft, leftProfile);
-		map.put(Side.kRight, rightProfile);
-		
-		return map;
+		return generate2D(x, y, angle, maxV, a, jerk, false);
 	}
 	
+	/**
+	 * Load a pre-generated motion profile from a text file
+	 * @param profileName The name of the file to load
+	 * @return The motion profile contained in the file
+	 */
 	public static double[][] loadProfile(String profileName){
 		double[][] profile = new double[][] {};
 		try {

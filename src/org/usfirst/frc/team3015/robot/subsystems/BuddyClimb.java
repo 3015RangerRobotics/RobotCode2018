@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BuddyClimb extends Subsystem {
-	DoubleSolenoid buddySolenoid;
+	private DoubleSolenoid buddySolenoid;
 
     public BuddyClimb() {
     	buddySolenoid = new DoubleSolenoid(Constants.buddySolenoid1, Constants.buddySolenoid2);

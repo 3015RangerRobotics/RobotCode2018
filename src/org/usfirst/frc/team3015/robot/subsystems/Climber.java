@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
-	TalonSRX climber1;
-	VictorSPX climber2;
-	DoubleSolenoid climberLock;
+	private TalonSRX climber1;
+	private VictorSPX climber2;
+	private DoubleSolenoid climberLock;
 	
-	final double CLIMBER_PERCENT = 1.0;
+	private final double CLIMBER_SPEED = 1.0;
 	
 	public Climber() {
 		climber1 = new TalonSRX(Constants.climberParentTalonSRX);
@@ -43,9 +43,9 @@ public class Climber extends Subsystem {
      */
     public void climbUp() {
     	climber1.enableVoltageCompensation(false);
-    	climber1.set(ControlMode.PercentOutput, CLIMBER_PERCENT);
+    	climber1.set(ControlMode.PercentOutput, CLIMBER_SPEED);
     	climber2.enableVoltageCompensation(false);
-    	climber2.set(ControlMode.PercentOutput, -CLIMBER_PERCENT);
+    	climber2.set(ControlMode.PercentOutput, -CLIMBER_SPEED);
     }
     
     /**
@@ -53,9 +53,9 @@ public class Climber extends Subsystem {
      */
     public void retractClimber() {
     	climber1.enableVoltageCompensation(false);
-    	climber1.set(ControlMode.PercentOutput, -CLIMBER_PERCENT);
+    	climber1.set(ControlMode.PercentOutput, -CLIMBER_SPEED);
     	climber2.enableVoltageCompensation(false);
-    	climber2.set(ControlMode.PercentOutput, CLIMBER_PERCENT);
+    	climber2.set(ControlMode.PercentOutput, CLIMBER_SPEED);
     }
     
     /**

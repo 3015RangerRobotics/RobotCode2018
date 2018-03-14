@@ -11,12 +11,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class Elevator extends Subsystem {
-	public TalonSRX elevatorTalonSRX;
-	DigitalInput elevatorBottomLimit;
+	private TalonSRX elevatorTalonSRX;
+	private DigitalInput elevatorBottomLimit;
 	
 	public final double elevatorMaxV = 10.0;
 	public final double elevatorAcc = 15.0;
@@ -35,7 +32,7 @@ public class Elevator extends Subsystem {
     
     @Override
     public void initDefaultCommand() {
-//    	this.setDefaultCommand(new ElevatorHold());
+    	
     }
     
     @Override
@@ -43,6 +40,13 @@ public class Elevator extends Subsystem {
     	if(isAtBottom()) {
     		elevatorTalonSRX.setSelectedSensorPosition(0, 0, 0);
     	}
+    	
+    	if(Math.abs(elevatorTalonSRX.getMotorOutputVoltage()) >= 4 && Math.abs(elevatorTalonSRX.getSelectedSensorVelocity(0)/pulsesPerInch) < 0.25) {
+    		CommandBase.oi.coDriverRumble(1.0);
+    	}else {
+    		CommandBase.oi.coDriverRumble(0);
+    	}
+    	
     	SmartDashboard.putNumber("Elevator Encoder", getDistance());
     	SmartDashboard.putBoolean("Bottom Limit", isAtBottom());
     }
@@ -59,7 +63,6 @@ public class Elevator extends Subsystem {
     	elevatorTalonSRX.configPeakCurrentDuration(200, 10);
     	elevatorTalonSRX.configContinuousCurrentLimit(30, 10);
     	elevatorTalonSRX.enableCurrentLimit(true);
-    	//middle value
     	elevatorTalonSRX.config_kP(0, kElevatorP, 0);
     	elevatorTalonSRX.config_kI(0, kElevatorI, 0);
     	elevatorTalonSRX.config_kD(0, kElevatorD, 0);
@@ -70,24 +73,32 @@ public class Elevator extends Subsystem {
     	elevatorBottomLimit = new DigitalInput(Constants.elevatorBottomLimit);
     }
     
+    /**
+     * Set the elevator motor output
+     * @param mode The control mode of the talon
+     * @param value The value to set
+     */
     public void set(ControlMode mode, double value) {
     	elevatorTalonSRX.set(mode, value);
-//    	System.out.println("elev power:"+elevatorTalonSRX.getMotorOutputVoltage()+"elev vel:"+elevatorTalonSRX.getSelectedSensorVelocity(0)/pulsesPerInch);
-    	if(Math.abs(elevatorTalonSRX.getMotorOutputVoltage()) >= 4 && Math.abs(elevatorTalonSRX.getSelectedSensorVelocity(0)/pulsesPerInch) < 0.5) {
-    		CommandBase.oi.coDriverRumble(1.0);
-    	}else {
-    		CommandBase.oi.coDriverRumble(0);
-    	}
     }
     
+    /**
+     * @return The distance of the elevator encoder in inches
+     */
     public double getDistance() {
     	return elevatorTalonSRX.getSelectedSensorPosition(0) / pulsesPerInch;
     }
     
+    /**
+     * @return The raw distance of the elevator encoder
+     */
     public double getRawDistance() {
     	return elevatorTalonSRX.getSelectedSensorPosition(0);
     }
     
+    /**
+     * @return Is the elevator at the bottom limit
+     */
     public boolean isAtBottom() {
     	return !elevatorBottomLimit.get();
     }

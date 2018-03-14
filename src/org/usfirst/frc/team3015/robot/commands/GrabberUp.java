@@ -21,7 +21,7 @@ public class GrabberUp extends CommandBase {
     }
 
     protected void end() {
-    	grabber.anglerStop();
+    	grabber.intakeAnglerStop();
     	grabber.intakeStop();
     }
 

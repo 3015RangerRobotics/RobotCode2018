@@ -35,12 +35,10 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	
 	public final double kDistancePerPulse = 0.00904774;
 	
-	public final double kDeadzone = 0.02;
-	
-	VictorSP leftDrive;
-	VictorSP rightDrive;
-	Encoder leftEncoder;
-	Encoder rightEncoder;
+	private VictorSP leftDrive;
+	private VictorSP rightDrive;
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 	public AHRS imu;
 	
 	public TargetInfo bestTarget = null;
@@ -57,6 +55,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightEncoder.setReverseDirection(false);//true
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
+		
 		SmartDashboard.putData("Gyro", imu);
 		SmartDashboard.putData("Left Encoder", leftEncoder);
 		SmartDashboard.putData("Right Encoder", rightEncoder);
@@ -71,46 +70,84 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		
 	}
 	
+	/**
+	 * Reset the drive encoders
+	 */
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
     
+	/**
+	 * Set the drive motor outputs
+	 * @param left Left motor output
+	 * @param right Right motor output
+	 */
     public void setMotorOutputs(double left, double right) {
     	leftDrive.set(left * 13.0 / RobotController.getBatteryVoltage());
     	rightDrive.set(right * 13.0 / RobotController.getBatteryVoltage());
     }
     
+    /**
+     * Drive with an arcade drive control
+     * @param moveValue Forward/Reverse throttle
+     * @param rotateValue Rate of rotation
+     * @param squaredInputs Square the inputs for fine control
+     */
     public void arcadeDrive(double moveValue, double rotateValue, boolean squaredInputs) {
         DriveSignal ds = DriveHelper.arcadeDrive(moveValue, rotateValue, squaredInputs);
         setMotorOutputs(ds.leftSignal, ds.rightSignal);
     }
     
+    /**
+     * Drive with a curvature drive control
+     * @param throttle Forward/Reverse throttle
+     * @param turn Turn value
+     * @param isQuickTurn Quick turn
+     */
     public void curvatureDrive(double throttle, double turn, boolean isQuickTurn) {
     	DriveSignal ds = DriveHelper.curvatureDrive(throttle, turn, isQuickTurn);
     	setMotorOutputs(ds.leftSignal, ds.rightSignal);
     }
     
+    /**
+     * @return Left encoder distance
+     */
     public double getLeftDistance() {
     	return leftEncoder.getDistance();
     }
     
+    /**
+     * @return Right encoder distance
+     */
     public double getRightDistance() {
     	return rightEncoder.getDistance();
     }
     
+    /**
+     * @return Left encoder velocity
+     */
     public double getLeftVelocity() {
     	return leftEncoder.getRate();
     }
     
+    /**
+     * @return Right encoder velocity
+     */
     public double getRightVelocity() {
     	return rightEncoder.getRate();
     }
     
+    /**
+     * @return The angle of rotation from the imu
+     */
     public double getAngle() {
     	return imu.getYaw();
     }
     
+    /**
+     * Reset the imu angle
+     */
     public void resetGyro() {
     	imu.zeroYaw();
     }

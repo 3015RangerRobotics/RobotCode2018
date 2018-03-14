@@ -6,7 +6,7 @@ import org.usfirst.frc.team3015.robot.Constants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
-public class DriveMotionProfile extends CommandBase {
+public class DriveMotionProfile extends CommandBase{
 	private volatile boolean isFinished = false;
 	private double[][] leftMotion;
 	private double[][] rightMotion;

@@ -2,7 +2,6 @@ package org.usfirst.frc.team3015.robot.subsystems;
 
 import org.usfirst.frc.team3015.robot.Constants;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -10,18 +9,12 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Grabber that can open and close to contain power cubes, Intake that rolls the power cubes in
- * Operates on a double solenoids. Intake runs on 1 victorSP
- */
 public class Grabber extends Subsystem {
 	private DoubleSolenoid grabberSolenoid;
 	private DoubleSolenoid ejector;
     private VictorSP intakeMotor1;
     private VictorSP intakeMotor2;
-    private VictorSP angler;
-//    private DigitalInput cubeDetector1;
-//    private DigitalInput cubeDetector2;
+    private VictorSP intakeAngler;
     private DigitalInput anglerPosUp;
     private DigitalInput anglerPosDown;
     private AnalogPotentiometer cubeDetector;
@@ -39,9 +32,7 @@ public class Grabber extends Subsystem {
 		ejector = new DoubleSolenoid(Constants.grabberEjectorSolenoid1, Constants.grabberEjectorSolenoid2);
     	intakeMotor1 = new VictorSP(Constants.intakeMotor1);
     	intakeMotor2 = new VictorSP(Constants.intakeMotor2);
-    	angler = new VictorSP(Constants.intakeAngler);
-//    	cubeDetector1 = new DigitalInput(Constants.cubeDetector1);
-//    	cubeDetector2 = new DigitalInput(Constants.cubeDetector2);
+    	intakeAngler = new VictorSP(Constants.intakeAngler);
     	cubeDetector = new AnalogPotentiometer(Constants.cubeDetector);
     	anglerPosUp = new DigitalInput(Constants.anglerPosUp);
     	anglerPosDown = new DigitalInput(Constants.anglerPosDown);
@@ -53,93 +44,133 @@ public class Grabber extends Subsystem {
     
     @Override
     public void periodic() {
-//    	System.out.println(cubeDetector.get());
     	SmartDashboard.putNumber("Cube Detector", cubeDetector.get());
     	SmartDashboard.putBoolean("Intake Down", isIntakeDown());
     	SmartDashboard.putBoolean("Intake Up", isIntakeUp());
     }
     
+    /**
+     * Close the grabber
+     */
     public void closeGrabber() {
     	grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
+    /**
+     * Open the grabber
+     */
     public void openGrabber() {
     	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
+    /**
+     * Pull the ejector in
+     */
     public void ejectorIn() {
     	ejector.set(DoubleSolenoid.Value.kReverse);
     }
     
+    /**
+     * Push the ejector out
+     */
     public void ejectorOut() {
     	ejector.set(DoubleSolenoid.Value.kForward);
     }
     
+    /**
+     * @return Is a cube in the intake
+     */
     public boolean isCubePresent() {
-//    	return !cubeDetector1.get() && !cubeDetector2.get();
     	return cubeDetector.get() > CUBE_PRESENT_VALUE;
     }
     
-//    public boolean isOneCubeDetectorPressed() {
-//    	return !cubeDetector1.get() || !cubeDetector2.get();
-//    }
-    
-    public void setAngler(double speed) {
-    	angler.set(speed);
+    /**
+     * Set the speed of the intake angler
+     * @param speed Speed of the motor
+     */
+    public void setIntakeAngler(double speed) {
+    	intakeAngler.set(speed);
     }
     
+    /**
+     * @return Is the intake in the up position
+     */
     public boolean isIntakeUp() {
     	return !anglerPosUp.get();
     }
-    
+    /**
+     * @return Is the intake in the down position
+     */
     public boolean isIntakeDown() {
     	return !anglerPosDown.get();
     }
     
+    /**
+     * Bring the intake up unless it is at the up position
+     */
     public void intakeUp() {
     	if(!isIntakeUp()) {
-    		setAngler(ANGLER_UP_SPEED);
+    		setIntakeAngler(ANGLER_UP_SPEED);
     	}else {
-    		anglerStop();
+    		intakeAnglerStop();
     	}
     }
     
+    /**
+     * Bring the intake down unless it is at the down position
+     */
     public void intakeDown() {
     	if(!isIntakeDown()) {
-    		setAngler(ANGLER_DOWN_SPEED);
+    		setIntakeAngler(ANGLER_DOWN_SPEED);
     	}else {
-    		anglerStop();
+    		intakeAnglerStop();
     	}
     }
     
-    public void anglerStop() {
-    	angler.set(0);
+    /**
+     * Stop moving the intake up/down
+     */
+    public void intakeAnglerStop() {
+    	intakeAngler.set(0);
     }
     
+    /**
+     * Intake in
+     */
     public void intakeIn() {
     	intakeMotor1.set(INTAKE_SPEED);
     	intakeMotor2.set(-INTAKE_SPEED);
     }
     
+    /**
+     * Intake in slowly
+     */
     public void intakeInSlowly() {
     	intakeMotor1.set(INTAKE_SPEED_SLOW);
     	intakeMotor2.set(-INTAKE_SPEED_SLOW);
     }
     
+    /**
+     * Intake out
+     */
     public void intakeOut() {
     	intakeMotor1.set(OUTTAKE_SPEED);
     	intakeMotor2.set(-OUTTAKE_SPEED);
     }
     
+    /**
+     * Intake out slowly
+     */
     public void intakeOutSlowly() {
     	intakeMotor1.set(OUTTAKE_SPEED_SLOW);
     	intakeMotor2.set(-OUTTAKE_SPEED_SLOW);
     }
     
+    /**
+     * Stop the intake
+     */
     public void intakeStop() {
     	intakeMotor1.set(0);
     	intakeMotor2.set(0);
     }
-    
 }
-
