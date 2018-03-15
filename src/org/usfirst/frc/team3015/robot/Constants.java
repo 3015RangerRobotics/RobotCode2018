@@ -39,7 +39,8 @@ public class Constants {
 	
 	//AIO
 	public static final int pressureSensor = 0;
-	public static final int cubeDetector = 1;
+	public static final int cubeDetector1 = 1;
+	public static final int cubeDetector2 = 2;
 	
 	//Auto Modes
 	public enum AutoMode{

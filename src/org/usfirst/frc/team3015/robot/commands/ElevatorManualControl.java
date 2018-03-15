@@ -14,7 +14,7 @@ public class ElevatorManualControl extends CommandBase {
     }
 
     protected void execute() {
-    	if(!elevator.isAtBottom()) {
+    	if((!elevator.isAtBottom() || oi.getCoDriverSumTriggers() > 0) || elevator.getDistance() > 65) {
     		this.position += oi.getCoDriverSumTriggers() * 100;
     	}
     	elevator.set(ControlMode.Position, position);

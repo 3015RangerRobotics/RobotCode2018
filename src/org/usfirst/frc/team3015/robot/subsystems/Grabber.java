@@ -17,7 +17,8 @@ public class Grabber extends Subsystem {
     private VictorSP intakeAngler;
     private DigitalInput anglerPosUp;
     private DigitalInput anglerPosDown;
-    private AnalogPotentiometer cubeDetector;
+    private AnalogPotentiometer cubeDetector1;
+    private AnalogPotentiometer cubeDetector2;
     
     private final double ANGLER_UP_SPEED = -1.0;
     private final double ANGLER_DOWN_SPEED = 1.0;
@@ -25,7 +26,7 @@ public class Grabber extends Subsystem {
     private final double INTAKE_SPEED_SLOW = 0.3;
     private final double OUTTAKE_SPEED = -0.85;
     private final double OUTTAKE_SPEED_SLOW = -.65;
-    private final double CUBE_PRESENT_VALUE = 0.35;
+    private final double CUBE_PRESENT_VALUE = 0.20;
 
 	public Grabber() {
 		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
@@ -33,7 +34,8 @@ public class Grabber extends Subsystem {
     	intakeMotor1 = new VictorSP(Constants.intakeMotor1);
     	intakeMotor2 = new VictorSP(Constants.intakeMotor2);
     	intakeAngler = new VictorSP(Constants.intakeAngler);
-    	cubeDetector = new AnalogPotentiometer(Constants.cubeDetector);
+    	cubeDetector1 = new AnalogPotentiometer(Constants.cubeDetector1);
+    	cubeDetector2 = new AnalogPotentiometer(Constants.cubeDetector2);
     	anglerPosUp = new DigitalInput(Constants.anglerPosUp);
     	anglerPosDown = new DigitalInput(Constants.anglerPosDown);
 	}
@@ -44,7 +46,8 @@ public class Grabber extends Subsystem {
     
     @Override
     public void periodic() {
-    	SmartDashboard.putNumber("Cube Detector", cubeDetector.get());
+    	SmartDashboard.putNumber("Cube Detector 1", cubeDetector1.get());
+    	SmartDashboard.putNumber("Cube Detector 2", cubeDetector2.get());
     	SmartDashboard.putBoolean("Intake Down", isIntakeDown());
     	SmartDashboard.putBoolean("Intake Up", isIntakeUp());
     }
@@ -81,7 +84,7 @@ public class Grabber extends Subsystem {
      * @return Is a cube in the intake
      */
     public boolean isCubePresent() {
-    	return cubeDetector.get() > CUBE_PRESENT_VALUE;
+    	return cubeDetector1.get() >= CUBE_PRESENT_VALUE && cubeDetector2.get() >= CUBE_PRESENT_VALUE;
     }
     
     /**

@@ -19,7 +19,7 @@ public class Elevator extends Subsystem {
 	public final double elevatorAcc = 15.0;
 	public final double elevatorHeightBottom = 0;
 	public final double elevatorHeightSwitch = 26;
-	public final double elevatorHeightScale = 66;
+	public final double elevatorHeightScale = 77;
 	public final double elevatorHeightScaleLow = 57;
 	public final double kElevatorP = 0.6;
 	public final double kElevatorI = 0.0;
@@ -37,7 +37,7 @@ public class Elevator extends Subsystem {
     
     @Override
     public void periodic() {
-    	if(isAtBottom()) {
+    	if(isAtBottom() && elevatorTalonSRX.getSelectedSensorPosition(0) < 65) {
     		elevatorTalonSRX.setSelectedSensorPosition(0, 0, 0);
     	}
     	
@@ -48,7 +48,7 @@ public class Elevator extends Subsystem {
     	}
     	
     	SmartDashboard.putNumber("Elevator Encoder", getDistance());
-    	SmartDashboard.putBoolean("Bottom Limit", isAtBottom());
+    	SmartDashboard.putBoolean("Elevator Bottom", isAtBottom());
     }
     
     public Elevator() {
@@ -68,7 +68,7 @@ public class Elevator extends Subsystem {
     	elevatorTalonSRX.config_kD(0, kElevatorD, 0);
     	elevatorTalonSRX.config_kF(0, kElevatorF, 0);
     	elevatorTalonSRX.configPeakOutputForward(1.0, 10);
-    	elevatorTalonSRX.configPeakOutputReverse(-0.1, 10);
+    	elevatorTalonSRX.configPeakOutputReverse(-0.4, 10);
     	
     	elevatorBottomLimit = new DigitalInput(Constants.elevatorBottomLimit);
     }

@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
 			DriverStation.reportError("Auto Mode?", false);
 			autonomousCommand = null;
 		}
-
+		
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}else {
