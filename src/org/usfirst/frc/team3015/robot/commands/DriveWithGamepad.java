@@ -21,7 +21,7 @@ public class DriveWithGamepad extends CommandBase {
 		    } else if(driveValue < lastDriveValue - maxControllerChange) {
 	    		driveValue = lastDriveValue - maxControllerChange;
 	    	}
-		    
+//		    driveValue *= 0.7;
 		    if(Math.abs(oi.getDriverLeftStickY()) <= 0.1) {
 		    	driveValue = oi.getDriverLeftStickY();
 		    }	

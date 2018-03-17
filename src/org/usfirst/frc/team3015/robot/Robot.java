@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
 		leftRightBoth = new AutoLeftRightSwitchFirst();
 		baseline = new AutoBaseline();
 		
-		chooser.addDefault("None", AutoMode.kNone);
-		chooser.addObject("Scale Only", AutoMode.kScaleOnly);
+//		chooser.addDefault("None", AutoMode.kNone);
+		chooser.addDefault("Scale Only", AutoMode.kScaleOnly);
 		chooser.addObject("Scale & Switch", AutoMode.kBoth);
 		chooser.addObject("Baseline", AutoMode.kBaseline);
 		

@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoLeftRightSwitchFirst extends CommandGroup {
 
     public AutoLeftRightSwitchFirst() {
+    	addSequential(new GrabberClose());
     	addParallel(new ElevatorToSwitch());
     	addSequential(new DriveMotionProfile("wallToLeftSwitch"));
-    	addSequential(new DriveTurnToAngleEncoders(57));
+    	addSequential(new DriveTurnToAngleEncoders(61));
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1, 14, 10, 60, false)));
     	addSequential(new GrabberCubeEject());
     	addParallel(new ElevatorToBottom());

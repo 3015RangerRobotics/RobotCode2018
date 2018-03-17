@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.RobotController;
 
 public class OurCompressorAuto extends CommandBase {
 	private final double CUTOFF_VOLTAGE = 10.0;
-	private boolean fillCompressor = true;
+//	private boolean fillCompressor = true;
 	
     public OurCompressorAuto() {
         requires(ourCompressor);
@@ -13,7 +13,7 @@ public class OurCompressorAuto extends CommandBase {
 
     protected void initialize() {
     	ourCompressor.startCompressor();
-    	fillCompressor = true;
+//    	fillCompressor = true;
     }
 
     protected void execute() {
@@ -21,17 +21,18 @@ public class OurCompressorAuto extends CommandBase {
     			(DriverStation.getInstance().getMatchTime() < 20 && DriverStation.getInstance().getMatchTime() > 0)){
     		ourCompressor.stopCompressor();
     	}else{
-    		if(fillCompressor){
-    			ourCompressor.startCompressor();
-    			if(ourCompressor.getPressure() >= 120){
-    				fillCompressor = false;
-    			}
-    		}else{
-    			ourCompressor.stopCompressor();
-    			if(ourCompressor.getPressure() <= 60){
-    				fillCompressor = true;
-    			}
-    		}
+//    		if(fillCompressor){
+//    			ourCompressor.startCompressor();
+//    			if(ourCompressor.getPressure() >= 120){
+//    				fillCompressor = false;
+//    			}
+//    		}else{
+//    			ourCompressor.stopCompressor();
+//    			if(ourCompressor.getPressure() <= 60){
+//    				fillCompressor = true;
+//    			}
+//    		}
+    		ourCompressor.startCompressor();
     	}
     }
 

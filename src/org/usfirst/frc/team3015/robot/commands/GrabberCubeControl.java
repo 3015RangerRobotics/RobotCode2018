@@ -7,7 +7,7 @@ public class GrabberCubeControl extends CommandGroup {
     public GrabberCubeControl() {
         addSequential(new GrabberOpen());
         addSequential(new GrabberEjectorIn());
-        addSequential(new GrabberDown(false));
+        addSequential(new GrabberDown());
         addSequential(new GrabberIntakeTilCube());
         addSequential(new DriverStartVibration());
     }

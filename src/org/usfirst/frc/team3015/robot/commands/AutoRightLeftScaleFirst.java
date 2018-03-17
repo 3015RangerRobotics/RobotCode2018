@@ -7,9 +7,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoRightLeftScaleFirst extends CommandGroup {
 
     public AutoRightLeftScaleFirst() {
+    	addSequential(new GrabberClose());
         addParallel(new ElevatorToScale());
         addSequential(new DriveMotionProfile("wallToLeftScale"));
-        addParallel(new GrabberOpen());
+        addParallel(new GrabberCubeEject());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 12, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngleEncoders(-62));

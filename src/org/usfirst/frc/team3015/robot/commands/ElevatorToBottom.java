@@ -17,7 +17,7 @@ public class ElevatorToBottom extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return elevator.getDistance() < 3;
+        return elevator.isAtBottom() && elevator.getDistance() < 40;
     }
     
     protected void end() {

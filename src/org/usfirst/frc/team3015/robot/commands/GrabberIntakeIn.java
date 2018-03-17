@@ -10,13 +10,11 @@ public class GrabberIntakeIn extends CommandBase {
     }
 
     protected void execute() {
-    	if(elevator.getDistance() < 10) {
-    		grabber.intakeIn();
-    	}
+    	grabber.intakeIn();
     }
 
     protected boolean isFinished() {
-   		return elevator.getDistance() > 10;
+   		return false;
     }
 
     protected void end() {

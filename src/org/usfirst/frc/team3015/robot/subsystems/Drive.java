@@ -142,7 +142,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
      * @return The angle of rotation from the imu
      */
     public double getAngle() {
-    	return imu.getYaw();
+    	return imu.getAngle();
     }
     
     /**

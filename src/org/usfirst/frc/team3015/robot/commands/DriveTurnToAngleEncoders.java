@@ -38,6 +38,7 @@ public class DriveTurnToAngleEncoders extends CommandBase {
     	
     	if(isAbsolute) {
         	angle -= drive.getAngle();
+        	System.out.println(angle + ", " + drive.getAngle());
         	generateProfile(angle);
         }
     	

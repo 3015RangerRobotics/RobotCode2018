@@ -22,11 +22,11 @@ public class Grabber extends Subsystem {
     
     private final double ANGLER_UP_SPEED = -1.0;
     private final double ANGLER_DOWN_SPEED = 1.0;
-    private final double INTAKE_SPEED = 0.85;
+    private final double INTAKE_SPEED = 0.75;
     private final double INTAKE_SPEED_SLOW = 0.3;
     private final double OUTTAKE_SPEED = -0.85;
     private final double OUTTAKE_SPEED_SLOW = -.65;
-    private final double CUBE_PRESENT_VALUE = 0.20;
+    private final double CUBE_PRESENT_VALUE = 0.4;
 
 	public Grabber() {
 		grabberSolenoid = new DoubleSolenoid(Constants.grabberSolenoid1, Constants.grabberSolenoid2);
@@ -50,6 +50,7 @@ public class Grabber extends Subsystem {
     	SmartDashboard.putNumber("Cube Detector 2", cubeDetector2.get());
     	SmartDashboard.putBoolean("Intake Down", isIntakeDown());
     	SmartDashboard.putBoolean("Intake Up", isIntakeUp());
+    	SmartDashboard.putBoolean("Cube Present", isCubePresent());
     }
     
     /**

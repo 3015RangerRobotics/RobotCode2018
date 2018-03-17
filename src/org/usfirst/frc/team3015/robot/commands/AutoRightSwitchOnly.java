@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoRightSwitchOnly extends CommandGroup {
 
     public AutoRightSwitchOnly() {
+    	addSequential(new GrabberClose());
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(12.75, 12, 8, 60, false)));
     	addParallel(new ElevatorToSwitch());
     	addSequential(new DriveMotionProfile("leftSwitchToRightSwitch"));

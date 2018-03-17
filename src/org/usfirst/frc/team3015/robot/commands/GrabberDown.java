@@ -1,11 +1,9 @@
 package org.usfirst.frc.team3015.robot.commands;
 
 public class GrabberDown extends CommandBase {
-	private boolean override;
 
-    public GrabberDown(boolean override) {
+    public GrabberDown() {
         requires(grabber);
-        this.override = override;
     }
 
     protected void initialize() {
@@ -13,15 +11,13 @@ public class GrabberDown extends CommandBase {
     }
 
     protected void execute() {
-    	if(elevator.getDistance() < 10 || override) {
-    		if(!grabber.isIntakeDown()) {
-        		grabber.intakeDown();
-        	}
-      	}
+    	if(!grabber.isIntakeDown()) {
+        	grabber.intakeDown();
+        }
     }
 
     protected boolean isFinished() {
-    		return grabber.isIntakeDown() || (elevator.getDistance() > 10 && !override);
+    	return grabber.isIntakeDown();
     }
 
     protected void end() {

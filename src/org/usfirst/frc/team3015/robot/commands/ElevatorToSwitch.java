@@ -15,7 +15,7 @@ public class ElevatorToSwitch extends CommandBase {
     protected void execute() {
     	elevator.set(ControlMode.Position, elevator.elevatorHeightSwitch * elevator.pulsesPerInch);
     	
-    	if(elevator.getDistance() < 15) {
+    	if(elevator.getDistance() < 25) {
     		grabber.intakeOutSlowly();
     	}else {
     		grabber.intakeStop();
