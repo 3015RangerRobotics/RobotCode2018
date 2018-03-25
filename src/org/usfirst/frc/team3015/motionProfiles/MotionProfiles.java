@@ -95,7 +95,7 @@ public class MotionProfiles {
 		double x = Math.cos(angle) * distance;
 		double y = Math.sin(angle) * distance;
 		
-		return generate2D(x, y, angle, maxV, a, jerk, false);
+		return generate2D(x, y, 0, maxV, a, jerk, false);
 	}
 	
 	/**

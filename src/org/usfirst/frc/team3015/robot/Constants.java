@@ -3,6 +3,8 @@ package org.usfirst.frc.team3015.robot;
 public class Constants {
 	public static final double kPeriod = 0.01;
 	public static final double wheelBaseWidth = 2;
+	public static final double cameraXOffsetFt = 0;
+	public static final double cameraYOffsetFt = 0;
 	
 	//PWM Motor Controllers
 	public static final int rightDriveMotor = 0;
