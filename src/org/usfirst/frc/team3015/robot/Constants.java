@@ -3,8 +3,8 @@ package org.usfirst.frc.team3015.robot;
 public class Constants {
 	public static final double kPeriod = 0.01;
 	public static final double wheelBaseWidth = 2;
-	public static final double cameraXOffsetFt = 0;
-	public static final double cameraYOffsetFt = 0;
+	public static final double cameraXOffsetFt = 0.77;
+	public static final double cameraYOffsetFt = 3.8;
 	
 	//PWM Motor Controllers
 	public static final int rightDriveMotor = 0;
@@ -47,8 +47,13 @@ public class Constants {
 	//Auto Modes
 	public enum AutoMode{
 		kScaleOnly,
+		kSwitchOnly,
 		kBoth,
-		kBaseline,
-		kNone
+		kBaseline
+	}
+	
+	public enum Side{
+		kLeft,
+		kRight
 	}
 }

@@ -5,9 +5,9 @@ import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class AutoLeftScaleFirst extends CommandGroup {
+public class ZAutoLeftScaleFirst extends CommandGroup {
 
-    public AutoLeftScaleFirst() {
+    public ZAutoLeftScaleFirst() {
     	addSequential(new GrabberClose());
     	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(.5, 14, 10, 60, false)));
         addParallel(new ElevatorToScale());

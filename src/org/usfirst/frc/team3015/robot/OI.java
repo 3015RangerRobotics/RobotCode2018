@@ -1,6 +1,30 @@
 package org.usfirst.frc.team3015.robot;
 
-import org.usfirst.frc.team3015.robot.commands.*;
+import org.usfirst.frc.team3015.robot.commands.BuddyExtend;
+import org.usfirst.frc.team3015.robot.commands.BuddyRetract;
+import org.usfirst.frc.team3015.robot.commands.ClimberDown;
+import org.usfirst.frc.team3015.robot.commands.ClimberHold;
+import org.usfirst.frc.team3015.robot.commands.ClimberLockIn;
+import org.usfirst.frc.team3015.robot.commands.ClimberLockOut;
+import org.usfirst.frc.team3015.robot.commands.ClimberUp;
+import org.usfirst.frc.team3015.robot.commands.DriveTurnToAngleGyro;
+import org.usfirst.frc.team3015.robot.commands.ElevatorHold;
+import org.usfirst.frc.team3015.robot.commands.ElevatorManualControl;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToBottom;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToScale;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToScaleLow;
+import org.usfirst.frc.team3015.robot.commands.ElevatorToSwitch;
+import org.usfirst.frc.team3015.robot.commands.GrabberClose;
+import org.usfirst.frc.team3015.robot.commands.GrabberCubeControl;
+import org.usfirst.frc.team3015.robot.commands.GrabberCubeEject;
+import org.usfirst.frc.team3015.robot.commands.GrabberCubeOuttake;
+import org.usfirst.frc.team3015.robot.commands.GrabberCubeUp;
+import org.usfirst.frc.team3015.robot.commands.GrabberDown;
+import org.usfirst.frc.team3015.robot.commands.GrabberIntakeIn;
+import org.usfirst.frc.team3015.robot.commands.GrabberIntakeOut;
+import org.usfirst.frc.team3015.robot.commands.GrabberOpen;
+import org.usfirst.frc.team3015.robot.commands.GrabberReset;
+import org.usfirst.frc.team3015.robot.commands.GrabberUp;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -58,6 +82,11 @@ public class OI {
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown());
 		driverLTrigger.whenPressed(new GrabberClose());
+		
+//		driverDLeft.whenPressed(new AutoLeftSwitchOnly());
+//		driverDRight.whenPressed(new AutoRightSwitchOnly());
+		driverDLeft.whenPressed(new DriveTurnToAngleGyro(90, false));
+		driverDRight.whenPressed(new DriveTurnToAngleGyro(0, true));
 				
 		coDriverA1.whenPressed(new ElevatorToBottom());
 		coDriverB2.whenPressed(new ElevatorToScaleLow());
