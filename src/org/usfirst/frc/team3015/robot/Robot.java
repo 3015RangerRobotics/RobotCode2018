@@ -19,16 +19,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
-	Command autonomousCommand;
-	Command leftScaleLeftStart,
+	private Command autonomousCommand;
+	private Command leftScaleLeftStart,
 		rightScaleRightStart,
 		rightScaleLeftStart,
 		leftScaleRightStart,
 		leftSwitchMiddleStart,
 		rightSwitchMiddleStart,
 		baseline;
-	SendableChooser<AutoMode> autoChooser = new SendableChooser<>();
-	SendableChooser<Side> sideChooser = new SendableChooser<>();
+	private SendableChooser<AutoMode> autoChooser = new SendableChooser<>();
+	private SendableChooser<Side> sideChooser = new SendableChooser<>();
+	private boolean noData = false;
 
 	@Override
 	public void robotInit() {
@@ -44,7 +45,6 @@ public class Robot extends TimedRobot {
 		rightSwitchMiddleStart = new AutoRightSwitchOnly();
 		baseline = new AutoBaseline();
 		
-//		chooser.addDefault("None", AutoMode.kNone);
 		autoChooser.addObject("Scale Only", AutoMode.kScaleOnly);
 		autoChooser.addObject("Switch Only", AutoMode.kSwitchOnly);
 		autoChooser.addObject("Scale & Switch", AutoMode.kBoth);
@@ -78,6 +78,53 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		CommandBase.drive.resetGyro();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.length() != 3) {
+			this.noData = true;
+		}else {
+			this.noData = false;
+			startAutonomous(gameData);
+		}
+	}
+
+	@Override
+	public void autonomousPeriodic() {
+		if(noData) {
+			String gameData = DriverStation.getInstance().getGameSpecificMessage();
+			if(gameData.length() != 3) {
+				if(DriverStation.getInstance().getMatchTime() < 5) {
+					noData = false;
+					autonomousCommand = this.baseline;
+					autonomousCommand.start();
+				}
+			}else {
+				noData = false;
+				startAutonomous(gameData);
+			}
+		}
+		
+		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
+	}
+
+	@Override
+	public void teleopInit() {
+		if (autonomousCommand != null) {
+			autonomousCommand.cancel();
+		}
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
+	}
+
+	@Override
+	public void testPeriodic() {
+		
+	}
+	
+	private void startAutonomous(String gameData) {
 		AutoMode autoMode = autoChooser.getSelected();
 		Side startSide = sideChooser.getSelected();
 		
@@ -122,30 +169,5 @@ public class Robot extends TimedRobot {
 			autonomousCommand = this.baseline;
 			autonomousCommand.start();
 		}
-		
-	}
-
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
-	}
-
-	@Override
-	public void teleopInit() {
-		if (autonomousCommand != null) {
-			autonomousCommand.cancel();
-		}
-	}
-
-	@Override
-	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
-	}
-
-	@Override
-	public void testPeriodic() {
-		
 	}
 }
