@@ -13,7 +13,7 @@ public class GrabberCloseIfCube extends CommandBase {
     }
 
     protected void execute() {
-    	
+    
     }
 
     protected boolean isFinished() {

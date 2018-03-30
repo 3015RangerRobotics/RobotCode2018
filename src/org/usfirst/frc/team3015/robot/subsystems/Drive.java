@@ -21,9 +21,12 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveP = 2.0;
 	public final double kDriveD = 0.02;
 	
-	public final double kTurnPEncoder = 4.0;
+	public final double kTurnPEncoder = 5.0;
 	public final double kTurnIEncoder = 0.0;
-	public final double kTurnDEncoder = 0.02;
+	public final double kTurnDEncoder = 0.035;
+	
+	public final double kVEncoder = 0.067;
+	public final double kAEncoder = 0.025;
 	
 	//TODO: Tune these
 	public final double kTurnP = 0.018;

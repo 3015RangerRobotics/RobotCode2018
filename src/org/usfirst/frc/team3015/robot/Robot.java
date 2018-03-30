@@ -58,9 +58,9 @@ public class Robot extends TimedRobot {
 //		AndroidServer server = AndroidServer.getInstance();
 //		server.addTargetUpdateReceiver(CommandBase.drive);
 		
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setFPS(30);
-		camera.setResolution(400, 300);
+//		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//		camera.setFPS(30);
+//		camera.setResolution(400, 300);
 	}
 
 	@Override
