@@ -87,13 +87,13 @@ public class DriveTurnToAngleEncoders extends CommandBase {
 			
 			double kP = drive.kTurnPEncoder;
 			double kD = drive.kTurnDEncoder;
-			double kV = drive.kV;
-			double kA = drive.kA;
+			double kV = drive.kVEncoder;
+			double kA = drive.kAEncoder;
 			
 			double pwmL = (kP * errorL) + (kD * errorDerivL) + (kV * goalVelL) + (kA * goalAccL);
 			double pwmR = (kP * errorR) + (kD * errorDerivR) + (kV * goalVelR) + (kA * goalAccR);
 			
-//			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
+			System.out.println(goalPosL + ", " + goalPosR + ", " + drive.getLeftDistance() + ", " + drive.getRightDistance());
 			
 			prevErrorL = errorL;
 			prevErrorR = errorR;
@@ -121,7 +121,7 @@ public class DriveTurnToAngleEncoders extends CommandBase {
     	double arcLength = (Constants.wheelBaseWidth * Math.PI) * (Math.abs(profileAngle) / 360);
         arcLength *= 1.13;
         
-        double[][] profile = MotionProfiles.generate1D(arcLength, 14, 12, 60, false);
+        double[][] profile = MotionProfiles.generate1D(arcLength, 30, 30, 150, false);
         leftMotion = new double[profile.length][3];
         rightMotion = new double[profile.length][3];
         

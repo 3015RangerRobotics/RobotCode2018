@@ -5,9 +5,9 @@ import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class AutoLeftRightSwitchFirst extends CommandGroup {
+public class ZAutoLeftRightSwitchFirst extends CommandGroup {
 
-    public AutoLeftRightSwitchFirst() {
+    public ZAutoLeftRightSwitchFirst() {
     	addSequential(new GrabberClose());
     	addParallel(new ElevatorToSwitch());
     	addSequential(new DriveMotionProfile("wallToLeftSwitch"));

@@ -1,8 +1,16 @@
 package org.usfirst.frc.team3015.robot;
 
 import org.usfirst.frc.team3015.robot.Constants.AutoMode;
-import org.usfirst.frc.team3015.robot.commands.*;
+import org.usfirst.frc.team3015.robot.Constants.Side;
+import org.usfirst.frc.team3015.robot.commands.AutoBaseline;
+import org.usfirst.frc.team3015.robot.commands.AutoLeftSwitchOnly;
+import org.usfirst.frc.team3015.robot.commands.AutoOppositeScaleOnly;
+import org.usfirst.frc.team3015.robot.commands.AutoRightSwitchOnly;
+import org.usfirst.frc.team3015.robot.commands.AutoSameScaleOnly;
+import org.usfirst.frc.team3015.robot.commands.CommandBase;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,15 +19,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
-	Command autonomousCommand;
-	Command leftScaleOnly,
-		rightScaleOnly,
-		leftBoth,
-		rightBoth,
-		leftRightBoth,
-		rightLeftBoth,
+	private Command autonomousCommand;
+	private Command leftScaleLeftStart,
+		rightScaleRightStart,
+		rightScaleLeftStart,
+		leftScaleRightStart,
+		leftSwitchMiddleStart,
+		rightSwitchMiddleStart,
 		baseline;
-	SendableChooser<AutoMode> chooser = new SendableChooser<>();
+	private SendableChooser<AutoMode> autoChooser = new SendableChooser<>();
+	private SendableChooser<Side> sideChooser = new SendableChooser<>();
+	private boolean noData = false;
 
 	@Override
 	public void robotInit() {
@@ -27,24 +37,30 @@ public class Robot extends TimedRobot {
 		
 		CommandBase.init();
 		
-		leftScaleOnly = new AutoLeftScaleOnly();
-		rightScaleOnly = new AutoRightScaleOnly();
-		leftBoth = new AutoLeftScaleFirst();
-		rightBoth = new AutoRightScaleFirst();
-//		rightLeftBoth = new AutoRightLeftScaleFirst();
-		rightLeftBoth = new AutoRightSwitchOnly();
-		leftRightBoth = new AutoLeftRightSwitchFirst();
+		leftScaleLeftStart = new AutoSameScaleOnly(false);
+		rightScaleRightStart = new AutoSameScaleOnly(true);
+		rightScaleLeftStart = new AutoOppositeScaleOnly(false);
+		leftScaleRightStart = new AutoOppositeScaleOnly(true);
+		leftSwitchMiddleStart = new AutoLeftSwitchOnly();
+		rightSwitchMiddleStart = new AutoRightSwitchOnly();
 		baseline = new AutoBaseline();
 		
-//		chooser.addDefault("None", AutoMode.kNone);
-		chooser.addDefault("Scale Only", AutoMode.kScaleOnly);
-		chooser.addObject("Scale & Switch", AutoMode.kBoth);
-		chooser.addObject("Baseline", AutoMode.kBaseline);
+		autoChooser.addObject("Scale Only", AutoMode.kScaleOnly);
+		autoChooser.addObject("Switch Only", AutoMode.kSwitchOnly);
+		autoChooser.addObject("Scale & Switch", AutoMode.kBoth);
+		autoChooser.addDefault("Baseline", AutoMode.kBaseline);
+		SmartDashboard.putData("Auto Mode", autoChooser);
 		
-		SmartDashboard.putData("Auto Mode", chooser);
+		sideChooser.addObject("Left Start", Side.kLeft);
+		sideChooser.addObject("Right Start", Side.kRight);
+		SmartDashboard.putData("Start Side", sideChooser);
 		
 //		AndroidServer server = AndroidServer.getInstance();
 //		server.addTargetUpdateReceiver(CommandBase.drive);
+		
+//		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//		camera.setFPS(30);
+//		camera.setResolution(400, 300);
 	}
 
 	@Override
@@ -62,50 +78,30 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		CommandBase.drive.resetGyro();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		AutoMode autoMode = chooser.getSelected();
-		
-		if(autoMode == AutoMode.kNone) {
-			autonomousCommand = null;
-		}else if(autoMode == AutoMode.kBaseline) {
-			autonomousCommand = this.baseline;
-		}else if(autoMode == AutoMode.kScaleOnly){
-			if(gameData.charAt(1) == 'L') {
-				autonomousCommand = this.leftScaleOnly;
-			}else if(gameData.charAt(1) == 'R') {
-				autonomousCommand = this.rightScaleOnly;
-			}else {
-				DriverStation.reportError("Invalid Game Data!", false);
-				autonomousCommand = null;
-			}
-		}else if(autoMode == AutoMode.kBoth) {
-			if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R') {
-				autonomousCommand = this.leftRightBoth;
-			}else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L') {
-				autonomousCommand = this.rightLeftBoth;
-			}else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L'){
-				autonomousCommand = this.leftBoth;
-				System.out.println("what");
-			}else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R'){
-				autonomousCommand = this.rightBoth;
-			}else {
-				DriverStation.reportError("Invalid Game Data!", false);
-				autonomousCommand = null;
-			}
+		if(gameData.length() != 3) {
+			this.noData = true;
 		}else {
-			DriverStation.reportError("Auto Mode?", false);
-			autonomousCommand = null;
+			this.noData = false;
+			startAutonomous(gameData);
 		}
-		
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}else {
-			DriverStation.reportWarning("No Auto Command, Doing Nothing!", false);
-		}
-		
 	}
 
 	@Override
 	public void autonomousPeriodic() {
+		if(noData) {
+			String gameData = DriverStation.getInstance().getGameSpecificMessage();
+			if(gameData.length() != 3) {
+				if(DriverStation.getInstance().getMatchTime() < 5) {
+					noData = false;
+					autonomousCommand = this.baseline;
+					autonomousCommand.start();
+				}
+			}else {
+				noData = false;
+				startAutonomous(gameData);
+			}
+		}
+		
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 	}
@@ -126,5 +122,52 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 		
+	}
+	
+	private void startAutonomous(String gameData) {
+		AutoMode autoMode = autoChooser.getSelected();
+		Side startSide = sideChooser.getSelected();
+		
+		if(autoMode == AutoMode.kBaseline) {
+			autonomousCommand = this.baseline;
+		}else if(autoMode == AutoMode.kScaleOnly){
+			if(gameData.charAt(1) == 'L') {
+				if(startSide == Side.kLeft) {
+					autonomousCommand = this.leftScaleLeftStart;
+				}else if(startSide == Side.kRight){
+					autonomousCommand = this.leftScaleRightStart;
+				}
+			}else if(gameData.charAt(1) == 'R') {
+				if(startSide == Side.kLeft) {
+					autonomousCommand = this.rightScaleLeftStart;
+				}else if(startSide == Side.kRight){
+					autonomousCommand = this.rightScaleRightStart;
+				}
+			}else {
+				DriverStation.reportError("Invalid Game Data!", false);
+				autonomousCommand = null;
+			}
+		}else if(autoMode == AutoMode.kSwitchOnly) {
+			if(gameData.charAt(0) == 'L') {
+				autonomousCommand = this.leftSwitchMiddleStart;
+			}else if(gameData.charAt(0) == 'R') {
+				autonomousCommand = this.rightSwitchMiddleStart;
+			}else {
+				DriverStation.reportError("Invalid Game Data!", false);
+				autonomousCommand = null;
+			}
+		}
+		else {
+			DriverStation.reportError("No Auto Mode Selected", false);
+			autonomousCommand = null;
+		}
+		
+		if (autonomousCommand != null) {
+			autonomousCommand.start();
+		}else {
+			DriverStation.reportError("No Auto Command, Driving to Baseline!", false);
+			autonomousCommand = this.baseline;
+			autonomousCommand.start();
+		}
 	}
 }

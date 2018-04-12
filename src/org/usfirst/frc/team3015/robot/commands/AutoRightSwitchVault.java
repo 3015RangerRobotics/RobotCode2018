@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoRightSwitchOnly extends CommandGroup {
+public class AutoRightSwitchVault extends CommandGroup {
 
-    public AutoRightSwitchOnly() {
+    public AutoRightSwitchVault() {
         addSequential(new GrabberClose());
         addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile("rightSwitchOnly"));
@@ -17,12 +17,10 @@ public class AutoRightSwitchOnly extends CommandGroup {
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 12, 8, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngleEncoders(-62));
-        addSequential(new ObtainCube(3.2));        
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.35, 12, 8, 60, true)));
-        addParallel(new ElevatorToSwitch());
-        addSequential(new DriveTurnToAngleEncoders(62));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(3.25, 12, 8, 60, false)));
-        addSequential(new GrabberCubeEject());
-        addSequential(new ElevatorToBottom());
+        addSequential(new SuccCube(3.2));        
+        addSequential(new DriveTurnToAngleEncoders(-81.5));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(6.5, 12, 8, 60, false)));
+        addSequential(new GrabberIntakeOutForTime(.75));
+        addSequential(new GrabberUp());
     }
 }

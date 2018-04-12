@@ -21,9 +21,12 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	public final double kDriveP = 2.0;
 	public final double kDriveD = 0.02;
 	
-	public final double kTurnPEncoder = 4.0;
+	public final double kTurnPEncoder = 5.0;
 	public final double kTurnIEncoder = 0.0;
-	public final double kTurnDEncoder = 0.02;
+	public final double kTurnDEncoder = 0.035;
+	
+	public final double kVEncoder = 0.067;
+	public final double kAEncoder = 0.025;
 	
 	//TODO: Tune these
 	public final double kTurnP = 0.018;
@@ -52,7 +55,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
 		rightDrive.setInverted(true);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
-		rightEncoder.setReverseDirection(true);
+		rightEncoder.setReverseDirection(false);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
 		
@@ -67,7 +70,11 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 	
 	@Override
 	public void periodic() {
-		
+//		if(bestTarget != null) {
+//			System.out.println("Distance: " + bestTarget.getYAngle());
+//		}else {
+//			System.out.println("No Target");
+//		}
 	}
 	
 	/**
@@ -154,16 +161,31 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
     
 	@Override
 	public void onUpdateReceived(TargetUpdate update) {
-		TargetInfo shortestDistance = null;
+		TargetInfo best = null;
 		for(TargetInfo target:update.getTargets()) {
-			if(shortestDistance == null) {
-				shortestDistance = target;
-			}else if(target.getDistance() < shortestDistance.getDistance()){
-				shortestDistance = target;
+			double distance = target.getDistance();
+			double yAngle = -target.getYAngle();
+			
+			double a = Math.sqrt(((distance*distance) + (Constants.cameraXOffsetFt*Constants.cameraXOffsetFt)) - 
+        			(2 * distance * Constants.cameraXOffsetFt * Math.cos(Math.toRadians(90 - yAngle))));
+        	double correctedDistance = Math.sqrt((a*a) - (Constants.cameraYOffsetFt*Constants.cameraYOffsetFt)) - 1;
+        	double cubeAngle = Math.toDegrees(Math.asin((Math.sin(Math.toRadians(90 - yAngle)) / a) * Constants.cameraXOffsetFt));
+        	double correctedYAngle = (180 - cubeAngle - (90 - yAngle)) - 90;
+        	
+//        	System.out.println("Distance: " + correctedDistance + " from " + distance);
+//        	System.out.println("Angle: " + correctedYAngle + " from " + yAngle);
+        	
+        	
+			if(best == null) {
+				best = new TargetInfo(target.getXAngle(), correctedYAngle, correctedDistance);
+			}else {
+				if(Math.abs(correctedYAngle) < Math.abs(best.getYAngle())) {
+					best = new TargetInfo(target.getXAngle(), correctedYAngle, correctedDistance);
+				}
 			}
 		}
-		if(shortestDistance != null)
-			bestTarget = shortestDistance;
+		
+		this.bestTarget = best;
 	}
 }
 

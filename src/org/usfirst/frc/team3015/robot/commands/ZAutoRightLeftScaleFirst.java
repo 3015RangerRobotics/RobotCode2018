@@ -4,9 +4,9 @@ import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutoRightLeftScaleFirst extends CommandGroup {
+public class ZAutoRightLeftScaleFirst extends CommandGroup {
 
-    public AutoRightLeftScaleFirst() {
+    public ZAutoRightLeftScaleFirst() {
     	addSequential(new GrabberClose());
         addParallel(new ElevatorToScale());
         addSequential(new DriveMotionProfile("wallToLeftScale"));

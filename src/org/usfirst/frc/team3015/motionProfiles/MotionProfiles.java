@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.usfirst.frc.team3015.robot.Constants;
+import org.usfirst.frc.team3015.robot.Constants.Side;
 
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
@@ -50,7 +51,7 @@ public class MotionProfiles {
 	 * @return A hash map containing a motion profile for the left and right side
 	 */
 	public static HashMap<Side, double[][]> generate2D(double dx, double dy, double endAngle, double maxV, double a, double jerk, boolean reversed){
-		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(dx, dy, endAngle)};
+		Waypoint[] waypoints = new Waypoint[] {new Waypoint(0, 0, 0), new Waypoint(dx, dy, Pathfinder.d2r(endAngle))};
 		Trajectory.Config config = new Trajectory.Config(FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW, Constants.kPeriod, maxV, a, jerk);
 		Trajectory trajectory = Pathfinder.generate(waypoints, config);
 		TankModifier modifier = new TankModifier(trajectory).modify(Constants.wheelBaseWidth);
@@ -92,10 +93,13 @@ public class MotionProfiles {
 	 * @return A hash map containing a motion profile for the left and right side
 	 */
 	public static HashMap<Side, double[][]> generateProfileToCube(double angle, double distance, double maxV, double a, double jerk){
-		double x = Math.cos(angle) * distance;
-		double y = Math.sin(angle) * distance;
-		
-		return generate2D(x, y, 0, maxV, a, jerk, false);
+		double x = Math.cos(Math.toRadians(angle)) * distance;
+		double y = Math.sin(Math.toRadians(angle)) * distance;
+//		if(angle < 0) {
+			y *= -1;
+//		}
+		System.out.println("x: " + x + " y: " + y);
+		return generate2D(x, y, -angle, maxV, a, jerk, false);
 	}
 	
 	/**
@@ -128,10 +132,5 @@ public class MotionProfiles {
 			e.printStackTrace();
 		}
 		return profile;		
-	}
-	
-	public static enum Side{
-		kLeft,
-		kRight
 	}
 }

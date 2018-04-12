@@ -3,17 +3,15 @@ package org.usfirst.frc.team3015.robot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 
-public class DriveTurnToAngle extends CommandBase implements PIDOutput{
+public class DriveTurnToAngleGyro extends CommandBase implements PIDOutput{
 	PIDController turnController;
 	double setpoint = 0;
 	int onTargetCount = 0;
-	double minTurn = 0.1;
-	private boolean isAbsolute;
+	double minTurn = 0.2;
 
-    public DriveTurnToAngle(double angle, boolean isAbsolute) {
+    public DriveTurnToAngleGyro(double angle, boolean isAbsolute) {
         requires(drive);
         this.setpoint = angle;
-        this.isAbsolute = isAbsolute;
         turnController = new PIDController(drive.kTurnP, drive.kTurnI, drive.kTurnD, drive.imu, this);
         turnController.setInputRange(-180.0, 180.0);
         turnController.setOutputRange(-1.0 + minTurn, 1.0 - minTurn);
@@ -22,15 +20,7 @@ public class DriveTurnToAngle extends CommandBase implements PIDOutput{
     }
 
     protected void initialize() {
-    	if(!isAbsolute) {
-	    	setpoint += drive.getAngle();
-	    	
-	    	if(setpoint > 180) {
-	    		setpoint -= 360;
-	    	}else if(setpoint < -180) {
-	    		setpoint += 360;
-	    	}
-    	}
+    	drive.resetGyro();
     	turnController.setSetpoint(setpoint);
     	turnController.enable();
     	onTargetCount = 0;
