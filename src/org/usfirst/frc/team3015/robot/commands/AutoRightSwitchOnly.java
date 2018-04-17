@@ -4,9 +4,6 @@ import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
 public class AutoRightSwitchOnly extends CommandGroup {
 
     public AutoRightSwitchOnly() {
@@ -14,14 +11,14 @@ public class AutoRightSwitchOnly extends CommandGroup {
         addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile("rightSwitchOnly"));
         addSequential(new GrabberCubeEject());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 12, 8, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 60, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngleEncoders(-62));
+        addSequential(new DriveTurnToAngleEncoders(-52));
         addSequential(new ObtainCube(3.2));        
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.35, 12, 8, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.35, 14, 10, 60, true)));
         addParallel(new ElevatorToSwitch());
-        addSequential(new DriveTurnToAngleEncoders(62));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(3.25, 12, 8, 60, false)));
+        addSequential(new DriveTurnToAngleEncoders(52));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.25, 14, 10, 60, false)));
         addSequential(new GrabberCubeEject());
         addSequential(new ElevatorToBottom());
     }

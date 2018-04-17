@@ -28,8 +28,6 @@ public class Constants {
 	public static final int grabberSolenoid1 = 0;
 	public static final int grabberEjectorSolenoid1 = 1;
 	public static final int buddySolenoid1 = 2;
-	public static final int climberLock1 = 3;
-	public static final int climberLock2 = 4;
 	public static final int buddySolenoid2 = 5;
 	public static final int grabberEjectorSolenoid2 = 6;
 	public static final int grabberSolenoid2 = 7;

@@ -55,7 +55,7 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
 		rightDrive = new VictorSP(Constants.rightDriveMotor);
 		rightDrive.setInverted(true);
 		rightEncoder = new Encoder(Constants.rightDriveEncoder1, Constants.rightDriveEncoder2);
-		rightEncoder.setReverseDirection(false);
+		rightEncoder.setReverseDirection(true);
 		rightEncoder.setDistancePerPulse(kDistancePerPulse);
 		imu = new AHRS(I2C.Port.kOnboard);
 		

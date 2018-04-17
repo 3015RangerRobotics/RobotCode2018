@@ -20,14 +20,14 @@ public class BuddyClimb extends Subsystem {
      * Deploy the buddy climb forks
      */
     public void buddyExtend() {
-    	buddySolenoid.set(DoubleSolenoid.Value.kReverse);
+    	buddySolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
     /**
      * Lock the buddy climb forks
      */
     public void buddyRetract() {
-    	buddySolenoid.set(DoubleSolenoid.Value.kForward);
+    	buddySolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 }
 

@@ -12,9 +12,7 @@ public class ClimberDown extends CommandBase {
     }
 
     protected void execute() {
-    	if(DriverStation.getInstance().getMatchTime() < 30) {
-    		climber.retractClimber();
-    	}
+    	climber.retractClimber();
     }
 
     protected boolean isFinished() {

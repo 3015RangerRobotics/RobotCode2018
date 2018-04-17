@@ -12,9 +12,7 @@ public class ClimberHold extends CommandBase {
     }
 
     protected void execute() {
-    	if(DriverStation.getInstance().getMatchTime() < 30) {
-    		climber.climberHold();
-    	}
+    	climber.climberHold();
     }
 
     protected boolean isFinished() {

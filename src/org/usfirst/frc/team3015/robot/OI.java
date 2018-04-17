@@ -74,8 +74,6 @@ public class OI {
 		coDriverRS10.whenPressed(new ClimberHold());
 		coDriverDUp.whileHeld(new ClimberUp());
 		coDriverDDown.whileHeld(new ClimberDown());
-		coDriverDRight.whenPressed(new ClimberLockOut());
-		coDriverDLeft.whenPressed(new ClimberLockIn());
 		
 		coDriverStartSelect.whenPressed(new BuddyExtend());
 		coDriverStartSelect.whenReleased(new BuddyRetract());

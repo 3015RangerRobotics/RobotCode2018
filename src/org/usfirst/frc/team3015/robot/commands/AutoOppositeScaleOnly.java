@@ -9,7 +9,7 @@ public class AutoOppositeScaleOnly extends CommandGroup {
 
     public AutoOppositeScaleOnly(boolean isRightStart) {
     	addSequential(new GrabberClose());
-    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(.5, 14, 10, 60, false)));
+    	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(.25, 14, 10, 60, false)));
         addParallel(new ElevatorToScaleDelayed(3.75));
         addSequential(new DriveMotionProfile("wallToRightScale", isRightStart));
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 45 : -45, true));
@@ -17,7 +17,7 @@ public class AutoOppositeScaleOnly extends CommandGroup {
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 10, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 115 : -115));
-        addSequential(new ObtainCube(5));
+        addSequential(new ObtainCube(5.25));
         addParallel(new ElevatorToScale());
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -155 : 155));
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 10, 60, false)));

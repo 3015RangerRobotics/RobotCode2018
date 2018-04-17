@@ -12,9 +12,7 @@ public class ClimberUp extends CommandBase {
     }
 
     protected void execute() {
-    	if(DriverStation.getInstance().getMatchTime() < 30) {
-    		climber.climbUp();
-    	}
+    	climber.climbUp();
     }
 
     protected boolean isFinished() {

@@ -8,9 +8,6 @@ import org.usfirst.frc.team3015.robot.commands.AutoOppositeScaleOnly;
 import org.usfirst.frc.team3015.robot.commands.AutoRightSwitchOnly;
 import org.usfirst.frc.team3015.robot.commands.AutoSameScaleOnly;
 import org.usfirst.frc.team3015.robot.commands.CommandBase;
-
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -80,8 +77,10 @@ public class Robot extends TimedRobot {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.length() != 3) {
 			this.noData = true;
+			System.out.println("No Game Data Received!");
 		}else {
 			this.noData = false;
+			System.out.println("Game Data Received: " + gameData);
 			startAutonomous(gameData);
 		}
 	}
@@ -98,6 +97,7 @@ public class Robot extends TimedRobot {
 				}
 			}else {
 				noData = false;
+				System.out.println("Game Data Received: " + gameData);
 				startAutonomous(gameData);
 			}
 		}
