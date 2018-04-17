@@ -52,7 +52,7 @@ public class DriveTurnToAngleEncoders extends CommandBase {
     		double lastTime = 0;
     		
     		while(!isFinished && DriverStation.getInstance().isEnabled()) {
-    			if(Timer.getFPGATimestamp() >= lastTime + 0.01) {
+    			if(Timer.getFPGATimestamp() >= lastTime + Constants.kPeriod) {
     				lastTime = Timer.getFPGATimestamp();
     				threadedExecute();
     			}
@@ -70,6 +70,16 @@ public class DriveTurnToAngleEncoders extends CommandBase {
     }
     
     protected synchronized void threadedExecute() {
+    	if(i == 24) {
+    		if(drive.getLeftDistance() == 0) {
+    			DriverStation.reportError("yo man left encoder is dead man", false);
+    			new DriveForTime(.5, 3).start();
+    		}else if(drive.getRightDistance() == 0) {
+    			DriverStation.reportError("aw dang right encoder is chooched", false);
+    			new DriveForTime(.5, 3).start();
+    		}
+    	}
+    	
     	if(i < leftMotion.length) {
 			double goalPosL = leftMotion[i][0];
 			double goalVelL = leftMotion[i][1];

@@ -71,12 +71,27 @@ public class DriveHelper {
      * @param isQuickTurn Quick turn
      * @return The left and right motor outputs
      */
-    public static DriveSignal curvatureDrive(double throttle, double turn, boolean isQuickTurn) {
+    public static DriveSignal curvatureDrive(double throttle, double turn, boolean isQuickTurn, boolean squaredInputs) {
     	throttle = handleDeadzone(throttle, kDeadband);
     	turn = handleDeadzone(turn, kDeadband);
     	
     	double overPower;
     	double angularPower;
+    	
+    	if (squaredInputs) {
+            // square the inputs (while preserving the sign) to increase fine control
+            // while permitting full power
+          	if (throttle >= 0.0) {
+          		throttle = throttle * throttle;
+          	} else {
+          		throttle = -(throttle * throttle);
+  	        }
+  	        if (turn >= 0.0) {
+  	        	turn = turn * turn;
+  	        } else {
+  	        	turn = -(turn * turn);
+  	        }
+          }
     	
     	if(isQuickTurn) {
     		if(Math.abs(throttle) < 0.2) {

@@ -7,7 +7,7 @@ public class DriveSignal{
 	/**
 	 * Creates a drive signal with a left and right motor output
 	 * @param leftSignal The left motor signal
-	 * @param rightSignal The right motor output
+	 * @param rightSignal The right motor signal
 	 */
 	public DriveSignal(double leftSignal, double rightSignal) {
 		this.leftSignal = leftSignal;

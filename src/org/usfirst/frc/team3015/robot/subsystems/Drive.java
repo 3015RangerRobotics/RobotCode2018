@@ -112,8 +112,8 @@ public class Drive extends Subsystem implements TargetUpdateReceiver{
      * @param turn Turn value
      * @param isQuickTurn Quick turn
      */
-    public void curvatureDrive(double throttle, double turn, boolean isQuickTurn) {
-    	DriveSignal ds = DriveHelper.curvatureDrive(throttle, turn, isQuickTurn);
+    public void curvatureDrive(double throttle, double turn, boolean isQuickTurn, boolean squaredInputs) {
+    	DriveSignal ds = DriveHelper.curvatureDrive(throttle, turn, isQuickTurn, squaredInputs);
     	setMotorOutputs(ds.leftSignal, ds.rightSignal);
     }
     

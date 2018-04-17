@@ -28,7 +28,7 @@ public class DriveWithGamepad extends CommandBase {
     	}
     	
 	    if(Math.abs(oi.getDriverRightStickX()) >= 0.1) {
-	    	drive.curvatureDrive(driveValue, oi.getDriverRightStickX()/1.25, false);
+	    	drive.curvatureDrive(driveValue, oi.getDriverRightStickX()/1.25, false, true);
 	    }else {
 	    	drive.arcadeDrive(driveValue, oi.getDriverLeftStickX()/1.25, true);
 	    }

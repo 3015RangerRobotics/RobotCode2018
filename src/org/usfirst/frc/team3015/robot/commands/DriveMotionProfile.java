@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3015.robot.commands;
 
+import java.util.HashMap;
+
 import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.Constants;
+import org.usfirst.frc.team3015.robot.Constants.Side;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
@@ -24,6 +27,12 @@ public class DriveMotionProfile extends CommandBase{
     	requires(drive);
     	this.leftMotion = leftMotion;
     	this.rightMotion = rightMotion;
+    }
+    
+    public DriveMotionProfile(HashMap<Side, double[][]> profiles) {
+    	requires(drive);
+    	this.leftMotion = profiles.get(Side.kLeft);
+    	this.rightMotion = profiles.get(Side.kRight);
     }
     
     public DriveMotionProfile(String filename) {
@@ -60,7 +69,7 @@ public class DriveMotionProfile extends CommandBase{
     		double lastTime = 0;
     		
     		while(!isFinished && DriverStation.getInstance().isEnabled()) {
-    			if(Timer.getFPGATimestamp() >= lastTime + 0.01) {
+    			if(Timer.getFPGATimestamp() >= lastTime + Constants.kPeriod) {
     				lastTime = Timer.getFPGATimestamp();
     				threadedExecute();
     			}
@@ -74,6 +83,16 @@ public class DriveMotionProfile extends CommandBase{
     }
     
     protected synchronized void threadedExecute() {
+    	if(i == 24) {
+    		if(drive.getLeftDistance() == 0) {
+    			DriverStation.reportError("yo man left encoder is dead man", false);
+    			new DriveForTime(.5, 3).start();
+    		}else if(drive.getRightDistance() == 0) {
+    			DriverStation.reportError("aw dang right encoder is chooched", false);
+    			new DriveForTime(.5, 3).start();
+    		}
+    	}
+    	
     	if(i < leftMotion.length) {
 			double goalPosL = leftMotion[i][0];
 			double goalVelL = leftMotion[i][1];
