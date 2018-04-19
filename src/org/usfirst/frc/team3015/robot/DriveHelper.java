@@ -86,11 +86,6 @@ public class DriveHelper {
           	} else {
           		throttle = -(throttle * throttle);
   	        }
-  	        if (turn >= 0.0) {
-  	        	turn = turn * turn;
-  	        } else {
-  	        	turn = -(turn * turn);
-  	        }
           }
     	
     	if(isQuickTurn) {

@@ -57,11 +57,7 @@ public class OI {
 		driverLB5.whenReleased(new GrabberReset());
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown());
-		driverLTrigger.whenPressed(new GrabberClose());
-		
-		driverDLeft.whenPressed(new AutoLeftSwitchVault());
-		driverDRight.whenPressed(new AutoRightSwitchVault());
-//		driverDLeft.whenPressed(new DriveTurnToAngleEncoders(90));		
+		driverLTrigger.whenPressed(new GrabberClose());		
 		
 		coDriverA1.whenPressed(new ElevatorToBottom());
 		coDriverB2.whenPressed(new ElevatorToScaleLow());
