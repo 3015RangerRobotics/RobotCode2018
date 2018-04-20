@@ -9,7 +9,7 @@ public class ObtainCube extends CommandGroup {
 	
     public ObtainCube(double distance) {
         addParallel(new GrabberDown());
-        addParallel(new DriveMotionProfile(MotionProfiles.generate1D(distance, 12, 8, 60, false)));
+        addParallel(new DriveMotionProfile(MotionProfiles.generate1D(distance, 14, 10, 200, false)));
         addSequential(new GrabberIntakeTilCube());
         addSequential(new WaitCommand(.15));
         addSequential(new GrabberUp());
