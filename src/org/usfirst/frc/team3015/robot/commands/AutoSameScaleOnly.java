@@ -11,15 +11,16 @@ public class AutoSameScaleOnly extends CommandGroup {
         addParallel(new ElevatorToScaleDelayed(0.25));
         addSequential(new DriveMotionProfile("wallToLeftScale", isRightStart));
         addParallel(new GrabberCubeEject());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.5, 14, 14, 200, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.5, 14, 14, 60, true)));
         addParallel(new ElevatorToBottom());
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -99 : 99));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 14, 60, false)));
         addSequential(new ObtainCube(5.5));
         addParallel(new ElevatorToScale());
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 140 : -140));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 200, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 10, 60, false)));
         addSequential(new GrabberCubeEject());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 14, 200, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 14, 60, true)));
         addSequential(new ElevatorToBottom());
     }
 }

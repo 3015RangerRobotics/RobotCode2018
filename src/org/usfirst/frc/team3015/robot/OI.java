@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3015.robot;
 
+import org.usfirst.frc.team3015.motionProfiles.MotionProfiles;
 import org.usfirst.frc.team3015.robot.commands.*;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -57,7 +58,7 @@ public class OI {
 		driverLB5.whenReleased(new GrabberReset());
 		driverRB6.whenPressed(new GrabberUp());
 		driverRTrigger.whenPressed(new GrabberDown());
-		driverLTrigger.whenPressed(new GrabberClose());		
+		driverLTrigger.whenPressed(new GrabberClose());
 		
 		coDriverA1.whenPressed(new ElevatorToBottom());
 		coDriverB2.whenPressed(new ElevatorToScaleLow());

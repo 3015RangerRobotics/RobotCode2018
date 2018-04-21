@@ -12,20 +12,18 @@ public class AutoLeftSwitchOnly extends CommandGroup {
         addSequential(new DriveMotionProfile("leftSwitchOnly"));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(5, 0, -56, 14, 14, 200, true)));
-        	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(3.7, 14, 14, 200, false)));
-//        addSequential(new ObtainCube(3.7));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.7, 0, 56, 14, 14, 200, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(5, 0, -56, 14, 14, 60, true)));
+        addSequential(new ObtainCube(3.7));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.7, 0, 56, 14, 14, 60, true)));
         addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.5, 14, 14, 200, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(5, 14, 14, 60, false)));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(4, 0, -50, 14, 14, 200, true)));
-        	addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.5, 14, 14, 200, false)));
-//        addSequential(new ObtainCube(2.5));
-        addSequential(new DriveTurnToAngleEncoders(-65));        
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(4, 0, -50, 14, 14, 60, true)));
+        addSequential(new ObtainCube(2.5));
+        addSequential(new DriveTurnToAngleEncoders(-75));        
         addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.5, 14, 14, 200, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(3, 14, 14, 60, false)));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
         
