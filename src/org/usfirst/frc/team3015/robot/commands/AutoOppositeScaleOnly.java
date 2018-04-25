@@ -13,20 +13,20 @@ public class AutoOppositeScaleOnly extends CommandGroup {
 //        addParallel(new ElevatorToScaleDelayed(3.75));
 //        addSequential(new DriveMotionProfile("wallToRightScale", isRightStart));
         addSequential(new DriveMotionProfile("wallToLeftSwitch", isRightStart));
-    	addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -90 : 90, true));
+    	addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -88 : 88, true));
         addParallel(new ElevatorToScaleDelayed(1));
     	addSequential(new DriveMotionProfile("leftSwitchToRightScale", isRightStart));
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 45 : -45, true));
         addParallel(new GrabberCubeEject());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 14, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 14, 100, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 115 : -115));
-        addSequential(new ObtainCube(5.25));
+        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 110 : -110));
+        addSequential(new ObtainCube(4.75));
         addParallel(new ElevatorToScale());
         addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -155 : 155));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 10, 60, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 10, 100, false)));
         addSequential(new GrabberCubeEject());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 14, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 14, 100, true)));
         addSequential(new ElevatorToBottom());
     }
 }

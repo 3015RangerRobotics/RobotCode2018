@@ -12,18 +12,18 @@ public class AutoRightSwitchOnly extends CommandGroup {
         addSequential(new DriveMotionProfile("rightSwitchOnly"));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(5, 0, 52, 14, 14, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(5, 0, 52, 14, 14, 100, true)));
         addSequential(new ObtainCube(3.2));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.2, 0, -52, 14, 14, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.2, 0, -52, 14, 14, 100, true)));
         addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.25, 14, 14, 60, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.25, 14, 14, 100, false)));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.8, 0, 52, 14, 14, 60, true)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.8, 0, 52, 14, 14, 100, true)));
         addSequential(new ObtainCube(2.6));
         addSequential(new DriveTurnToAngleEncoders(50));
         addParallel(new ElevatorToSwitch());
-        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.3, 14, 14, 60, false)));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.3, 14, 14, 100, false)));
         addSequential(new GrabberCubeEject());
         addSequential(new ElevatorToBottomDelayed(0.25));
         
