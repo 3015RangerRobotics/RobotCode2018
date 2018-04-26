@@ -19,13 +19,13 @@ public class AutoRightSwitchOnly extends CommandGroup {
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4.25, 14, 14, 100, false)));
         addSequential(new GrabberCubeEject());
         addParallel(new ElevatorToBottomDelayed(0.25));
-        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.8, 0, 52, 14, 14, 100, true)));
-        addSequential(new ObtainCube(2.6));
-        addSequential(new DriveTurnToAngleEncoders(50));
+        addSequential(new DriveMotionProfile(MotionProfiles.generate2D(3.4, 0, 49, 14, 14, 100, true)));
+        addSequential(new ObtainCube(2.8));
+        addSequential(new DriveTurnToAngleEncoders(47));
         addParallel(new ElevatorToSwitch());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2.3, 14, 14, 100, false)));
         addSequential(new GrabberCubeEject());
-        addSequential(new ElevatorToBottomDelayed(0.25));
+        addSequential(new ElevatorToBottomDelayed(0.25));       
         
 //      addSequential(new GrabberClose());
 //      addParallel(new ElevatorToSwitch());

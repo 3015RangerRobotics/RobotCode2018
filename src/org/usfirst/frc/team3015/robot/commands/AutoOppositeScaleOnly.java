@@ -20,10 +20,10 @@ public class AutoOppositeScaleOnly extends CommandGroup {
         addParallel(new GrabberCubeEject());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(1.5, 14, 14, 100, true)));
         addParallel(new ElevatorToBottom());
-        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 110 : -110));
+        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? 115 : -115));
         addSequential(new ObtainCube(4.75));
         addParallel(new ElevatorToScale());
-        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -155 : 155));
+        addSequential(new DriveTurnToAngleEncoders((isRightStart) ? -145 : 145));
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 10, 100, false)));
         addSequential(new GrabberCubeEject());
         addSequential(new DriveMotionProfile(MotionProfiles.generate1D(2, 14, 14, 100, true)));
