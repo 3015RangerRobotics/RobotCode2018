@@ -22,8 +22,9 @@ public class AutoLeftSwitchOnly extends CommandGroup {
           addSequential(new GrabberCubeEject());
           addParallel(new ElevatorToBottomDelayed(.25));
           addSequential(new DriveMotionProfile(MotionProfiles.generate1D(4, 14, 14, 100, true)));
-          addSequential(new DriveTurnToAngleEncoders(40));
+          addSequential(new DriveTurnToAngleEncoders(45));
           addSequential(new SuccCube(3));
+          addSequential(new DriveTurnToAngleEncoders(100));
           
 //        addSequential(new GrabberClose());
 //        addParallel(new ElevatorToSwitch());

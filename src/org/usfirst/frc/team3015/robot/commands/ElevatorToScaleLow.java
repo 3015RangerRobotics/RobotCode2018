@@ -15,7 +15,7 @@ public class ElevatorToScaleLow extends CommandBase {
     protected void execute() {
     	elevator.set(ControlMode.Position, elevator.elevatorHeightScaleLow * elevator.pulsesPerInch);
     	
-    	if(elevator.getDistance() < 25) {
+    	if(elevator.getDistance() < 23) {
     		grabber.intakeOutSlowly();
     	}else {
     		grabber.intakeStop();
