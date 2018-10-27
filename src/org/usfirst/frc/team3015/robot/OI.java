@@ -93,6 +93,12 @@ public class OI {
 		return coDriver.getStickButton(Hand.kLeft);
 	}
 	
+	
+	
+	
+	
+	
+	
 	public double getDriverLeftStickY() {
 		if(Math.abs(driver.getY(Hand.kLeft)) > 0.05) {
 			return -driver.getY(Hand.kLeft);
